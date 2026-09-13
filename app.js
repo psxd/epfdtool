@@ -602,7 +602,7 @@ function setupUIEvents() {
         viewToggleBtn.textContent = "◎";
         viewToggleBtn.title = "Switch to overhead globe view";
       } else {
-        world.pointOfView({ lat: 20, lng: 0, altitude: 2.2 }, 800);
+        world.pointOfView({ lat: 15, lng: 15, altitude: 12 }, 800);
         viewToggleBtn.textContent = "◠";
         viewToggleBtn.title = "Toggle globe / horizon view";
       }
