@@ -1,0 +1,2810 @@
+[
+  {
+    "name": "PALAPA-B1",
+    "lon": 108.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "PALAPA-B2",
+    "lon": 113.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "INSAT-1B",
+    "lon": 74.0,
+    "planned": false,
+    "operator": "India (Republic of) \ud83c\uddee\ud83c\uddf3"
+  },
+  {
+    "name": "MARECS ATL1",
+    "lon": -26.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT MCS ATL A",
+    "lon": -18.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT MCS INDOC D",
+    "lon": 66.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT MCS INDOC A",
+    "lon": 63.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MARISAT-PAC",
+    "lon": 176.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MARECS PAC1",
+    "lon": 178.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT5 ATL2",
+    "lon": -18.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5 ATL4",
+    "lon": -34.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5 INDOC1",
+    "lon": 63.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "OTS",
+    "lon": 5.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "FLTSATCOM W PAC",
+    "lon": 172.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "ANIK D-1",
+    "lon": -104.5,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "ARABSAT 1-B",
+    "lon": 26.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "ARABSAT 1-A",
+    "lon": 19.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "STW-1",
+    "lon": 125.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "SBTS A1",
+    "lon": -70.0,
+    "planned": false,
+    "operator": "Brazil (Federative Republic of) \ud83c\udde7\ud83c\uddf7"
+  },
+  {
+    "name": "SBTS A2",
+    "lon": -65.0,
+    "planned": false,
+    "operator": "Brazil (Federative Republic of) \ud83c\udde7\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT 1-2",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT-1",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "USGCSS PH3 ATL",
+    "lon": -12.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH3 E PAC",
+    "lon": -135.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH3 W PAC",
+    "lon": 175.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5A ATL2",
+    "lon": -27.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "WSDRN",
+    "lon": -16.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "CSDRN",
+    "lon": 95.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "SATCOM PHASE-3",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "Belgium \ud83c\udde7\ud83c\uddea"
+  },
+  {
+    "name": "POTOK-2",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-15",
+    "lon": 128.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USGCSS PH2 ATL",
+    "lon": -12.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH2 INDOC",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5 PAC1",
+    "lon": 174.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5 PAC3",
+    "lon": 180.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "GMS-3",
+    "lon": 140.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "GOES EAST",
+    "lon": -75.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "METEOSAT",
+    "lon": 0.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "PROGNOZ-1",
+    "lon": -24.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "PROGNOZ-2",
+    "lon": 12.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "PROGNOZ-3",
+    "lon": 35.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "PROGNOZ-4",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT5 ATL5",
+    "lon": -21.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "POTOK-1",
+    "lon": -13.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "ANIK D-2",
+    "lon": -110.5,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "ANIK C-3",
+    "lon": -117.5,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "ANIK C-2",
+    "lon": -110.0,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "STATSIONAR-4",
+    "lon": -14.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "DFS-2",
+    "lon": 28.5,
+    "planned": false,
+    "operator": "Germany (Federal Republic of) \ud83c\udde9\ud83c\uddea"
+  },
+  {
+    "name": "DFS-1",
+    "lon": 23.5,
+    "planned": false,
+    "operator": "Germany (Federal Republic of) \ud83c\udde9\ud83c\uddea"
+  },
+  {
+    "name": "POTOK-3",
+    "lon": -168.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "SKYNET-4A",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INTELSAT IBS 342E",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT IBS 310E",
+    "lon": -50.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT IBS 319.5E",
+    "lon": -40.5,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "INTELSAT IBS 307E",
+    "lon": -53.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5 INDOC3",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-4A",
+    "lon": -14.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "TELECOM-1A",
+    "lon": -8.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "TELECOM-1B",
+    "lon": -5.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT6 332.5E",
+    "lon": -27.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT6 335.5E",
+    "lon": -24.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT6 60E",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "ESDRN",
+    "lon": -160.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "GDL-6",
+    "lon": 19.2,
+    "planned": true,
+    "operator": "Luxembourg \ud83c\uddf1\ud83c\uddfa"
+  },
+  {
+    "name": "TELECOM-1C",
+    "lon": 3.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "USASAT-12C",
+    "lon": -76.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT 1-3",
+    "lon": 7.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "ETS-5",
+    "lon": 150.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "USASAT-6A",
+    "lon": -97.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-6C",
+    "lon": -95.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-D1",
+    "lon": -26.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-D2",
+    "lon": -170.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-D6",
+    "lon": 128.0,
+    "planned": true,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INMARSAT-2 IOR 1",
+    "lon": 64.5,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INMARSAT-2 AOR EAST",
+    "lon": -15.5,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "CS-3A",
+    "lon": 132.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "CS-3B",
+    "lon": 136.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "STATSIONAR-6",
+    "lon": 90.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-7",
+    "lon": 140.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "LOUTCH-3",
+    "lon": 90.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USASAT-11D",
+    "lon": -134.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "WESTAR-5",
+    "lon": -123.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-21",
+    "lon": 103.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USASAT-7A",
+    "lon": -74.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "SUPERBIRD-B",
+    "lon": 162.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "SUPERBIRD-A",
+    "lon": 158.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "INTELSAT5A INDOC1",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-13A",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT5 INDOC4",
+    "lon": 66.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "JCSAT-1",
+    "lon": 150.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "USASAT-20A",
+    "lon": -126.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-3C",
+    "lon": -86.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "BSB-1",
+    "lon": -31.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "CSSRD-2",
+    "lon": 77.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "VSSRD-2",
+    "lon": 167.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "GMS-4",
+    "lon": 140.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "TDRS-C2",
+    "lon": -79.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "L-SAT",
+    "lon": -19.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "BS-3",
+    "lon": 110.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "JCSAT-2",
+    "lon": 154.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "INTELSAT5 PAC2",
+    "lon": 177.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5A 342E",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5A CONT1",
+    "lon": -53.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INMARSAT-2 IOR 2",
+    "lon": 65.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INMARSAT-2 AOR CL 2A",
+    "lon": -32.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INMARSAT-2 AOR WEST",
+    "lon": -55.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "TELE-X",
+    "lon": 5.0,
+    "planned": false,
+    "operator": "Sweden \ud83c\uddf8\ud83c\uddea"
+  },
+  {
+    "name": "TELSTAR-3A",
+    "lon": -97.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5A CONT4",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT5A 338.5E",
+    "lon": -21.5,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "INTELSAT6 63E",
+    "lon": 63.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT 2-7E",
+    "lon": 7.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT 2-36E",
+    "lon": 36.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "HIPPARCOS",
+    "lon": -12.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "STATSIONAR-20",
+    "lon": 70.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EUTELSAT 2-10E",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT 2-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT6 325.5E",
+    "lon": -34.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "ASC-1",
+    "lon": -128.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "TDRS 174W",
+    "lon": -174.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "TDRS 46W",
+    "lon": -46.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "SATCOM-4",
+    "lon": -17.8,
+    "planned": false,
+    "operator": "Belgium \ud83c\udde7\ud83c\uddea"
+  },
+  {
+    "name": "USASAT-7D",
+    "lon": -101.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-11",
+    "lon": -11.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-12",
+    "lon": 40.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "METEOSAT S1",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "METEOSAT S2",
+    "lon": -10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT5A INDOC3",
+    "lon": 63.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT MCS PAC A",
+    "lon": 180.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "PALAPA-B3",
+    "lon": 118.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "STATSIONAR-1",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USASAT-13I",
+    "lon": -45.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT 1-4",
+    "lon": 16.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "ASIASAT-1",
+    "lon": 105.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EUTELSAT 1-5",
+    "lon": 21.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "HISPASAT-1",
+    "lon": -30.0,
+    "planned": false,
+    "operator": "Spain \ud83c\uddea\ud83c\uddf8"
+  },
+  {
+    "name": "GMS-120E",
+    "lon": 120.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "ACTS",
+    "lon": -100.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MARISAT-INDOC",
+    "lon": 72.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-24E",
+    "lon": -89.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MARECS ATL4",
+    "lon": -55.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "SJC-1",
+    "lon": 124.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "SJC-2",
+    "lon": 120.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "TOR-3",
+    "lon": 45.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "TOR-4",
+    "lon": 85.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EUTELSAT 2-16E",
+    "lon": 16.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT6 335.5E",
+    "lon": 24.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-27",
+    "lon": 12.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT5A INDOC2",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "INTELSAT5 183E",
+    "lon": -177.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "ANIK E-A",
+    "lon": -107.3,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "ANIK E-B",
+    "lon": -111.1,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "FOTON-1",
+    "lon": -13.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INSAT-2(83)",
+    "lon": 83.0,
+    "planned": false,
+    "operator": "India (Republic of) \ud83c\uddee\ud83c\uddf3"
+  },
+  {
+    "name": "INSAT-2(93.5)",
+    "lon": 93.5,
+    "planned": false,
+    "operator": "India (Republic of) \ud83c\uddee\ud83c\uddf3"
+  },
+  {
+    "name": "INTELSAT7 359E",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "STATSIONAR-22",
+    "lon": 1.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "ZSSRD-2",
+    "lon": -16.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "FOTON-2",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "KOREASAT-1",
+    "lon": 116.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "GOMS-M",
+    "lon": 76.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USGCSS PH3 INDOC",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "FOTON-3",
+    "lon": -168.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USGCSS PH3 MID-ATL",
+    "lon": -42.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH3B ATL",
+    "lon": -12.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH3 E PAC-2",
+    "lon": -130.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USGCSS PH3B E PAC",
+    "lon": -135.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "AUSSAT B 160E",
+    "lon": 160.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "N-SAT-146",
+    "lon": 144.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "ARABSAT 2-B",
+    "lon": 26.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "ARABSAT 2-A",
+    "lon": 30.5,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "INTELSAT7 307E",
+    "lon": -53.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT7 66E",
+    "lon": 66.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT7 57E",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "STATSIONAR-3",
+    "lon": 85.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT7 342E",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "SIRIUS-2",
+    "lon": 4.8,
+    "planned": false,
+    "operator": "Sweden \ud83c\uddf8\ud83c\uddea"
+  },
+  {
+    "name": "EXPRESS-6",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "ASIASAT-E",
+    "lon": 100.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "TDRS WEST",
+    "lon": -171.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "APSTAR-4",
+    "lon": 76.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "ASIASAT-CK",
+    "lon": 105.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "INTELSAT7 180E",
+    "lon": 180.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "DJCF-2A",
+    "lon": -39.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "DJCF-1A",
+    "lon": 39.5,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "DEF-R-SAT-1A",
+    "lon": 82.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "DEF-R-SAT-2A",
+    "lon": 72.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "DEF-R-SAT-3A",
+    "lon": 93.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "USCSID-W2",
+    "lon": -144.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-W1",
+    "lon": -141.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-E1",
+    "lon": -10.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-E2",
+    "lon": -13.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-E3",
+    "lon": -24.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-E4",
+    "lon": -30.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-14G",
+    "lon": 169.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A3",
+    "lon": 75.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A4",
+    "lon": 82.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A5",
+    "lon": 92.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A6",
+    "lon": 110.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A1",
+    "lon": 0.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USCSID-A2",
+    "lon": 44.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "CHINASAT-6",
+    "lon": 110.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "INTELSAT6 62E",
+    "lon": 62.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EXPRESS-4",
+    "lon": 40.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USDKH2",
+    "lon": -30.4,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "N-STAR-A",
+    "lon": 132.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "N-STAR-B",
+    "lon": 136.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "TELECOM-2A",
+    "lon": -8.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "USASAT-14I",
+    "lon": 68.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-14H",
+    "lon": 166.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "TDRS 85E",
+    "lon": 85.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "N-SAT-128",
+    "lon": 128.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "FLTSATCOM-C E ATL-1",
+    "lon": -22.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "CHINASAT-2",
+    "lon": 110.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "INMARSAT-3 IOR-1",
+    "lon": 64.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "DJCF-2B",
+    "lon": -26.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "DJCF-1B",
+    "lon": 46.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INTELSAT8 328.5E",
+    "lon": -31.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EXPRESS-9",
+    "lon": 103.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "KOREASAT-2",
+    "lon": 113.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "EXPRESS-7",
+    "lon": 90.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "SICRAL-2A",
+    "lon": 16.2,
+    "planned": false,
+    "operator": "Italy \ud83c\uddee\ud83c\uddf9"
+  },
+  {
+    "name": "EUTELSAT 3-7E",
+    "lon": 7.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT B-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EXPRESS-2",
+    "lon": -14.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-3",
+    "lon": -11.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "ASIASAT-AKX",
+    "lon": 122.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EXPRESS-11",
+    "lon": 145.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "CHINASAT-138E",
+    "lon": 138.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EUTELSAT-KA-36E",
+    "lon": 36.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "PALAPA PAC-C 146E",
+    "lon": 108.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "USASAT-14J",
+    "lon": 72.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-14L",
+    "lon": -15.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT 3-36E",
+    "lon": 36.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "FY-2B",
+    "lon": 86.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "FY-2C",
+    "lon": 123.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "FY-2AS",
+    "lon": 105.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "FY-2BS",
+    "lon": 86.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "FY-2CS",
+    "lon": 123.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "THAICOM-A3",
+    "lon": 120.0,
+    "planned": false,
+    "operator": "Thailand \ud83c\uddf9\ud83c\udded"
+  },
+  {
+    "name": "AM-SAT A4",
+    "lon": 108.2,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INTELSAT8 95E",
+    "lon": 95.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "JCSAT-3A",
+    "lon": 128.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "INTELSAT9 62E",
+    "lon": 62.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "JCSAT-2R",
+    "lon": 154.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "JCSAT-1R",
+    "lon": 150.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "EXPRESS-8",
+    "lon": 96.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "STATSIONAR-24",
+    "lon": 49.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-5",
+    "lon": 53.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "NSS-16",
+    "lon": -22.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "INTELSAT6 340E",
+    "lon": -20.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "PALAPA PAC-C 146E",
+    "lon": 146.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "INTELSAT8 62E",
+    "lon": 62.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT 3-12.5W",
+    "lon": -12.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTERBELAR-2",
+    "lon": 75.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-10B",
+    "lon": 140.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "HELLAS-SAT",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "Greece \ud83c\uddec\ud83c\uddf7"
+  },
+  {
+    "name": "EXPRESS-6B",
+    "lon": 80.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-5B",
+    "lon": 53.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT7 62E",
+    "lon": 62.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MEASAT-1",
+    "lon": 91.5,
+    "planned": false,
+    "operator": "Malaysia \ud83c\uddf2\ud83c\uddfe"
+  },
+  {
+    "name": "VIDEOSAT-7",
+    "lon": -5.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUROPE*STAR-1",
+    "lon": 45.0,
+    "planned": false,
+    "operator": "Germany (Federal Republic of) \ud83c\udde9\ud83c\uddea"
+  },
+  {
+    "name": "INTELSAT8 335.5E",
+    "lon": -24.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EXPRESS-7B",
+    "lon": 90.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "DEF-R-SAT-4B 121.0E",
+    "lon": 121.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "HISPASAT-1D KU",
+    "lon": -30.0,
+    "planned": false,
+    "operator": "Spain \ud83c\uddea\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT6 330.5E",
+    "lon": -29.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT8 64E",
+    "lon": 64.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EXPRESS-10",
+    "lon": 140.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EUTELSAT EXB-13E",
+    "lon": 13.0,
+    "planned": true,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "TONGASAT C/KU-3",
+    "lon": 138.0,
+    "planned": false,
+    "operator": "Tonga (Kingdom of) \ud83c\uddf9\ud83c\uddf4"
+  },
+  {
+    "name": "INMARSAT-3 IOR WEST",
+    "lon": 25.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INTELSAT8 60E",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INSAT-2E83",
+    "lon": 83.0,
+    "planned": false,
+    "operator": "India (Republic of) \ud83c\uddee\ud83c\uddf3"
+  },
+  {
+    "name": "ROSCOM-4",
+    "lon": 49.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT8 319.5E",
+    "lon": -40.5,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "BIFROST-3-FSS",
+    "lon": -0.8,
+    "planned": true,
+    "operator": "Norway \ud83c\uddf3\ud83c\uddf4"
+  },
+  {
+    "name": "FY-2A",
+    "lon": 105.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EUTELSAT 3-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT 3-33E",
+    "lon": 33.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "GOES-EAST-1",
+    "lon": -75.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "MEASAT-IC 91.5",
+    "lon": 91.5,
+    "planned": false,
+    "operator": "Malaysia \ud83c\uddf2\ud83c\uddfe"
+  },
+  {
+    "name": "INMARSAT-3 POR-2",
+    "lon": 178.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INTELSAT8 359E",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "VIDEOSAT-6",
+    "lon": -8.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "NSS-9",
+    "lon": 95.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "EUTELSAT 3-16E",
+    "lon": 16.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "VINASAT-4A2",
+    "lon": 132.0,
+    "planned": false,
+    "operator": "Viet Nam (Socialist Republic of) \ud83c\uddfb\ud83c\uddf3"
+  },
+  {
+    "name": "SIRIUS-5-BSS",
+    "lon": 4.8,
+    "planned": false,
+    "operator": "Sweden \ud83c\uddf8\ud83c\uddea"
+  },
+  {
+    "name": "USASAT-25G",
+    "lon": -58.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "HISPASAT-2A X",
+    "lon": -30.0,
+    "planned": false,
+    "operator": "Spain \ud83c\uddea\ud83c\uddf8"
+  },
+  {
+    "name": "KOREASAT-113X",
+    "lon": 113.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "INMARSAT-3 AOR WEST2",
+    "lon": -54.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "THAICOM-A2B",
+    "lon": 78.5,
+    "planned": false,
+    "operator": "Thailand \ud83c\uddf9\ud83c\udded"
+  },
+  {
+    "name": "TELECOM-3B",
+    "lon": -5.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "USASAT-26A",
+    "lon": -37.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EMARSAT-1F",
+    "lon": 44.0,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "CANSAT KA-4",
+    "lon": -111.1,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "INTELSAT7 332.5E",
+    "lon": -27.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "ANIK-F2",
+    "lon": -111.1,
+    "planned": false,
+    "operator": "Canada \ud83c\udde8\ud83c\udde6"
+  },
+  {
+    "name": "VINASAT-TTC",
+    "lon": 132.0,
+    "planned": false,
+    "operator": "Viet Nam (Socialist Republic of) \ud83c\uddfb\ud83c\uddf3"
+  },
+  {
+    "name": "INTELSAT9 342E",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "DFH-5-OD",
+    "lon": 115.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "SUPERBIRD-C2",
+    "lon": 144.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "EUTELSAT 2-21.5E",
+    "lon": 21.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EMARSAT-1F/M",
+    "lon": 44.0,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "INTELSAT8 332.5E",
+    "lon": -27.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "KYPROS-SAT-C",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "Cyprus (Republic of) \ud83c\udde8\ud83c\uddfe"
+  },
+  {
+    "name": "INTELSAT9 64E",
+    "lon": 64.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 325.5E",
+    "lon": -34.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 335.5E",
+    "lon": -24.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "SKYNET-5A",
+    "lon": -34.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "SKYNET-5B",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "SKYNET-5D",
+    "lon": 53.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "ASIASAT-AK1",
+    "lon": 122.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "TELECOM-2C",
+    "lon": 3.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT10 359E",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "THAICOM-A2",
+    "lon": 78.5,
+    "planned": false,
+    "operator": "Thailand \ud83c\uddf9\ud83c\udded"
+  },
+  {
+    "name": "EMARSAT-4F",
+    "lon": 44.0,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "DBL",
+    "lon": 19.2,
+    "planned": true,
+    "operator": "Luxembourg \ud83c\uddf1\ud83c\uddfa"
+  },
+  {
+    "name": "NSS-19",
+    "lon": -177.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "NSS-8",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "F-SAT-C-E-10E",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTERSPUTNIK-3W-Q",
+    "lon": -3.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "F-SAT-KU2-E-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EXPRESS-8B",
+    "lon": 96.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EUTELSAT-KA-16E",
+    "lon": 16.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "LUX-G3-19.2E",
+    "lon": 19.2,
+    "planned": false,
+    "operator": "Luxembourg \ud83c\uddf1\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT9 359E",
+    "lon": -1.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 340E",
+    "lon": -20.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 60E",
+    "lon": 60.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "BIFROST-17",
+    "lon": -0.8,
+    "planned": true,
+    "operator": "Norway \ud83c\uddf3\ud83c\uddf4"
+  },
+  {
+    "name": "JCSAT-FO-132E",
+    "lon": 132.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "USASAT-60B",
+    "lon": 166.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-60C",
+    "lon": 68.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "ARABSAT 2-C",
+    "lon": 20.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "TURKSAT-42E-A",
+    "lon": 42.0,
+    "planned": false,
+    "operator": "Republic of T\u00fcrkiye \ud83c\uddf9\ud83c\uddf7"
+  },
+  {
+    "name": "SKYNET-5E",
+    "lon": -17.8,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "ASIASAT-EK1",
+    "lon": 100.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "DFH-3-OC",
+    "lon": 87.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "ASIASAT-CK1",
+    "lon": 105.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EUROPESTAR-47.5E",
+    "lon": 47.5,
+    "planned": false,
+    "operator": "Germany (Federal Republic of) \ud83c\udde9\ud83c\uddea"
+  },
+  {
+    "name": "USASAT-14K",
+    "lon": 172.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "TDRS 167.5W",
+    "lon": -167.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 66E",
+    "lon": 66.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "KUPON-1M",
+    "lon": 55.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EUTELSAT-B1-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "PALAPA-C1",
+    "lon": 113.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "CHNSAT-130E",
+    "lon": 130.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "PALAPA-B1-EC",
+    "lon": 108.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "PALAPA-C2",
+    "lon": 108.0,
+    "planned": false,
+    "operator": "Indonesia (Republic of) \ud83c\uddee\ud83c\udde9"
+  },
+  {
+    "name": "JCSAT-FO-154E",
+    "lon": 154.0,
+    "planned": false,
+    "operator": "Japan \ud83c\uddef\ud83c\uddf5"
+  },
+  {
+    "name": "CHINASAT-45",
+    "lon": 101.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "CHNSAT-98E",
+    "lon": 98.2,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "APSTAR-5-KU",
+    "lon": 138.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "CHINASAT-134E",
+    "lon": 134.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "USASAT-60F",
+    "lon": -95.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT9 332.5E",
+    "lon": -27.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "NSS-35",
+    "lon": -40.5,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "YAMAL-49E",
+    "lon": 49.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-7C",
+    "lon": 90.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-9B",
+    "lon": 103.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "USASAT-14I-3",
+    "lon": 68.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "INTELSAT7 157E",
+    "lon": 157.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-60J",
+    "lon": 169.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "CHINASAT-51.5E",
+    "lon": 51.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "APSTAR-76E",
+    "lon": 76.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "ASIASAT-EKX",
+    "lon": 100.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "CHINASAT-33",
+    "lon": 110.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EUTELSAT 3-10E",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "SINOSAT-5",
+    "lon": 110.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "ASIASAT-AKZ",
+    "lon": 122.2,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "INTERSPUTNIK-75E-CK",
+    "lon": 75.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "EMARSAT-4S",
+    "lon": 98.5,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "ASIASAT-CKX",
+    "lon": 105.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "DFH-3-OC M",
+    "lon": 87.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "DEF-R-SAT-5B",
+    "lon": 68.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "DEF-R-SAT-6B",
+    "lon": 95.6,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-4B",
+    "lon": 40.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT7 64E",
+    "lon": 64.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "USASAT-60A",
+    "lon": 172.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "EXPRESS-10P",
+    "lon": 140.0,
+    "planned": true,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "F-SAT-KA-E-9E",
+    "lon": 9.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "CHINASAT-ROUTE1",
+    "lon": 51.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "EXPRESS-2B",
+    "lon": -14.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "CHINASAT-64",
+    "lon": 98.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "DBL-G3-23.5E",
+    "lon": 23.5,
+    "planned": true,
+    "operator": "Luxembourg \ud83c\uddf1\ud83c\uddfa"
+  },
+  {
+    "name": "EXPRESS-B 11W",
+    "lon": -11.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "KOR11201",
+    "lon": 116.0,
+    "planned": true,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "YAMAL-55E",
+    "lon": 55.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT8 57E",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "KOREASAT-113K",
+    "lon": 113.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "KOREASAT-116K",
+    "lon": 116.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "IRNDBS-2",
+    "lon": 26.0,
+    "planned": true,
+    "operator": "Iran (Islamic Republic of) \ud83c\uddee\ud83c\uddf7"
+  },
+  {
+    "name": "ARABSAT-BSS1A",
+    "lon": 26.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "ARABSAT-BSS1B",
+    "lon": 26.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "YAMAL-183E",
+    "lon": -177.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "YAMAL-PK2",
+    "lon": 55.0,
+    "planned": true,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "INTELSAT9 304.5E",
+    "lon": -55.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "F-SAT-N3-28.5E",
+    "lon": 28.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT 3-21.5E",
+    "lon": 21.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-KU-E-8W",
+    "lon": -8.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N-E-48E",
+    "lon": 48.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N3-25.5E",
+    "lon": 25.5,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-KU-E-5W",
+    "lon": -5.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-T-E-36E",
+    "lon": 36.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-T-E-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "INTELSAT7 325.5E",
+    "lon": -34.5,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "GK2-128.2E",
+    "lon": 128.2,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "CSDRN-M",
+    "lon": 95.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "HISPASAT-3",
+    "lon": -30.0,
+    "planned": true,
+    "operator": "Spain \ud83c\uddea\ud83c\uddf8"
+  },
+  {
+    "name": "EUTELSAT EXB-36E",
+    "lon": 36.0,
+    "planned": true,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "NSS-36",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "CERES-1",
+    "lon": -4.0,
+    "planned": true,
+    "operator": "Hungary \ud83c\udded\ud83c\uddfa"
+  },
+  {
+    "name": "CHINASAT-65",
+    "lon": 103.0,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "COMPASS-110.5E",
+    "lon": 110.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "SE-KA-56.5E",
+    "lon": 56.5,
+    "planned": false,
+    "operator": "Norway \ud83c\uddf3\ud83c\uddf4"
+  },
+  {
+    "name": "MCO-FSS-52E",
+    "lon": 52.0,
+    "planned": true,
+    "operator": "Monaco (Principality of) \ud83c\uddf2\ud83c\udde8"
+  },
+  {
+    "name": "MCO-BSS-52E",
+    "lon": 52.0,
+    "planned": true,
+    "operator": "Monaco (Principality of) \ud83c\uddf2\ud83c\udde8"
+  },
+  {
+    "name": "GRC15002",
+    "lon": 39.0,
+    "planned": true,
+    "operator": "Greece \ud83c\uddec\ud83c\uddf7"
+  },
+  {
+    "name": "EUTELSAT B-9E",
+    "lon": 9.0,
+    "planned": true,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N-E-16E",
+    "lon": 16.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N-E-7E",
+    "lon": 7.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "GEO-KOMPSAT-2-128.2E",
+    "lon": 128.2,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N3-10E",
+    "lon": 10.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "F-SAT-N3-13E",
+    "lon": 13.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "TELECOM-4C",
+    "lon": 3.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "KOREASAT-116",
+    "lon": 116.0,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "AMOS 2-B",
+    "lon": -4.0,
+    "planned": false,
+    "operator": "Israel (State of) \ud83c\uddee\ud83c\uddf1"
+  },
+  {
+    "name": "ARABSAT 8G-11E",
+    "lon": 11.0,
+    "planned": false,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "INTELSAT8 342E",
+    "lon": -18.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "KAZSAT2",
+    "lon": 86.5,
+    "planned": false,
+    "operator": "Kazakhstan (Republic of) \ud83c\uddf0\ud83c\uddff"
+  },
+  {
+    "name": "NSS-G5-18",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "INTERSPUTNIK-75E-Q",
+    "lon": 75.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "YAHSAT-KA-47.5E",
+    "lon": 47.5,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "F-SAT-N-E-36E",
+    "lon": 36.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  },
+  {
+    "name": "KAZSAT1",
+    "lon": 58.5,
+    "planned": false,
+    "operator": "Kazakhstan (Republic of) \ud83c\uddf0\ud83c\uddff"
+  },
+  {
+    "name": "COMS-128.2E",
+    "lon": 128.2,
+    "planned": false,
+    "operator": "Korea (Republic of) \ud83c\uddf0\ud83c\uddf7"
+  },
+  {
+    "name": "RUSATCOM-145E",
+    "lon": 145.0,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "KAZSAT-30B-58.5E",
+    "lon": 58.5,
+    "planned": true,
+    "operator": "Kazakhstan (Republic of) \ud83c\uddf0\ud83c\uddff"
+  },
+  {
+    "name": "USASAT-60I",
+    "lon": -45.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "TURKSAT-31E-F",
+    "lon": 31.0,
+    "planned": false,
+    "operator": "Republic of T\u00fcrkiye \ud83c\uddf9\ud83c\uddf7"
+  },
+  {
+    "name": "TURKSAT-42E-F",
+    "lon": 42.0,
+    "planned": false,
+    "operator": "Republic of T\u00fcrkiye \ud83c\uddf9\ud83c\uddf7"
+  },
+  {
+    "name": "DEF-R-SAT-7C",
+    "lon": 106.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "DEF-R-SAT-8C",
+    "lon": 127.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "AUSSAT-H-160E",
+    "lon": 160.0,
+    "planned": false,
+    "operator": "Australia \ud83c\udde6\ud83c\uddfa"
+  },
+  {
+    "name": "TURKSAT-42E-B",
+    "lon": 42.0,
+    "planned": false,
+    "operator": "Republic of T\u00fcrkiye \ud83c\uddf9\ud83c\uddf7"
+  },
+  {
+    "name": "MEASAT-1A",
+    "lon": 91.5,
+    "planned": false,
+    "operator": "Malaysia \ud83c\uddf2\ud83c\uddfe"
+  },
+  {
+    "name": "ARABSAT-AXB26E_C",
+    "lon": 26.0,
+    "planned": true,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "ARABSAT-AXB30.5E",
+    "lon": 30.5,
+    "planned": true,
+    "operator": "Saudi Arabia (Kingdom of) \ud83c\uddf8\ud83c\udde6"
+  },
+  {
+    "name": "INMARSAT-4B 64E",
+    "lon": 64.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INMARSAT-4A 25E",
+    "lon": 25.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "INMARSAT-4 143.5E",
+    "lon": 143.5,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "GOMS-14.5W",
+    "lon": -14.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "YAHSAT-N-20W",
+    "lon": -20.0,
+    "planned": false,
+    "operator": "United Arab Emirates \ud83c\udde6\ud83c\uddea"
+  },
+  {
+    "name": "INMARSAT-S4-R",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "United Kingdom of Great Britain and Northern Ireland \ud83c\uddec\ud83c\udde7"
+  },
+  {
+    "name": "CHINASAT-E-33.5E",
+    "lon": 33.5,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "KYPROS-SAT-7",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "Cyprus (Republic of) \ud83c\udde8\ud83c\uddfe"
+  },
+  {
+    "name": "KYPROS-SAT-L4",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "Cyprus (Republic of) \ud83c\udde8\ud83c\uddfe"
+  },
+  {
+    "name": "NSS-G2-17",
+    "lon": 57.0,
+    "planned": false,
+    "operator": "Netherlands (Kingdom of the) \ud83c\uddf3\ud83c\uddf1"
+  },
+  {
+    "name": "ITS-AR-77.2W",
+    "lon": -77.2,
+    "planned": false,
+    "operator": "China (People's Republic of) \ud83c\udde8\ud83c\uddf3"
+  },
+  {
+    "name": "AZERSAT-46E",
+    "lon": 46.0,
+    "planned": false,
+    "operator": "Azerbaijan (Republic of) \ud83c\udde6\ud83c\uddff"
+  },
+  {
+    "name": "USASAT-60V",
+    "lon": 169.0,
+    "planned": false,
+    "operator": "United States of America \ud83c\uddfa\ud83c\uddf8"
+  },
+  {
+    "name": "YAMAL-E5-1",
+    "lon": 163.5,
+    "planned": false,
+    "operator": "Russian Federation \ud83c\uddf7\ud83c\uddfa"
+  },
+  {
+    "name": "HELLAS-SAT-2G",
+    "lon": 39.0,
+    "planned": false,
+    "operator": "Greece \ud83c\uddec\ud83c\uddf7"
+  },
+  {
+    "name": "VIDEOSAT-8-KU-C",
+    "lon": 3.0,
+    "planned": false,
+    "operator": "France \ud83c\uddeb\ud83c\uddf7"
+  }
+]
