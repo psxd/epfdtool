@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITU EPFD Network Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Floating Glassmorphism Controls Panel -->
+  <div id="ui">
+    <h1>ITU EPFD Network Visualizer</h1>
+
+    <p class="introText">
+      Explore GSO satellite orbits, ground stations, and active RF link topologies across global networks.
+    </p>
+
+    <section class="panelSection" style="position: relative;">
+      <label for="searchInput">Search Network Entities</label>
+      <div style="position: relative; width: 100%;">
+        <input type="text" id="searchInput" placeholder="Search station, satellite..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
+        <!-- Autocomplete dropdown container positioned directly under search bar -->
+        <div id="searchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <label for="filterStatus">Satellite Filing</label>
+        <select id="filterStatus" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Filings</option>
+          <option value="planned">Planned Only</option>
+          <option value="nonplanned">Non-Planned</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="filterSatCountry">Satellite Country</label>
+        <select id="filterSatCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Countries</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="filterGsCountry">Ground Station Country</label>
+        <select id="filterGsCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Countries</option>
+        </select>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="panelSection">
+      <p class="statIntro">
+        Current active ITU network query parameters yield:
+      </p>
+
+      <div class="statsGridWithIn">
+        <div class="statBlock">
+          <div id="satelliteStat" class="statNumber">0</div>
+          <div class="statLabel">Satellites</div>
+        </div>
+
+        <div class="statIn">and</div>
+
+        <div class="statBlock">
+          <div id="stationStat" class="statNumber">0</div>
+          <div class="statLabel">Ground Stations</div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="panelSection">
+      <span class="subsectionLabel">Network Legend</span>
+
+      <div class="legendContainer">
+        <div class="legendList">
+          <div class="legendRow">
+            <span class="legendDot legendDotPlanned"></span>
+            <span>Planned Satellites (GSO Orbit)</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendDot legendDotNonPlanned"></span>
+            <span>Non-Planned Satellites</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendDot legendDotStation"></span>
+            <span>Ground Stations</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendLine legendLineLink"></span>
+            <span>Active Link Paths</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="detailsBox" class="detailsBox">
+      <p class="placeholderText">Hover over or click nodes on the globe to inspect payload metadata.</p>
+    </div>
+  </div>
+
+  <!-- Camera Floating Quick Controls -->
+  <div id="cameraControls">
+    <button id="zoomInBtn" class="cameraBtn" title="Zoom in">+</button>
+    <button id="zoomOutBtn" class="cameraBtn" title="Zoom out">−</button>
+    <button id="viewToggleBtn" class="cameraBtn" title="Toggle globe / horizon view">◠</button>
+  </div>
+
+  <!-- 3D Globe Render Area -->
+  <div id="canvas-wrap">
+    <div id="globeCanvas"></div>
+  </div>
+
+  <!-- Laboratory Branding Logo -->
+  <img id="gtLogo" src="assets/ESPL.png" alt="Engineering Space Policy Laboratory">
+
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

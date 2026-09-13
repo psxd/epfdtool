@@ -1,0 +1,337 @@
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f1eee8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+#canvas-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+#globeCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Floating UI Panel */
+#ui {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 10;
+  width: 325px;
+  max-height: calc(100vh - 36px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #dddddd;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(10px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+#ui::-webkit-scrollbar {
+  width: 8px;
+}
+
+#ui::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#ui::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.12;
+  color: #444444;
+}
+
+.introText,
+.statIntro {
+  color: #666666;
+  line-height: 1.35;
+  font-size: 13px;
+}
+
+.introText {
+  margin: 0 0 15px 0;
+}
+
+.statIntro {
+  margin: 0 0 12px 0;
+}
+
+.panelSection {
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #555555;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.subsectionLabel {
+  display: block;
+  margin: 4px 0 8px 0;
+  color: #555555;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .055em;
+}
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 9px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 13px;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #eaaa00;
+}
+
+.twoColumnControls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  margin: 14px 0;
+}
+
+/* Dashboard Statistics Grid */
+.statsGridWithIn {
+  display: grid;
+  grid-template-columns: 1fr 34px 1fr;
+  align-items: center;
+}
+
+.statBlock {
+  text-align: center;
+}
+
+.statNumber {
+  font-size: 45px;
+  font-weight: 800;
+  line-height: 1;
+  color: #222222;
+}
+
+.statLabel {
+  margin-top: 4px;
+  color: #666666;
+  font-size: 13px;
+}
+
+.statIn {
+  align-self: center;
+  justify-self: center;
+  color: #777777;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: .01em;
+  margin-top: -10px;
+}
+
+/* Legend Component */
+.legendContainer {
+  display: flex;
+  align-items: center;
+}
+
+.legendList {
+  width: 100%;
+  display: grid;
+  gap: 7px;
+  color: #666666;
+  font-size: 12px;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendDot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+.legendDotPlanned {
+  background: #1977AD;
+  border: 1px solid #000000;
+}
+
+.legendDotNonPlanned {
+  background: #E69F00;
+  border: 1px solid #000000;
+}
+
+.legendDotStation {
+  background: #8f8f8f;
+  border: 1px solid #4a4a4a;
+}
+
+.legendLine {
+  display: inline-block;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+.legendLineLink {
+  width: 16px;
+  height: 2px;
+  background: #B0B0B0;
+}
+
+.detailsBox {
+  margin-top: 14px;
+  background: #f7dc93;
+  border: 1px solid #eaaa00;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 12px;
+  color: #111111;
+  line-height: 1.4;
+  min-height: 60px;
+}
+
+.placeholderText {
+  color: #555555;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Floating Camera Controls */
+#cameraControls {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cameraBtn {
+  width: 46px;
+  height: 46px;
+  border: 1px solid #d0d0d0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s ease;
+  color: #444444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cameraBtn:hover {
+  background: #f5f5f5;
+}
+
+/* Laboratory Watermark Logo */
+#gtLogo {
+  position: fixed;
+  right: 26px;
+  bottom: 24px;
+  width: 320px;
+  opacity: 0.23;
+  filter: grayscale(1);
+  pointer-events: none;
+  z-index: 9;
+}
+
+/* Custom Plotly Tooltip Box */
+.plotly-tooltip {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  background: #f7dc93;
+  color: #111111;
+  border: 1px solid #eaaa00;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.35;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: pre-line;
+}
+
+/* Ground Station Dot Styling */
+.gs-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #8f8f8f;
+  border-radius: 50%;
+  opacity: 0.7;
+  cursor: pointer;
+  pointer-events: auto !important;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.gs-dot:hover {
+  transform: translate(-50%, -50%) scale(1.8);
+  opacity: 1;
+  background-color: #eaaa00;
+}
+
+.plotly-tooltip {
+  max-width: 280px;
+  padding: 10px 12px;
+  background: rgba(20, 20, 20, 0.85);
+  color: #f1eee8;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.plotly-tooltip b {
+  color: #f7dc93;
+}
