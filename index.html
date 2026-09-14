@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ITU EPFD Network Visualizer</title>
+  <title> EPFD Network Visualizer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <!-- Floating Glassmorphism Controls Panel -->
   <div id="ui">
-    <h1>ITU EPFD Network Visualizer</h1>
+    <h1>EPFD Visualizer</h1>
 
-    <p class="introText">
-      Explore GSO satellite orbits, ground stations, and active RF link topologies across global networks.
-    </p>
+    <!-- Tab Navigation -->
+    <div class="tab-container" style="display: flex; gap: 6px; margin-bottom: 12px;">
+      <button id="tabGsoBtn" class="tab-btn active" style="flex:1; padding: 8px; cursor: pointer; font-weight: bold; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111;">GSO Network</button>
+      <button id="tabLeoBtn" class="tab-btn" style="flex:1; padding: 8px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111;">LEO Propagation</button>
+    </div>
 
-    <section class="panelSection" style="position: relative;">
+    <!-- GSO Section -->
+    <section class="panelSection" id="gsoPanel" style="position: relative;">
       <label for="searchInput">Search Network Entities</label>
       <div style="position: relative; width: 100%;">
         <input type="text" id="searchInput" placeholder="Search station, satellite..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
-        <!-- Autocomplete dropdown container positioned directly under search bar -->
         <div id="searchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
       </div>
 
@@ -46,6 +48,38 @@
           <option value="all">All Countries</option>
         </select>
       </div>
+    </section>
+
+    <!-- LEO Section (Hidden by default) -->
+    <section class="panelSection" id="leoPanel" style="display: none; position: relative;">
+      <label for="leoSearchInput">Search Active LEO Satellite</label>
+      <div style="position: relative; width: 100%;">
+        <input type="text" id="leoSearchInput" placeholder="e.g., ISS, STARLINK..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
+        <div id="leoSearchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="leoSpeedSelect">Propagation Speed</label>
+        <select id="leoSpeedSelect" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="1" selected>1x Speed (Real-time)</option>
+          <option value="10">10x Speed</option>
+          <option value="100">100x Speed</option>
+        </select>
+      </div>
+
+      <!-- Prominent Intersection Count Card -->
+      <div style="margin-top: 12px; background: rgba(0, 255, 204, 0.12); border: 1px solid #00ffcc; padding: 10px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #005544;">Total Intersected Links</div>
+        <div id="leoCompromisedCount" style="font-size: 24px; font-weight: bold; color: #007760; margin-top: 2px;">0</div>
+      </div>
+
+      <div id="leoPropagationInfo" style="margin-top: 10px; font-size: 13px; background: rgba(0,0,0,0.04); padding: 8px; border-radius: 4px;">
+        <div><b>Status:</b> <span id="leoStatusText">Idle</span></div>
+        <div><b>Propagation Time:</b> <span id="leoTimeText">-</span></div>
+        <div><b>Altitude:</b> <span id="leoAltText">-</span> km</div>
+      </div>
+
+      <button id="leoResetBtn" style="width: 100%; margin-top: 10px; padding: 8px; background: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">Reset View</button>
     </section>
 
     <hr>
@@ -119,7 +153,6 @@
 
   <!-- Laboratory Branding Logo -->
   <img id="gtLogo" src="assets/ESPL.png" alt="Engineering Space Policy Laboratory">
-
 
   <script type="module" src="app.js"></script>
 </body>
