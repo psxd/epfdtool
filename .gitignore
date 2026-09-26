@@ -4,3 +4,8 @@ dist/
 *.log
 # Local Netlify folder
 .netlify
+# Temp folder used by scripts/publish-pages.sh
+.pages-tmp/
+# Never commit local secrets (the Netlify function reads these from its own env)
+.env
+.env.*
