@@ -1,10 +1,12 @@
-// Comment system: yellow add-comment button + local username/password gate,
+// Comment system: yellow add-comment button + server-checked login gate,
 // click-to-place comment cards, Supabase threads (view_comments — schema in
 // ./supabase.txt), shareable ?view=..&filters=..&comment=.. URLs and Slack
-// notifications. Rows go straight into Supabase from the browser via the
-// supabase-js client (no server / no git commits involved).
+// notifications. Supabase keys arrive from the Netlify function at runtime
+// (nothing secret lives in this public repo); rows go straight into Supabase
+// from the browser via the supabase-js client; Slack goes through the
+// token-protected Netlify function.
 //
-// Flow: yellow button -> login (COMMENT_USERS in src/commentConfig.js) ->
+// Flow: yellow button -> login (Netlify function action: login) ->
 // "add mode" (old cards hidden, ?comment= stripped) -> click anywhere on the
 // globe -> composer -> Save -> insert row -> pushState the shareable URL ->
 // copy it to the clipboard + toast -> Slack -> render the card focused.
@@ -13,7 +15,7 @@
 import { store } from './state.js';
 import { applyFilters } from './gsoFilters.js';
 import { focusCameraOn } from './globe.js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY, SLACK_WEBHOOK_URL, COMMENT_USERS } from './commentConfig.js';
+import { getSupabaseConfig, verifyLogin, sendSlackNotification } from './commentConfig.js';
 import {
   UUID_RE, clamp, round, escapeHtml, truncate, formatTime,
   parseView, parseFilters, buildQuery, makeViewHash, parseViewHash,
@@ -124,21 +126,34 @@ function shareableUrl(view, filters, commentId) {
 }
 
 // ---------- Supabase + Slack + clipboard ----------
-function ensureClient() {
+let configPromise = null;
+
+/** Fetch Supabase config from the Netlify function once; cached + retryable. */
+function loadSupabaseConfig() {
+  if (!configPromise) {
+    configPromise = getSupabaseConfig().then((cfg) => {
+      if (!cfg || !cfg.SUPABASE_URL || !cfg.SUPABASE_ANON_KEY) {
+        throw new Error('Netlify function returned no Supabase config — check SUPABASE_URL / SUPABASE_ANON_KEY env vars in Netlify.');
+      }
+      // Common paste mistake: URL and anon key swapped in the Netlify env vars.
+      if (!/^https?:\/\//i.test(cfg.SUPABASE_URL)) {
+        throw new Error('SUPABASE_URL must start with https:// — it looks like the URL and anon key are swapped in the Netlify env vars.');
+      }
+      if (/^https?:\/\//i.test(cfg.SUPABASE_ANON_KEY)) {
+        throw new Error('SUPABASE_ANON_KEY looks like a URL — the URL and anon key are swapped in the Netlify env vars.');
+      }
+      return cfg;
+    }).catch((err) => {
+      configPromise = null; // allow a retry on the next attempt
+      throw new Error(`Could not fetch Supabase config from the Netlify function: ${err.message || err}`);
+    });
+  }
+  return configPromise;
+}
+
+async function ensureClient() {
   if (client) return client;
-  if (!SUPABASE_URL || /^YOUR_/i.test(SUPABASE_URL)) {
-    throw new Error('Supabase is not configured — set SUPABASE_URL in src/commentConfig.js.');
-  }
-  if (!SUPABASE_ANON_KEY || /^YOUR_/i.test(SUPABASE_ANON_KEY)) {
-    throw new Error('Supabase is not configured — set SUPABASE_ANON_KEY in src/commentConfig.js.');
-  }
-  // Common paste mistake: URL and anon key swapped in commentConfig.js.
-  if (!/^https?:\/\//i.test(SUPABASE_URL)) {
-    throw new Error('SUPABASE_URL must start with https:// — it looks like the URL and anon key are swapped in src/commentConfig.js.');
-  }
-  if (/^https?:\/\//i.test(SUPABASE_ANON_KEY)) {
-    throw new Error('SUPABASE_ANON_KEY looks like a URL — the URL and anon key are swapped in src/commentConfig.js.');
-  }
+  const { SUPABASE_URL, SUPABASE_ANON_KEY } = await loadSupabaseConfig();
   if (typeof window === 'undefined' || !window.supabase || typeof window.supabase.createClient !== 'function') {
     throw new Error('Supabase JS client failed to load — check the CDN <script> in index.html.');
   }
@@ -146,27 +161,14 @@ function ensureClient() {
     client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   } catch (err) {
     console.error('Supabase createClient failed:', err);
-    throw new Error(`Supabase client failed to start: ${err && err.message ? err.message : err} — check SUPABASE_URL / SUPABASE_ANON_KEY in src/commentConfig.js.`);
+    throw new Error(`Supabase client failed to start: ${err && err.message ? err.message : err}.`);
   }
   return client;
 }
 
-/** Fire-and-forget; silently disabled while SLACK_WEBHOOK_URL is a YOUR_ placeholder. */
+/** Fire-and-forget via the Netlify function (auth token from the login gate). */
 function notifySlack(text) {
-  if (!SLACK_WEBHOOK_URL || /^YOUR_/i.test(SLACK_WEBHOOK_URL)) return;
-  try {
-    // Slack's webhook rejects the CORS preflight for application/json, so send
-    // the same JSON payload as a "simple" text/plain request (no preflight).
-    fetch(SLACK_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-      body: JSON.stringify({ text }),
-    }).then(async (res) => {
-      if (!res.ok) console.warn(`Slack notification failed: HTTP ${res.status}: ${(await res.text()).slice(0, 120)}`);
-    }).catch((err) => console.warn('Slack notification failed:', err));
-  } catch (err) {
-    console.warn('Slack notification failed:', err);
-  }
+  sendSlackNotification(text).catch((err) => console.warn('Slack notification failed:', err));
 }
 
 async function copyToClipboard(text) {
@@ -213,24 +215,30 @@ function closeLoginModal() {
   if (passEl) passEl.value = '';
 }
 
-function attemptLogin() {
+async function attemptLogin() {
   const nameEl = $('commentUsername');
   const passEl = $('commentPassword');
   const errEl = $('commentLoginError');
   const name = nameEl ? nameEl.value.trim() : '';
   const pass = passEl ? passEl.value : '';
   const fail = (msg) => { showErr(errEl, msg); if (passEl) passEl.value = ''; };
-  if (!Array.isArray(COMMENT_USERS) || !COMMENT_USERS.length) {
-    fail('No comment accounts configured (src/commentConfig.js).');
+  if (!name || !pass) { fail('Enter both username and password.'); return; }
+  const loginBtn = $('commentLoginBtn');
+  if (loginBtn) loginBtn.disabled = true;
+  let ok = false;
+  try {
+    ok = await verifyLogin(name, pass);
+  } catch (err) {
+    console.error('Login failed:', err);
+    fail('Login failed — check your connection and try again.');
+    if (loginBtn) loginBtn.disabled = false;
     return;
   }
-  if (!name || !pass) { fail('Enter both username and password.'); return; }
-  const match = COMMENT_USERS.find((u) => u
-    && String(u.username).toLowerCase() === name.toLowerCase()
-    && String(u.password) === pass);
-  if (!match) { fail('Invalid username or password.'); return; }
-  currentUser = String(match.username);
+  if (loginBtn) loginBtn.disabled = false;
+  if (!ok) { fail('Invalid username or password.'); return; }
+  currentUser = name;
   const cb = loginSuccessCb;
+  loginSuccessCb = null;
   closeLoginModal();
   const listBtn = $('myCommentsBtn');
   if (listBtn) listBtn.style.display = 'flex';
@@ -245,10 +253,10 @@ function requireAuth(cb) {
 
 // ---------- add mode (yellow button -> click the globe) ----------
 function startAddMode() {
-  const begin = () => {
+  const begin = async () => {
     if (addMode) return;
     try {
-      ensureClient();
+      await ensureClient();
     } catch (err) {
       console.error('Comment add-mode failed:', err);
       toast(err.message);
@@ -349,7 +357,7 @@ async function saveNewComment() {
   hideErr(errEl);
   if (btn) btn.disabled = true;
   try {
-    const db = ensureClient();
+    const db = await ensureClient();
     const anchor = {
       x: clamp(round(Number(el.dataset.x), 2), 2, 98),
       y: clamp(round(Number(el.dataset.y), 2), 2, 96),
@@ -411,7 +419,7 @@ async function fetchReplies(rootId, db) {
 }
 
 async function fetchThread(commentId) {
-  const db = ensureClient();
+  const db = await ensureClient();
   const root = await fetchCommentRow(commentId, db);
   if (!root) throw new Error('Comment not found.');
   const replies = await fetchReplies(root.id, db);
@@ -501,7 +509,7 @@ async function saveReply(box, root) {
   hideErr(errEl);
   if (btn) btn.disabled = true;
   try {
-    const db = ensureClient();
+    const db = await ensureClient();
     const { error } = await db
       .from('view_comments')
       .insert({ view_hash: root.view_hash, author: currentUser, comment_text: text, parent_id: root.id });
@@ -539,7 +547,7 @@ async function openMyComments() {
   }
   if (listEl) listEl.innerHTML = '';
   try {
-    const db = ensureClient();
+    const db = await ensureClient();
     const { data, error } = await db
       .from('view_comments')
       .select('*')
