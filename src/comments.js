@@ -382,7 +382,7 @@ async function saveNewComment() {
     toast(copied
       ? 'Comment saved — shareable link copied to your clipboard.'
       : `Comment saved — copy this link: ${url}`);
-    notifySlack(`*New EPFD comment by ${currentUser}*\n>${text.replace(/\n/g, '\n>')}\n${url}`);
+    notifySlack(`*New comment by ${currentUser}*\n>${text.replace(/\n/g, '\n>')}\n${url}`);
     const root = { id, author: currentUser, comment_text: text, view_hash: hash, created_at: new Date().toISOString(), parent_id: null };
     renderThread(root, [], { focus: true });
   } catch (err) {
