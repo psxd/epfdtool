@@ -1,7 +1,18 @@
 # Netlify hosts only the serverless function for this project: it keeps every
-# secret (SUPABASE_URL, SUPABASE_ANON_KEY, ADMIN_USERNAME, ADMIN_PASSWORD,
-# SLACK_WEBHOOK_URL) in Netlify env vars instead of this public GitHub repo.
-# The dashboard itself is served by GitHub Pages at psxd.github.io/epfdtool/.
+# secret (SUPABASE_URL, SUPABASE_ANON_KEY, SLACK_WEBHOOK_URL, AUTH_SECRET,
+# ADMIN_USERNAME, ADMIN_PASSWORD) in Netlify env vars instead of this public
+# GitHub repo. The dashboard itself is served by GitHub Pages at
+# psxd.github.io/epfdtool/.
+#
+# Login accounts live in Supabase (`public.app_users`), so adding a user is an
+# INSERT in the Supabase Table Editor — no Netlify redeploy needed.
+#   insert into app_users (username, password) values ('alice', 's3cret');
+# Optional but recommended: set SUPABASE_SERVICE_ROLE_KEY here as well. The
+# function then reads app_users with that key, and the public "read app_users"
+# RLS policy can be removed (with the anon key the policy is required, which
+# means anyone can read the plain-text passwords in that table).
+# No SUPABASE_SERVICE_ROLE_KEY yet? Store hashes instead of plain text:
+#   npm run add-user -- alice "s3cret" --hash
 [build]
   command = "npm run build"
   publish = "dist"
