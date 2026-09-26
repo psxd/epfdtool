@@ -3,27 +3,35 @@
 // public. Keep this URL pointing at the deployed function site.
 const NETLIFY_API_URL = 'https://epfdtool.netlify.app/.netlify/functions/api';
 
-// Helpers for the signed-in identity. The token is what the Netlify function
-// validated; user/name are stored so a reload keeps attributing comments to the
-// same account (and so multi-user deployments can show a friendly name).
+// The signed-in identity lives in memory for the current page view only: the
+// token, username and display name are never written to storage, so refreshing
+// the page (or opening the site in another tab) signs the user out and the login
+// dialog is shown again. Nothing survives the session.
+let auth = null; // { token, user, name } after a successful login
+
+// Earlier builds kept those values in localStorage. Purge them on load so an
+// upgrade cannot resurrect a stale session.
+for (const legacyKey of ['auth_token', 'auth_user', 'auth_name']) {
+  try { localStorage.removeItem(legacyKey); } catch { /* storage absent or blocked */ }
+}
+
+/** Token for the current session (null once signed out). */
 function getAuthToken() {
-  return localStorage.getItem('auth_token');
+  return auth ? auth.token : null;
 }
 
 /** Canonical username of the last successful login ('' when signed out). */
 export function getAuthUser() {
-  return localStorage.getItem('auth_user') || '';
+  return auth ? auth.user : '';
 }
 
 /** Friendly display name of the signed-in account (falls back to username). */
 export function getAuthName() {
-  return localStorage.getItem('auth_name') || getAuthUser();
+  return auth ? (auth.name || auth.user) : '';
 }
 
 function clearAuth() {
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('auth_user');
-  localStorage.removeItem('auth_name');
+  auth = null;
 }
 
 // Every call is sent as a CORS "simple request": POST + text/plain body + no
@@ -66,12 +74,10 @@ export async function verifyLogin(username, password) {
   }
   if (!res.ok) throw httpError(res, 'Login');
   if (res.data && res.data.success && res.data.token) {
-    // The function is the source of truth for the account's spelling and for
-    // the friendly name shown in the UI.
+    // The function is the source of truth for the account's spelling and for the
+    // friendly name shown in the UI. Held in memory only — see the note above.
     const user = res.data.username || username;
-    localStorage.setItem('auth_token', res.data.token);
-    localStorage.setItem('auth_user', user);
-    localStorage.setItem('auth_name', res.data.name || user);
+    auth = { token: res.data.token, user, name: res.data.name || user };
     return true;
   }
   return false;

@@ -749,9 +749,10 @@ function wireControls() {
 
 /** Entry point — called from app.js on DOMContentLoaded. */
 export function initComments() {
-  // A token saved by an earlier visit means this browser is already signed in:
-  // restore the account so new comments keep the same author (the Netlify
-  // function re-validates the token whenever Slack is notified).
+  // The session lasts one page view (see commentConfig.js), so a fresh load is
+  // always signed out: getAuthUser() is '' here and the login dialog appears the
+  // first time a comment or reply is written. The call is kept so the buttons
+  // still reflect a restored account if that ever changes.
   currentUser = getAuthUser() || null;
   if (currentUser) {
     const listBtn = $('myCommentsBtn');
