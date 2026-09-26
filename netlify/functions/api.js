@@ -38,6 +38,24 @@ export default async (req, context) => {
     'Access-Control-Allow-Origin': '*',
   };
 
+  // Health check: open <site>/.netlify/functions/api?diag=1 in a browser tab to
+  // see which Netlify env vars this function actually receives (booleans only,
+  // never values). If ADMIN_USERNAME/ADMIN_PASSWORD are false here, login will
+  // only accept the built-in 'admin'/'password' fallback.
+  if (req.method === 'GET') {
+    return new Response(JSON.stringify({
+      ok: true,
+      env: {
+        SUPABASE_URL: !!process.env.SUPABASE_URL,
+        SUPABASE_ANON_KEY: !!process.env.SUPABASE_ANON_KEY,
+        ADMIN_USERNAME: !!process.env.ADMIN_USERNAME,
+        ADMIN_PASSWORD: !!process.env.ADMIN_PASSWORD,
+        SLACK_WEBHOOK_URL: !!process.env.SLACK_WEBHOOK_URL,
+        AUTH_SECRET: !!process.env.AUTH_SECRET,
+      },
+    }, null, 2), { status: 200, headers: corsHeaders });
+  }
+
   try {
     const body = await req.json();
     const { action, username, password, message, token: bodyToken } = body;
