@@ -3,9 +3,27 @@
 // public. Keep this URL pointing at the deployed function site.
 const NETLIFY_API_URL = 'https://epfdtool.netlify.app/.netlify/functions/api';
 
-// Helper to grab the saved token from localStorage
+// Helpers for the signed-in identity. The token is what the Netlify function
+// validated; user/name are stored so a reload keeps attributing comments to the
+// same account (and so multi-user deployments can show a friendly name).
 function getAuthToken() {
   return localStorage.getItem('auth_token');
+}
+
+/** Canonical username of the last successful login ('' when signed out). */
+export function getAuthUser() {
+  return localStorage.getItem('auth_user') || '';
+}
+
+/** Friendly display name of the signed-in account (falls back to username). */
+export function getAuthName() {
+  return localStorage.getItem('auth_name') || getAuthUser();
+}
+
+function clearAuth() {
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('auth_user');
+  localStorage.removeItem('auth_name');
 }
 
 // Every call is sent as a CORS "simple request": POST + text/plain body + no
@@ -43,12 +61,17 @@ export async function getSupabaseConfig() {
 export async function verifyLogin(username, password) {
   const res = await postAction({ action: 'login', username, password });
   if (res.status === 401 || res.status === 403) {
-    localStorage.removeItem('auth_token'); // don't keep a stale/foreign token
+    clearAuth(); // don't keep a stale/foreign token
     return false;
   }
   if (!res.ok) throw httpError(res, 'Login');
   if (res.data && res.data.success && res.data.token) {
+    // The function is the source of truth for the account's spelling and for
+    // the friendly name shown in the UI.
+    const user = res.data.username || username;
     localStorage.setItem('auth_token', res.data.token);
+    localStorage.setItem('auth_user', user);
+    localStorage.setItem('auth_name', res.data.name || user);
     return true;
   }
   return false;

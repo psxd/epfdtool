@@ -1,3 +1,85 @@
+import { USERS } from './users.js';
+
+// ---------------------------------------------------------------------------
+// Accounts. The list comes from the repo file ./users.js (salted SHA-256 hashes
+// or, if you insist, plain text), optionally extended/overridden by the
+// COMMENT_USERS Netlify env var (JSON, same shape as the file), and the single
+// ADMIN_USERNAME/ADMIN_PASSWORD env pair always stays valid as well so an
+// existing deployment keeps working unchanged. Values are never logged.
+// ---------------------------------------------------------------------------
+async function sha256Hex(text) {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** Constant-time-ish compare: both sides are hashed to a fixed length first. */
+async function safeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || !a || !b) return false;
+  const [x, y] = await Promise.all([sha256Hex(a), sha256Hex(b)]);
+  let diff = 0;
+  for (let i = 0; i < x.length; i += 1) diff |= x.charCodeAt(i) ^ y.charCodeAt(i);
+  return diff === 0;
+}
+
+/** Normalise one users.js / COMMENT_USERS entry into a predictable shape. */
+function normalizeEntry(key, entry) {
+  const raw = String(key == null ? '' : key).trim();
+  if (!raw) return null;
+  const base = { key: raw, lower: raw.toLowerCase(), name: raw, hash: null, password: null };
+  if (typeof entry === 'string') return { ...base, password: entry };
+  if (!entry || typeof entry !== 'object') return null;
+  return {
+    ...base,
+    name: typeof entry.name === 'string' && entry.name.trim() ? entry.name.trim() : raw,
+    hash: typeof entry.hash === 'string' && entry.hash.trim() ? entry.hash.trim() : null,
+    password: typeof entry.password === 'string' ? entry.password : null,
+  };
+}
+
+/** Repo accounts, extended/overridden by the optional COMMENT_USERS env JSON. */
+function configuredUsers() {
+  const list = new Map();
+  const merge = (source) => {
+    if (!source || typeof source !== 'object') return;
+    for (const [key, entry] of Object.entries(source)) {
+      const norm = normalizeEntry(key, entry);
+      if (norm) list.set(norm.lower, norm);
+    }
+  };
+  merge(USERS);
+  if (process.env.COMMENT_USERS) {
+    try { merge(JSON.parse(process.env.COMMENT_USERS)); } catch { /* bad JSON: repo accounts still apply */ }
+  }
+  return list;
+}
+
+/** Returns { username, name } the credentials belong to, or null. Usernames
+ *  are matched case-insensitively; the repo/env spelling is what gets used. */
+async function authenticate(username, password) {
+  if (typeof username !== 'string' || typeof password !== 'string' || !password) return null;
+  const wanted = username.trim().toLowerCase();
+  if (!wanted) return null;
+
+  const adminUser = (process.env.ADMIN_USERNAME || '').trim();
+  const adminPass = process.env.ADMIN_PASSWORD || '';
+  if (adminUser && adminPass && wanted === adminUser.toLowerCase() && await safeEqual(password, adminPass)) {
+    return { username: adminUser, name: adminUser };
+  }
+
+  const entry = configuredUsers().get(wanted);
+  if (!entry) return null;
+  if (entry.hash) {
+    const [salt, digest] = entry.hash.split(':');
+    if (!digest || !/^[0-9a-f]{64}$/i.test(digest)) return null; // malformed hash entry
+    return await safeEqual(await sha256Hex(`${salt || ''}:${password}`), digest)
+      ? { username: entry.key, name: entry.name } : null;
+  }
+  if (entry.password && await safeEqual(password, entry.password)) {
+    return { username: entry.key, name: entry.name };
+  }
+  return null;
+}
+
 // Issues and checks short, stateless auth tokens. The secret never appears in
 // this (public) repository: it comes from the Netlify env vars, falling back to
 // the admin password so an existing deployment keeps working without new config.
@@ -39,9 +121,8 @@ export default async (req, context) => {
   };
 
   // Health check: open <site>/.netlify/functions/api?diag=1 in a browser tab to
-  // see which Netlify env vars this function actually receives (booleans only,
-  // never values). If ADMIN_USERNAME/ADMIN_PASSWORD are false here, login will
-  // only accept the built-in 'admin'/'password' fallback.
+  // see which Netlify env vars this function actually receives, plus how many
+  // accounts it can see (booleans and counts only — never values).
   if (req.method === 'GET') {
     return new Response(JSON.stringify({
       ok: true,
@@ -52,6 +133,12 @@ export default async (req, context) => {
         ADMIN_PASSWORD: !!process.env.ADMIN_PASSWORD,
         SLACK_WEBHOOK_URL: !!process.env.SLACK_WEBHOOK_URL,
         AUTH_SECRET: !!process.env.AUTH_SECRET,
+        COMMENT_USERS: !!process.env.COMMENT_USERS,
+      },
+      accounts: {
+        repoFile: Object.keys(USERS || {}).length,
+        total: configuredUsers().size,
+        adminPair: !!(process.env.ADMIN_USERNAME && process.env.ADMIN_PASSWORD),
       },
     }, null, 2), { status: 200, headers: corsHeaders });
   }
@@ -70,17 +157,19 @@ export default async (req, context) => {
 
     // Action 2: Login
     if (action === 'login') {
-      const validUser = process.env.ADMIN_USERNAME || 'admin';
-      const validPass = process.env.ADMIN_PASSWORD || 'password';
-
-      if (username === validUser && password === validPass) {
-        // Derive a stateless token from the server-side secret (no literal
-        // credential/token values in this public repository).
-        const token = await signToken(username);
-        return new Response(JSON.stringify({ success: true, token }), { status: 200, headers: corsHeaders });
-      } else {
+      const who = await authenticate(username, password);
+      if (!who) {
+        // No built-in fallback account: the only credentials that work are the
+        // ones in netlify/functions/users.js, COMMENT_USERS or the
+        // ADMIN_USERNAME/ADMIN_PASSWORD env pair.
         return new Response(JSON.stringify({ success: false }), { status: 401, headers: corsHeaders });
       }
+      // Derive a stateless token from the server-side secret (no literal
+      // credential/token values in this public repository).
+      const token = await signToken(who.username);
+      return new Response(JSON.stringify({
+        success: true, token, username: who.username, name: who.name,
+      }), { status: 200, headers: corsHeaders });
     }
 
     // Action 3: Send Slack Notification (Protected)

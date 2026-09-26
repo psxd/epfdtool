@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "publish:pages": "bash scripts/publish-pages.sh"
+    "publish:pages": "bash scripts/publish-pages.sh",
+    "add-user": "node scripts/add-user.mjs"
   },
   "dependencies": {
     "globe.gl": "^2.31.0",

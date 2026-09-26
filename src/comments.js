@@ -15,7 +15,7 @@
 import { store } from './state.js';
 import { applyFilters } from './gsoFilters.js';
 import { focusCameraOn } from './globe.js';
-import { getSupabaseConfig, verifyLogin, sendSlackNotification } from './commentConfig.js';
+import { getSupabaseConfig, verifyLogin, sendSlackNotification, getAuthUser, getAuthName } from './commentConfig.js';
 import {
   UUID_RE, clamp, round, escapeHtml, truncate, formatTime,
   parseView, parseFilters, buildQuery, makeViewHash, parseViewHash,
@@ -236,13 +236,15 @@ async function attemptLogin() {
   }
   if (loginBtn) loginBtn.disabled = false;
   if (!ok) { fail('Invalid username or password.'); return; }
-  currentUser = name;
+  // Trust the function's canonical account name (multi-user ready) so comments
+  // are attributed to exactly the account that authenticated.
+  currentUser = getAuthUser() || name;
   const cb = loginSuccessCb;
   loginSuccessCb = null;
   closeLoginModal();
   const listBtn = $('myCommentsBtn');
   if (listBtn) listBtn.style.display = 'flex';
-  toast(`Signed in as ${currentUser}`);
+  toast(`Signed in as ${getAuthName() || currentUser}`);
   if (cb) cb();
 }
 
@@ -480,7 +482,7 @@ function openReplyComposer(card, root) {
     box.className = 'commentReplyComposer';
     box.innerHTML = `
       <div class="commentComposerActions" style="margin-top:0; justify-content:space-between;">
-        <span class="commentThreadCount">Replying as ${escapeHtml(currentUser || '')}</span>
+        <span class="commentThreadCount">Replying as ${escapeHtml(getAuthName() || currentUser || '')}</span>
         <span style="display:flex; gap:8px;">
           <button type="button" class="commentBtnSecondary commentBtnTiny" data-action="rcancel">Cancel</button>
           <button type="button" class="commentBtnYellow commentBtnTiny" data-action="rsave">Reply</button>
@@ -747,6 +749,14 @@ function wireControls() {
 
 /** Entry point — called from app.js on DOMContentLoaded. */
 export function initComments() {
+  // A token saved by an earlier visit means this browser is already signed in:
+  // restore the account so new comments keep the same author (the Netlify
+  // function re-validates the token whenever Slack is notified).
+  currentUser = getAuthUser() || null;
+  if (currentUser) {
+    const listBtn = $('myCommentsBtn');
+    if (listBtn) listBtn.style.display = 'flex';
+  }
   try {
     wireControls();
   } catch (err) {
