@@ -1,0 +1,8 @@
+# Netlify hosts only the serverless function for this project: it keeps every
+# secret (SUPABASE_URL, SUPABASE_ANON_KEY, ADMIN_USERNAME, ADMIN_PASSWORD,
+# SLACK_WEBHOOK_URL) in Netlify env vars instead of this public GitHub repo.
+# The dashboard itself is served by GitHub Pages at psxd.github.io/epfdtool/.
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
