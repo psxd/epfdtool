@@ -1,0 +1,19 @@
+-- Create the main comments table supporting views, filters, threading, and authors
+create table view_comments (
+    id uuid default gen_random_uuid() primary key,
+    view_hash text not null,
+    author text not null,
+    comment_text text not null,
+    parent_id uuid references view_comments(id) on delete cascade,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable Row Level Security (RLS) for data safety
+alter table view_comments enable row level security;
+
+-- Create a policy allowing public read/write access for your static site users
+create policy "Allow public comments" 
+on view_comments 
+for all 
+using (true) 
+with check (true);

@@ -1,0 +1,23 @@
+{
+  "name": "epfd-visualizer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "globe.gl": "^2.31.0",
+    "satellite.js": "^4.1.4",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "description": "EPFD Network Visualizer (Vite build; logic ported 1:1 from ver1)",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

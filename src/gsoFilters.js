@@ -1,0 +1,121 @@
+// Country dropdowns + combined filtering + smart camera.
+// Camera framing comes from countryView.filterView: a filtered country is
+// framed from its real GeoJSON polygons (and from the filtered ground stations
+// when the dataset has no polygon for that name), so switching a country in
+// either dropdown always moves the view onto what got highlighted.
+import { store } from './state.js';
+import { normalizeCountryName } from './countryNorm.js';
+import { updateHighlightedCountriesCache } from './countryHi.js';
+import { filterView } from './countryView.js';
+import { focusCameraOn, setSatellites } from './globe.js';
+import { renderStraightLinkBeams } from './links.js';
+
+export function populateCountryFilters(satellites, stations) {
+  const satCountrySelect = document.getElementById('filterSatCountry');
+  const gsCountrySelect = document.getElementById('filterGsCountry');
+  if (satCountrySelect) {
+    satCountrySelect.innerHTML = '<option value="all">All Countries</option>';
+    const satCountries = [...new Set(satellites.map(s => s.operator || s.satcountry).filter(Boolean))].sort();
+    for (const country of satCountries) {
+      const option = document.createElement('option');
+      option.value = country;
+      option.textContent = country;
+      satCountrySelect.appendChild(option);
+    }
+  }
+  if (gsCountrySelect) {
+    gsCountrySelect.innerHTML = '<option value="all">All Countries</option>';
+    const gsCountries = [...new Set(stations.map(stn => stn.country || stn.gscountry).filter(Boolean))].sort();
+    for (const country of gsCountries) {
+      const option = document.createElement('option');
+      option.value = country;
+      option.textContent = country;
+      gsCountrySelect.appendChild(option);
+    }
+  }
+}
+
+let filterTimer = 0;
+export function requestApplyFilters(adjustView = true) {
+  clearTimeout(filterTimer);
+  filterTimer = setTimeout(() => applyFilters(adjustView), 60);
+}
+
+export function applyFilters(adjustView = true) {
+  if (store.isLeoActive || !store.world) return;
+  const filterStatus = document.getElementById('filterStatus')?.value || 'all';
+  const satCountry = document.getElementById('filterSatCountry')?.value || 'all';
+  const gsCountry = document.getElementById('filterGsCountry')?.value || 'all';
+  const hasSat = satCountry !== 'all';
+  const hasGs = gsCountry !== 'all';
+
+  updateHighlightedCountriesCache();
+
+  const targetGs = hasGs ? normalizeCountryName(gsCountry) : null;
+  const targetSat = hasSat ? normalizeCountryName(satCountry) : null;
+
+  let filteredStations = hasGs
+    ? store.rawData.stations.filter(stn => normalizeCountryName(stn.country || stn.gscountry || '') === targetGs)
+    : store.rawData.stations;
+
+  let gsScopedSatNames = null;
+  if (hasGs) {
+    gsScopedSatNames = new Set();
+    for (const stn of filteredStations) {
+      const links = store.satsByGsName.get(stn.name);
+      if (links) for (const l of links) gsScopedSatNames.add(l.name);
+    }
+  }
+  const filteredSatellites = store.rawData.satellites.filter(sat => {
+    const isPlanned = sat.planned === true || sat.planned === 1 || sat.planned === '1' || sat.planned === 'true';
+    if (filterStatus === 'planned' && !isPlanned) return false;
+    if (filterStatus === 'nonplanned' && isPlanned) return false;
+    if (hasSat && normalizeCountryName(sat.operator || sat.satcountry || '') !== targetSat) return false;
+    if (gsScopedSatNames && !gsScopedSatNames.has(sat.name)) return false;
+    return true;
+  });
+
+  if (hasSat) {
+    const activeSatNames = new Set(filteredSatellites.map(s => s.name));
+    const validGsNames = new Set();
+    for (const conn of store.rawData.connections) {
+      if (activeSatNames.has(conn.sat_name)) validGsNames.add(conn.gs_name);
+    }
+    filteredStations = filteredStations.filter(stn => validGsNames.has(stn.name));
+  }
+
+  const finalActiveSatNames = new Set(filteredSatellites.map(s => s.name));
+  const stationSet = new Set(filteredStations.map(s => s.name));
+  const filteredConnections = [];
+  for (const conn of store.rawData.connections) {
+    if (finalActiveSatNames.has(conn.sat_name) && stationSet.has(conn.gs_name)) filteredConnections.push(conn);
+  }
+
+  store.world.pointsData(filteredStations);
+  setSatellites(filteredSatellites);
+  renderStraightLinkBeams(filteredConnections, true);
+
+  // Re-push the SAME feature array so three-globe re-runs the cap/stroke
+  // color accessors against the fresh highlight sets. This is required:
+  // without it the accessors are never re-evaluated and no country ever
+  // repaints. It is cheap and glitch-free now: altitude is constant 0 for
+  // every polygon (no geometry re-extrusion) and polygonsTransitionDuration
+  // is 0 (no morph tween).
+  if (store.world && store.cachedGeoJsonFeatures.length > 0) {
+    store.world.polygonsData(store.cachedGeoJsonFeatures);
+  }
+
+  const satStat = document.getElementById('satelliteStat');
+  const stnStat = document.getElementById('stationStat');
+  if (satStat) satStat.textContent = filteredSatellites.length.toLocaleString();
+  if (stnStat) stnStat.textContent = filteredStations.length.toLocaleString();
+
+  if (adjustView) {
+    const view = filterView({
+      hasGs, hasSat, targetSat,
+      stations: filteredStations,
+      satellites: filteredSatellites,
+    });
+    if (view) focusCameraOn(view.lat, view.lng, view.altitude);
+  }
+}

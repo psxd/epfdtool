@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPFD Network Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Supabase JS client (browser writes go straight to the view_comments table) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <div id="ui">
+    <h1>EPFD Visualizer</h1>
+    <!-- Tab Navigation -->
+    <div class="tab-container" style="display: flex; gap: 6px; margin-bottom: 12px;">
+      <button id="tabGsoBtn" class="tab-btn active" style="flex:1; padding: 8px; cursor: pointer; font-weight: bold; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111;">GSO Network</button>
+      <button id="tabLeoBtn" class="tab-btn" style="flex:1; padding: 8px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111;">LEO Propagation</button>
+    </div>
+
+    <!-- GSO Section -->
+    <section class="panelSection" id="gsoPanel" style="position: relative;">
+      <label for="searchInput">Search Network Entities</label>
+      <div style="position: relative; width: 100%;">
+        <input type="text" id="searchInput" placeholder="Search station, satellite..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
+        <div id="searchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <label for="filterStatus">Satellite Filing</label>
+        <select id="filterStatus" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Filings</option>
+          <option value="planned">Planned Only</option>
+          <option value="nonplanned">Non-Planned</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="filterSatCountry">Satellite Country</label>
+        <select id="filterSatCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Countries</option>
+        </select>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="filterGsCountry">Ground Station Country</label>
+        <select id="filterGsCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="all">All Countries</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- LEO Section (Hidden by default) -->
+    <section class="panelSection" id="leoPanel" style="display: none; position: relative;">
+      <label for="leoSearchInput">Search Active LEO Satellite</label>
+      <div style="position: relative; width: 100%;">
+        <input type="text" id="leoSearchInput" placeholder="e.g., ISS, STARLINK..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
+        <div id="leoSearchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <label for="leoSpeedSelect">Propagation Speed</label>
+        <select id="leoSpeedSelect" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+          <option value="1" selected>1x Speed (Real-time)</option>
+          <option value="10">10x Speed</option>
+          <option value="100">100x Speed</option>
+        </select>
+      </div>
+
+      <!-- Prominent Intersection Count Card -->
+      <div style="margin-top: 12px; background: rgba(0, 255, 204, 0.12); border: 1px solid #00ffcc; padding: 10px; border-radius: 6px; text-align: center;">
+        <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; color: #005544;">Total Intersected Links</div>
+        <div id="leoCompromisedCount" style="font-size: 24px; font-weight: bold; color: #007760; margin-top: 2px;">0</div>
+      </div>
+
+      <div id="leoPropagationInfo" style="margin-top: 10px; font-size: 13px; background: rgba(0,0,0,0.04); padding: 8px; border-radius: 4px;">
+        <div><b>Status:</b> <span id="leoStatusText">Idle</span></div>
+        <div><b>Propagation Time:</b> <span id="leoTimeText">-</span></div>
+        <div><b>Altitude:</b> <span id="leoAltText">-</span> km</div>
+      </div>
+
+      <button id="leoResetBtn" style="width: 100%; margin-top: 10px; padding: 8px; background: #d9534f; color: white; border: none; border-radius: 4px; cursor: pointer;">Reset View</button>
+    </section>
+
+    <hr>
+
+    <section class="panelSection">
+      <p class="statIntro">
+        Current active ITU network query parameters yield:
+      </p>
+
+      <div class="statsGridWithIn">
+        <div class="statBlock">
+          <div id="satelliteStat" class="statNumber">0</div>
+          <div class="statLabel">Satellites</div>
+        </div>
+
+        <div class="statIn">and</div>
+
+        <div class="statBlock">
+          <div id="stationStat" class="statNumber">0</div>
+          <div class="statLabel">Ground Stations</div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="panelSection">
+      <span class="subsectionLabel">Network Legend</span>
+
+      <div class="legendContainer">
+        <div class="legendList">
+          <div class="legendRow">
+            <span class="legendDot legendDotPlanned"></span>
+            <span>Planned Satellites (GSO Orbit)</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendDot legendDotNonPlanned"></span>
+            <span>Non-Planned Satellites</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendDot legendDotStation"></span>
+            <span>Ground Stations</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendLine legendLineLink"></span>
+            <span>Active Link Paths</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="detailsBox" class="detailsBox">
+      <p class="placeholderText">Hover over or click nodes on the globe to inspect payload metadata.</p>
+    </div>
+  </div>
+
+  <!-- Camera Floating Quick Controls -->
+  <div id="cameraControls">
+    <button id="zoomInBtn" class="cameraBtn" title="Zoom in">+</button>
+    <button id="zoomOutBtn" class="cameraBtn" title="Zoom out">−</button>
+    <button id="viewToggleBtn" class="cameraBtn" title="Toggle globe / horizon view">◠</button>
+    <button id="addCommentBtn" class="cameraBtn commentBtn" title="Add a comment at this view">＋</button>
+    <button id="myCommentsBtn" class="cameraBtn commentBtn" title="My comments" style="display:none;">💬</button>
+  </div>
+
+  <!-- 3D Globe Render Area -->
+  <div id="canvas-wrap">
+    <div id="globeCanvas"></div>
+  </div>
+
+  <!-- Laboratory Branding Logo -->
+  <img id="gtLogo" src="./assets/ESPL.png" alt="Engineering Space Policy Laboratory">
+
+  <!-- Comment system: cards layer, add-mode hint, toast, login modal, my-comments panel -->
+  <div id="commentLayer" aria-live="polite"></div>
+  <div id="commentHint">Click anywhere on the globe to place your comment — press Esc to cancel.</div>
+  <div id="commentToast" role="status"></div>
+
+  <div id="commentModalBackdrop" class="commentModalBackdrop">
+    <div class="commentModal" role="dialog" aria-modal="true" aria-labelledby="commentLoginTitle">
+      <div class="commentModalTitle" id="commentLoginTitle">Sign in to comment</div>
+      <label class="commentModalLabel" for="commentUsername">Username</label>
+      <input id="commentUsername" class="commentModalInput" type="text" autocomplete="username" />
+      <label class="commentModalLabel" for="commentPassword">Password</label>
+      <input id="commentPassword" class="commentModalInput" type="password" autocomplete="current-password" />
+      <div id="commentLoginError" class="commentModalError" style="display:none;"></div>
+      <div class="commentModalActions">
+        <button id="commentCancelBtn" type="button" class="commentBtnSecondary">Cancel</button>
+        <button id="commentLoginBtn" type="button" class="commentBtnYellow">Sign in</button>
+      </div>
+    </div>
+  </div>
+
+  <aside id="myCommentsPanel" class="myCommentsPanel" style="display:none;">
+    <div class="myCommentsHeader">
+      <span>My comments</span>
+      <button id="myCommentsClose" type="button" class="commentBtnSecondary commentBtnTiny" title="Close">✕</button>
+    </div>
+    <div id="myCommentsStatus" class="commentStatus" style="display:none;"></div>
+    <div id="myCommentsList" class="myCommentsList"></div>
+  </aside>
+
+  <!-- Main ES Module entry point for Vite -->
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
