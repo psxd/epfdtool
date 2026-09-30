@@ -9,3 +9,8 @@ dist/
 # Never commit local secrets (the Netlify function reads these from its own env)
 .env
 .env.*
+# spaceexplorer.py private workspace: downloaded ITU CSVs + processed backup.
+# mapping.json is the one exception - it is a required input, so negate it.
+data/*
+!data/mapping.json
+!data/.gitkeep

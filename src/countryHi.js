@@ -10,6 +10,11 @@
 //    (altitude is constant 0 for every polygon).
 //  * both filtered -> only the GS country, and only when at least one link
 //    between that GS country and the sat country exists; otherwise nothing.
+//  * no polygon in globe.json (Monaco, Singapore, Bahrain, Maldives, Mauritius,
+//    Seychelles, Comoros, Cape Verde, Marshall Islands, Tonga, ...): the outline
+//    is SKIPPED for that country by design - it stays in the footprint/link data
+//    and its stations + beams are still rendered (that part of the pipeline
+//    lives in gsoFilters.applyFilters and never consults these sets).
 // Camera framing lives in countryView.js: the primary country is framed.
 import { store } from './state.js';
 import { normalizeCountryName } from './countryNorm.js';
@@ -29,6 +34,12 @@ function hasPolygon(key) {
 }
 
 // Countries hosting stations that talk to targetSat's fleet (polygon-gated).
+// The gate is deliberate and is the only place a country is dropped: without a
+// polygon there is nothing to outline, and the country's stations/links are NOT
+// affected by being dropped here (they are filtered straight from the dropdown
+// values in gsoFilters.applyFilters). Serbia used to land in this bucket by
+// accident (station administration code "XYU" vs the geo name "Republic of
+// Serbia") - see COUNTRY_ALIASES / CANONICAL_OVERRIDES.
 // Exported so the regression harness can derive the allowed set independently.
 export function linkedGsCountries(targetSat) {
   const out = new Set();
@@ -81,8 +92,12 @@ export function updateHighlightedCountriesCache() {
       // sat country filter -> the operator's country is OUTLINED in the same
       // blue, never filled, and so is every GS country it talks to. Nothing is
       // filled here, which is what stops a sat filter from washing the globe.
+      // A key with no polygon in globe.json (Monaco / Tonga / Singapore / ...)
+      // is skipped: there is nothing to outline for it, and its stations and
+      // link beams keep rendering because those come from the country selects,
+      // never from these sets (see gsoFilters.applyFilters).
       const t = normalizeCountryName(satCountry);
-      if (t) satOutline.add(t);
+      if (t && hasPolygon(t)) satOutline.add(t);
       for (const c of linkedGsCountries(t)) {
         if (c !== t) footprint.add(c);
       }

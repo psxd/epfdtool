@@ -6,7 +6,7 @@
   <title>EPFD Network Visualizer</title>
   <link rel="stylesheet" href="style.css" />
   <!-- Tab icon uses a file that already ships in public/ (avoids a /favicon.ico 404) -->
-  <link rel="icon" type="image/png" href="./assets/ESPL.png" />
+  <link rel="icon" type="image/png" href="./assets/web.png" />
   <!-- Supabase JS client (browser writes go straight to the view_comments table) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -49,6 +49,11 @@
         <select id="filterGsCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
           <option value="all">All Countries</option>
         </select>
+      </div>
+
+      <div id="dataSourceBox" style="margin-top: 10px; font-size: 12px; line-height: 1.5; color: #8f8f8f;">
+        <div id="dataVersion"></div>
+        <div>Source: <a href="https://www.itu.int/itu-r/space/apps/public/spaceexplorer/networks-explorer" target="_blank" rel="noopener" style="color: #8f8f8f;">ITU Space Explorer</a></div>
       </div>
     </section>
 
@@ -146,6 +151,7 @@
     <button id="zoomInBtn" class="cameraBtn" title="Zoom in">+</button>
     <button id="zoomOutBtn" class="cameraBtn" title="Zoom out">−</button>
     <button id="viewToggleBtn" class="cameraBtn" title="Toggle globe / horizon view">◠</button>
+    <button id="resetViewBtn" class="cameraBtn" title="Reset to the initial boot view: no filters, default camera">↺</button>
     <button id="addCommentBtn" class="cameraBtn commentBtn" title="Add a comment at this view">⍜</button>
     <button id="myCommentsBtn" class="cameraBtn commentBtn" title="My comments" style="display:none;">💬</button>
   </div>

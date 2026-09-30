@@ -84,15 +84,26 @@ export function applyFilters(adjustView = true) {
     filteredStations = filteredStations.filter(stn => validGsNames.has(stn.name));
   }
 
-  const finalActiveSatNames = new Set(filteredSatellites.map(s => s.name));
-  const stationSet = new Set(filteredStations.map(s => s.name));
+  // Dedupe rows by name before they reach the scene, the beam intersection
+  // and the stat counters: the source files carry duplicate rows (120 station
+  // names appear twice, e.g. SIDODADI; 2 satellites likewise), while hover +
+  // click only ever resolve ONE row per name (last one wins in
+  // stationByName/satByName). Counting raw rows inflated the left-panel
+  // totals above the unique satellites / ground stations actually shown.
+  // `filteredSatellites` is a const above, so the deduped rows get their own
+  // names rather than a reassignment.
+  const visibleStations = [...new Map(filteredStations.map(s => [s.name, s])).values()];
+  const visibleSatellites = [...new Map(filteredSatellites.map(s => [s.name, s])).values()];
+
+  const finalActiveSatNames = new Set(visibleSatellites.map(s => s.name));
+  const stationSet = new Set(visibleStations.map(s => s.name));
   const filteredConnections = [];
   for (const conn of store.rawData.connections) {
     if (finalActiveSatNames.has(conn.sat_name) && stationSet.has(conn.gs_name)) filteredConnections.push(conn);
   }
 
-  store.world.pointsData(filteredStations);
-  setSatellites(filteredSatellites);
+  store.world.pointsData(visibleStations);
+  setSatellites(visibleSatellites);
   renderStraightLinkBeams(filteredConnections, true);
 
   // Re-push the SAME feature array so three-globe re-runs the cap/stroke
@@ -107,14 +118,14 @@ export function applyFilters(adjustView = true) {
 
   const satStat = document.getElementById('satelliteStat');
   const stnStat = document.getElementById('stationStat');
-  if (satStat) satStat.textContent = filteredSatellites.length.toLocaleString();
-  if (stnStat) stnStat.textContent = filteredStations.length.toLocaleString();
+  if (satStat) satStat.textContent = visibleSatellites.length.toLocaleString();
+  if (stnStat) stnStat.textContent = visibleStations.length.toLocaleString();
 
   if (adjustView) {
     const view = filterView({
       hasGs, hasSat, targetSat,
-      stations: filteredStations,
-      satellites: filteredSatellites,
+      stations: visibleStations,
+      satellites: visibleSatellites,
     });
     if (view) focusCameraOn(view.lat, view.lng, view.altitude);
   }

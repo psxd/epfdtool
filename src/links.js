@@ -3,7 +3,7 @@
 // Why: 7840 links as individual meshes = 7840 draw calls + heavy GC on every
 // filter. One InstancedMesh (8-sided cylinder) = 1 draw call; per-link state
 // (colour/opacity) is updated via instanceColor without rebuilding geometry.
-// Lines are translucent (opacity ~0.28 GSO / 0.12 LEO-idle) for visibility.
+// Lines are translucent (opacity ~0.5 GSO / 0.2 LEO-idle) for visibility.
 import * as THREE from 'three';
 import { PALETTE, GSO_ALTITUDE_RATIO } from './constants.js';
 import { store } from './state.js';
@@ -23,6 +23,10 @@ const _mid = new THREE.Vector3();
 const _dir = new THREE.Vector3();
 const _scale = new THREE.Vector3();
 const _col = new THREE.Color();
+// Transient hover-highlight state: `kind:name` of the node whose beams are
+// currently painted bright (null = none). Cleared on every beam re-render.
+let highlightKey = null;
+const _hlCol = new THREE.Color();
 
 export const LEO_DIM_COLOR = LEO_IDLE_COLOR;
 
@@ -61,7 +65,7 @@ function ensureLinkMesh(count, opacity) {
 export function renderStraightLinkBeams(connections, isGsoMode = false) {
   if (!store.world) return;
   const list = connections || [];
-  const opacity = isGsoMode ? 0.28 : 0.12;
+  const opacity = isGsoMode ? 0.5 : 0.2;
   const mesh = ensureLinkMesh(list.length, opacity);
   if (!mesh || list.length === 0) {
     disposeLinkMesh();
@@ -80,13 +84,22 @@ export function renderStraightLinkBeams(connections, isGsoMode = false) {
   const dirZ = new Float32Array(n);
   const country = new Array(n);
   const ident = new Array(n);
+  const satName = new Array(n);
+  const gsName = new Array(n);
 
   const baseColor = isGsoMode ? GSO_COLOR : LEO_IDLE_COLOR;
 
   for (let i = 0; i < n; i++) {
     const conn = list[i];
     const satLon = store.satLonByName.get(conn.sat_name) ?? conn.sat_lon ?? 0;
-    const p1 = store.world.getCoords(conn.gs_lat, conn.gs_lon, 0.01);
+    // Snap the GS endpoint to the drawn node's coords: rows for duplicate
+    // station names (e.g. SIDODADI appears twice with different coordinates)
+    // can carry coords slightly different from the deduped node that is
+    // actually drawn, leaving beams a hair off their dot. Beam end == dot.
+    const stn = store.stationByName.get(conn.gs_name);
+    const gLat = (stn && stn.lat != null) ? stn.lat : conn.gs_lat;
+    const gLon = (stn && stn.lon != null) ? stn.lon : conn.gs_lon;
+    const p1 = store.world.getCoords(gLat, gLon, 0.01);
     const p2 = store.world.getCoords(0, satLon, GSO_ALTITUDE_RATIO);
     _mid.set((p1.x + p2.x) / 2, (p1.y + p2.y) / 2, (p1.z + p2.z) / 2);
     _dir.set(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
@@ -97,19 +110,21 @@ export function renderStraightLinkBeams(connections, isGsoMode = false) {
     mesh.setMatrixAt(i, _m);
     mesh.setColorAt(i, _col.copy(baseColor));
 
-    gsLat[i] = conn.gs_lat; gsLon[i] = conn.gs_lon;
+    gsLat[i] = gLat; gsLon[i] = gLon;
     gsX[i] = p1.x; gsY[i] = p1.y; gsZ[i] = p1.z;
     dirX[i] = (p2.x - p1.x) / len; dirY[i] = (p2.y - p1.y) / len; dirZ[i] = (p2.z - p1.z) / len;
-    const stn = store.stationByName.get(conn.gs_name);
     country[i] = stn ? normalizeCountryName(stn.country || stn.gscountry || '') : '';
-    ident[i] = `${conn.gs_lat},${conn.gs_lon}-${satLon}`;
+    ident[i] = `${gLat},${gLon}-${satLon}`;
+    satName[i] = conn.sat_name;
+    gsName[i] = conn.gs_name;
   }
   mesh.instanceMatrix.needsUpdate = true;
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   mesh.material.opacity = opacity;
   mesh.material.needsUpdate = false;
 
-  store.linkMeta = { count: n, gsLat, gsLon, gsX, gsY, gsZ, dirX, dirY, dirZ, country, ident };
+  highlightKey = null; // beams rebuilt -> any previous highlight is gone
+  store.linkMeta = { count: n, gsLat, gsLon, gsX, gsY, gsZ, dirX, dirY, dirZ, country, ident, satName, gsName, isGsoMode };
 }
 
 // Recolour instances by index (used by LEO highlight + reset).
@@ -127,6 +142,35 @@ export function paintAllLinks(hex) {
   _col.setHex(hex);
   for (let i = 0; i < store.linkMeta.count; i++) mesh.setColorAt(i, _col);
   if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+}
+
+// --- Transient hover highlight ------------------------------------------------
+// Colour-only: brightens the beams of ONE node so a viewer can see exactly
+// which lines belong to the hovered satellite/station and check them against
+// the hover list. It never adds/removes beams - the drawn set is always
+// exactly the (filtered) connection rows.
+const HIGHLIGHT_HEX = new THREE.Color(PALETTE.false_sat).getHex();
+
+export function highlightBeams(kind, name) {
+  const mesh = store.linkMesh;
+  const meta = store.linkMeta;
+  if (!mesh || !meta || !meta.isGsoMode || store.isLeoActive) return;
+  const key = kind + ':' + name;
+  if (highlightKey === key) return;
+  paintAllLinks(GSO_COLOR_HEX); // clear the previously highlighted node
+  const names = kind === 'sat' ? meta.satName : meta.gsName;
+  _hlCol.setHex(HIGHLIGHT_HEX);
+  for (let i = 0; i < meta.count; i++) {
+    if (names[i] === name) mesh.setColorAt(i, _hlCol);
+  }
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+  highlightKey = key;
+}
+
+export function clearBeamHighlight() {
+  if (!highlightKey) return;
+  highlightKey = null;
+  paintAllLinks(GSO_COLOR_HEX);
 }
 
 export { GSO_COLOR_HEX };

@@ -1,0 +1,642 @@
+{
+    "AFS": {
+        "country": "South Africa",
+        "flag": "🇿🇦",
+        "formatted": "South Africa 🇿🇦"
+    },
+    "AGL": {
+        "country": "Angola",
+        "flag": "🇦🇴",
+        "formatted": "Angola 🇦🇴"
+    },
+    "ALS": {
+        "country": "United States of America",
+        "flag": "🇺🇸",
+        "formatted": "United States of America 🇺🇸"
+    },
+    "ARG": {
+        "country": "Argentina",
+        "flag": "🇦🇷",
+        "formatted": "Argentina 🇦🇷"
+    },
+    "ARM": {
+        "country": "Armenia",
+        "flag": "🇦🇲",
+        "formatted": "Armenia 🇦🇲"
+    },
+    "ARS": {
+        "country": "Saudi Arabia",
+        "flag": "🇸🇦",
+        "formatted": "Saudi Arabia 🇸🇦"
+    },
+    "ARS / ARB": {
+        "country": "Saudi Arabia",
+        "flag": "🇸🇦",
+        "formatted": "Saudi Arabia 🇸🇦"
+    },
+    "ASC": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "AUS": {
+        "country": "Australia",
+        "flag": "🇦🇺",
+        "formatted": "Australia 🇦🇺"
+    },
+    "AUT": {
+        "country": "Austria",
+        "flag": "🇦🇹",
+        "formatted": "Austria 🇦🇹"
+    },
+    "AZE": {
+        "country": "Azerbaijan",
+        "flag": "🇦🇿",
+        "formatted": "Azerbaijan 🇦🇿"
+    },
+    "AZR": {
+        "country": "Portugal",
+        "flag": "🇵🇹",
+        "formatted": "Portugal 🇵🇹"
+    },
+    "B": {
+        "country": "Brazil",
+        "flag": "🇧🇷",
+        "formatted": "Brazil 🇧🇷"
+    },
+    "BEL": {
+        "country": "Belgium",
+        "flag": "🇧🇪",
+        "formatted": "Belgium 🇧🇪"
+    },
+    "BER": {
+        "country": "Bermuda",
+        "flag": "🇧🇲",
+        "formatted": "Bermuda 🇧🇲"
+    },
+    "BFA": {
+        "country": "Burkina Faso",
+        "flag": "🇧🇫",
+        "formatted": "Burkina Faso 🇧🇫"
+    },
+    "BHR": {
+        "country": "Bahrain",
+        "flag": "🇧🇭",
+        "formatted": "Bahrain 🇧🇭"
+    },
+    "BLR": {
+        "country": "Belarus",
+        "flag": "🇧🇾",
+        "formatted": "Belarus 🇧🇾"
+    },
+    "BRM": {
+        "country": "Myanmar",
+        "flag": "🇲🇲",
+        "formatted": "Myanmar 🇲🇲"
+    },
+    "BUL": {
+        "country": "Bulgaria",
+        "flag": "🇧🇬",
+        "formatted": "Bulgaria 🇧🇬"
+    },
+    "CAN": {
+        "country": "Canada",
+        "flag": "🇨🇦",
+        "formatted": "Canada 🇨🇦"
+    },
+    "CAR": {
+        "country": "Central African Republic",
+        "flag": "🇨🇫",
+        "formatted": "Central African Republic 🇨🇫"
+    },
+    "CHL": {
+        "country": "Chile",
+        "flag": "🇨🇱",
+        "formatted": "Chile 🇨🇱"
+    },
+    "CHN": {
+        "country": "China",
+        "flag": "🇨🇳",
+        "formatted": "China 🇨🇳"
+    },
+    "CHR": {
+        "country": "Australia",
+        "flag": "🇦🇺",
+        "formatted": "Australia 🇦🇺"
+    },
+    "CLM": {
+        "country": "Colombia",
+        "flag": "🇨🇴",
+        "formatted": "Colombia 🇨🇴"
+    },
+    "CNR": {
+        "country": "Spain",
+        "flag": "🇪🇸",
+        "formatted": "Spain 🇪🇸"
+    },
+    "COM": {
+        "country": "Comoros",
+        "flag": "🇰🇲",
+        "formatted": "Comoros 🇰🇲"
+    },
+    "CPV": {
+        "country": "Cape Verde",
+        "flag": "🇨🇻",
+        "formatted": "Cape Verde 🇨🇻"
+    },
+    "CYM": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "CYP": {
+        "country": "Cyprus",
+        "flag": "🇨🇾",
+        "formatted": "Cyprus 🇨🇾"
+    },
+    "CZE": {
+        "country": "Czech Republic",
+        "flag": "🇨🇿",
+        "formatted": "Czech Republic 🇨🇿"
+    },
+    "D": {
+        "country": "Germany",
+        "flag": "🇩🇪",
+        "formatted": "Germany 🇩🇪"
+    },
+    "DGA": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "DJI": {
+        "country": "Djibouti",
+        "flag": "🇩🇯",
+        "formatted": "Djibouti 🇩🇯"
+    },
+    "DNK": {
+        "country": "Denmark",
+        "flag": "🇩🇰",
+        "formatted": "Denmark 🇩🇰"
+    },
+    "E": {
+        "country": "Spain",
+        "flag": "🇪🇸",
+        "formatted": "Spain 🇪🇸"
+    },
+    "EGY": {
+        "country": "Egypt",
+        "flag": "🇪🇬",
+        "formatted": "Egypt 🇪🇬"
+    },
+    "EST": {
+        "country": "Estonia",
+        "flag": "🇪🇪",
+        "formatted": "Estonia 🇪🇪"
+    },
+    "F": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "F / ESA": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "F / EUT": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "FIN": {
+        "country": "Finland",
+        "flag": "🇫🇮",
+        "formatted": "Finland 🇫🇮"
+    },
+    "FJI": {
+        "country": "Fiji",
+        "flag": "🇫🇯",
+        "formatted": "Fiji 🇫🇯"
+    },
+    "FRO": {
+        "country": "Denmark",
+        "flag": "🇩🇰",
+        "formatted": "Denmark 🇩🇰"
+    },
+    "G": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "GIB": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "GLP": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "GRC": {
+        "country": "Greece",
+        "flag": "🇬🇷",
+        "formatted": "Greece 🇬🇷"
+    },
+    "GUF": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "GUM": {
+        "country": "United States of America",
+        "flag": "🇺🇸",
+        "formatted": "United States of America 🇺🇸"
+    },
+    "HKG": {
+        "country": "China",
+        "flag": "🇨🇳",
+        "formatted": "China 🇨🇳"
+    },
+    "HNG": {
+        "country": "Hungary",
+        "flag": "🇭🇺",
+        "formatted": "Hungary 🇭🇺"
+    },
+    "HOL": {
+        "country": "Netherlands",
+        "flag": "🇳🇱",
+        "formatted": "Netherlands 🇳🇱"
+    },
+    "HRV": {
+        "country": "Croatia",
+        "flag": "🇭🇷",
+        "formatted": "Croatia 🇭🇷"
+    },
+    "HWA": {
+        "country": "United States of America",
+        "flag": "🇺🇸",
+        "formatted": "United States of America 🇺🇸"
+    },
+    "I": {
+        "country": "Italy",
+        "flag": "🇮🇹",
+        "formatted": "Italy 🇮🇹"
+    },
+    "ICO": {
+        "country": "Australia",
+        "flag": "🇦🇺",
+        "formatted": "Australia 🇦🇺"
+    },
+    "IND": {
+        "country": "India",
+        "flag": "🇮🇳",
+        "formatted": "India 🇮🇳"
+    },
+    "INS": {
+        "country": "Indonesia",
+        "flag": "🇮🇩",
+        "formatted": "Indonesia 🇮🇩"
+    },
+    "IRL": {
+        "country": "Ireland",
+        "flag": "🇮🇪",
+        "formatted": "Ireland 🇮🇪"
+    },
+    "IRN": {
+        "country": "Iran",
+        "flag": "🇮🇷",
+        "formatted": "Iran 🇮🇷"
+    },
+    "IRQ": {
+        "country": "Iraq",
+        "flag": "🇮🇶",
+        "formatted": "Iraq 🇮🇶"
+    },
+    "ISL": {
+        "country": "Iceland",
+        "flag": "🇮🇸",
+        "formatted": "Iceland 🇮🇸"
+    },
+    "ISR": {
+        "country": "Israel",
+        "flag": "🇮🇱",
+        "formatted": "Israel 🇮🇱"
+    },
+    "J": {
+        "country": "Japan",
+        "flag": "🇯🇵",
+        "formatted": "Japan 🇯🇵"
+    },
+    "JOR": {
+        "country": "Jordan",
+        "flag": "🇯🇴",
+        "formatted": "Jordan 🇯🇴"
+    },
+    "KAZ": {
+        "country": "Kazakhstan",
+        "flag": "🇰🇿",
+        "formatted": "Kazakhstan 🇰🇿"
+    },
+    "KGZ": {
+        "country": "Kyrgyzstan",
+        "flag": "🇰🇬",
+        "formatted": "Kyrgyzstan 🇰🇬"
+    },
+    "KOR": {
+        "country": "South Korea",
+        "flag": "🇰🇷",
+        "formatted": "South Korea 🇰🇷"
+    },
+    "KWT": {
+        "country": "Kuwait",
+        "flag": "🇰🇼",
+        "formatted": "Kuwait 🇰🇼"
+    },
+    "LAO": {
+        "country": "Laos",
+        "flag": "🇱🇦",
+        "formatted": "Laos 🇱🇦"
+    },
+    "LBY": {
+        "country": "Libya",
+        "flag": "🇱🇾",
+        "formatted": "Libya 🇱🇾"
+    },
+    "LTU": {
+        "country": "Lithuania",
+        "flag": "🇱🇹",
+        "formatted": "Lithuania 🇱🇹"
+    },
+    "LUX": {
+        "country": "Luxembourg",
+        "flag": "🇱🇺",
+        "formatted": "Luxembourg 🇱🇺"
+    },
+    "LVA": {
+        "country": "Latvia",
+        "flag": "🇱🇻",
+        "formatted": "Latvia 🇱🇻"
+    },
+    "MAC": {
+        "country": "China",
+        "flag": "🇨🇳",
+        "formatted": "China 🇨🇳"
+    },
+    "MAU": {
+        "country": "Mauritius",
+        "flag": "🇲🇺",
+        "formatted": "Mauritius 🇲🇺"
+    },
+    "MCO": {
+        "country": "Monaco",
+        "flag": "🇲🇨",
+        "formatted": "Monaco 🇲🇨"
+    },
+    "MDA": {
+        "country": "Moldova",
+        "flag": "🇲🇩",
+        "formatted": "Moldova 🇲🇩"
+    },
+    "MDG": {
+        "country": "Madagascar",
+        "flag": "🇲🇬",
+        "formatted": "Madagascar 🇲🇬"
+    },
+    "MDR": {
+        "country": "Portugal",
+        "flag": "🇵🇹",
+        "formatted": "Portugal 🇵🇹"
+    },
+    "MEX": {
+        "country": "Mexico",
+        "flag": "🇲🇽",
+        "formatted": "Mexico 🇲🇽"
+    },
+    "MLA": {
+        "country": "Malaysia",
+        "flag": "🇲🇾",
+        "formatted": "Malaysia 🇲🇾"
+    },
+    "MLD": {
+        "country": "Maldives",
+        "flag": "🇲🇻",
+        "formatted": "Maldives 🇲🇻"
+    },
+    "MNG": {
+        "country": "Mongolia",
+        "flag": "🇲🇳",
+        "formatted": "Mongolia 🇲🇳"
+    },
+    "MRC": {
+        "country": "Morocco",
+        "flag": "🇲🇦",
+        "formatted": "Morocco 🇲🇦"
+    },
+    "MRL": {
+        "country": "MRL",
+        "flag": "🏳️️",
+        "formatted": "MRL 🏳️️"
+    },
+    "MRT": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "MSR": {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "formatted": "United Kingdom 🇬🇧"
+    },
+    "MYT": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "NCG": {
+        "country": "Nicaragua",
+        "flag": "🇳🇮",
+        "formatted": "Nicaragua 🇳🇮"
+    },
+    "NCL": {
+        "country": "New Caledonia",
+        "flag": "🇳🇨",
+        "formatted": "New Caledonia 🇳🇨"
+    },
+    "NOR": {
+        "country": "Norway",
+        "flag": "🇳🇴",
+        "formatted": "Norway 🇳🇴"
+    },
+    "NZL": {
+        "country": "New Zealand",
+        "flag": "🇳🇿",
+        "formatted": "New Zealand 🇳🇿"
+    },
+    "OMA": {
+        "country": "Oman",
+        "flag": "🇴🇲",
+        "formatted": "Oman 🇴🇲"
+    },
+    "ONU": {
+        "country": "ONU",
+        "flag": "🏳️️",
+        "formatted": "ONU 🏳️️"
+    },
+    "PNG": {
+        "country": "Papua New Guinea",
+        "flag": "🇵🇬",
+        "formatted": "Papua New Guinea 🇵🇬"
+    },
+    "POL": {
+        "country": "Poland",
+        "flag": "🇵🇱",
+        "formatted": "Poland 🇵🇱"
+    },
+    "POR": {
+        "country": "Portugal",
+        "flag": "🇵🇹",
+        "formatted": "Portugal 🇵🇹"
+    },
+    "PTR": {
+        "country": "Puerto Rico",
+        "flag": "🇵🇷",
+        "formatted": "Puerto Rico 🇵🇷"
+    },
+    "REU": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "ROU": {
+        "country": "Romania",
+        "flag": "🇷🇴",
+        "formatted": "Romania 🇷🇴"
+    },
+    "RUS": {
+        "country": "Russia",
+        "flag": "🇷🇺",
+        "formatted": "Russia 🇷🇺"
+    },
+    "RUS / IK": {
+        "country": "Russia",
+        "flag": "🇷🇺",
+        "formatted": "Russia 🇷🇺"
+    },
+    "S": {
+        "country": "Sweden",
+        "flag": "🇸🇪",
+        "formatted": "Sweden 🇸🇪"
+    },
+    "S / NOT": {
+        "country": "Sweden",
+        "flag": "🇸🇪",
+        "formatted": "Sweden 🇸🇪"
+    },
+    "SDN": {
+        "country": "Sudan",
+        "flag": "🇸🇩",
+        "formatted": "Sudan 🇸🇩"
+    },
+    "SEY": {
+        "country": "Seychelles",
+        "flag": "🇸🇨",
+        "formatted": "Seychelles 🇸🇨"
+    },
+    "SLM": {
+        "country": "Solomon Islands",
+        "flag": "🇸🇧",
+        "formatted": "Solomon Islands 🇸🇧"
+    },
+    "SNG": {
+        "country": "Singapore",
+        "flag": "🇸🇬",
+        "formatted": "Singapore 🇸🇬"
+    },
+    "SPM": {
+        "country": "France",
+        "flag": "🇫🇷",
+        "formatted": "France 🇫🇷"
+    },
+    "SUI": {
+        "country": "Switzerland",
+        "flag": "🇨🇭",
+        "formatted": "Switzerland 🇨🇭"
+    },
+    "SVK": {
+        "country": "Slovakia",
+        "flag": "🇸🇰",
+        "formatted": "Slovakia 🇸🇰"
+    },
+    "SVN": {
+        "country": "Slovenia",
+        "flag": "🇸🇮",
+        "formatted": "Slovenia 🇸🇮"
+    },
+    "SYR": {
+        "country": "Syria",
+        "flag": "🇸🇾",
+        "formatted": "Syria 🇸🇾"
+    },
+    "THA": {
+        "country": "Thailand",
+        "flag": "🇹🇭",
+        "formatted": "Thailand 🇹🇭"
+    },
+    "TON": {
+        "country": "Tonga",
+        "flag": "🇹🇴",
+        "formatted": "Tonga 🇹🇴"
+    },
+    "TUN": {
+        "country": "Tunisia",
+        "flag": "🇹🇳",
+        "formatted": "Tunisia 🇹🇳"
+    },
+    "TUR": {
+        "country": "Turkey",
+        "flag": "🇹🇷",
+        "formatted": "Turkey 🇹🇷"
+    },
+    "UAE": {
+        "country": "United Arab Emirates",
+        "flag": "🇦🇪",
+        "formatted": "United Arab Emirates 🇦🇪"
+    },
+    "UKR": {
+        "country": "Ukraine",
+        "flag": "🇺🇦",
+        "formatted": "Ukraine 🇺🇦"
+    },
+    "USA": {
+        "country": "United States of America",
+        "flag": "🇺🇸",
+        "formatted": "United States of America 🇺🇸"
+    },
+    "USA / IT": {
+        "country": "United States of America",
+        "flag": "🇺🇸",
+        "formatted": "United States of America 🇺🇸"
+    },
+    "UZB": {
+        "country": "Uzbekistan",
+        "flag": "🇺🇿",
+        "formatted": "Uzbekistan 🇺🇿"
+    },
+    "VTN": {
+        "country": "Vietnam",
+        "flag": "🇻🇳",
+        "formatted": "Vietnam 🇻🇳"
+    },
+    "XYU": {
+        "country": "XYU",
+        "flag": "🏳️️",
+        "formatted": "XYU 🏳️️"
+    },
+    "YEM": {
+        "country": "Yemen",
+        "flag": "🇾🇪",
+        "formatted": "Yemen 🇾🇪"
+    }
+}

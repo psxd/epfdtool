@@ -10,6 +10,7 @@ import { store } from './state.js';
 import { isCountryHighlighted, isCountryOutlined, isCountryFootprint, updateHighlightedCountriesCache } from './countryHi.js';
 import { buildGeoNameSet } from './countryNorm.js';
 import { stationHoverHtml, satelliteHoverHtml } from './hoverText.js';
+import { highlightBeams, clearBeamHighlight } from './links.js';
 export const DEFAULT_VIEW = { lat: 20, lng: 0, altitude: 2.2 };
 
 // Altitude for EVERY polygon, in globe radii (globe radius = 100 units, so
@@ -159,7 +160,49 @@ let satMatPlanned = null;
 let satMatNonPlanned = null;
 // Base radius of a satellite dot's geometry. The per-zoom value is
 // satScaleForAltitude() and is a MULTIPLIER on this, never a replacement for it.
-const SAT_BASE_RADIUS = 0.3;
+const SAT_BASE_RADIUS = 0.7;
+let satGeoPick = null;
+let satMatPick = null;
+const _pickVec = new THREE.Vector3();
+// Invisible pick proxy, parented to every satellite dot. A visible dot is ~1px
+// across at the default view and satScaleForAltitude holds it at that size at
+// EVERY zoom by design, so satellites could only ever be hit by luck. The proxy
+// is a sphere that is NEVER RENDERED but is still raycast: three's
+// Raycaster.intersect() only tests `object.layers`, it does NOT skip
+// `visible = false` meshes (checked against the three in package.json) and
+// three-render-objects raycasts with intersectObjects(objects, true) - i.e.
+// recursively - so a hidden child costs zero draw calls and zero pixels while
+// still giving globe.gl's hover/click raycast something to hit.
+// It is sized in SCREEN PIXELS (not world units) so the target is the same size
+// at every zoom: see satPickLocalScale / syncSatDotScale, which re-size it on
+// every camera move exactly like the dots themselves.
+const SAT_PICK_PROXY_PX = 14;
+// Used when there is no camera to measure (headless harness): a plain multiple
+// of the dot, which is still far more forgiving than the dot itself.
+const SAT_PICK_PROXY_FALLBACK_FACTOR = 4;
+
+// Canvas height in CSS px - the bridge between a pixel size and world units.
+function canvasPixelHeight() {
+  const fromWorld = store.world && store.world.height ? Number(store.world.height()) : 0;
+  if (fromWorld > 0) return fromWorld;
+  if (typeof window !== 'undefined' && window.innerHeight > 0) return window.innerHeight;
+  return 900;
+}
+
+// Local scale for a dot's pick proxy (same geometry radius as the dot, so the
+// scale is directly "how much bigger than the dot"): converts a world radius
+// computed from the perspective camera into the child's local scale.
+function satPickLocalScale(mesh, dotScale, camera, canvasHeight) {
+  const inherited = SAT_BASE_RADIUS * (dotScale || 1);
+  if (!camera || !camera.position || inherited <= 0) return SAT_PICK_PROXY_FALLBACK_FACTOR;
+  // Distance from the camera to THIS dot, not to the globe centre: rim dots sit
+  // ~2x further from the camera than centre-aligned ones, so one shared distance
+  // would size their targets unevenly. getWorldPosition also flushes any stale
+  // world matrix, so this is correct even before the first render.
+  const distance = Math.max(mesh.getWorldPosition(_pickVec).distanceTo(camera.position), 1);
+  const worldPerPixel = (2 * distance * Math.tan(((Number(camera.fov) || 50) * Math.PI) / 360)) / (canvasHeight || 900);
+  return ((SAT_PICK_PROXY_PX / 2) * worldPerPixel) / inherited;
+}
 
 // Satellite dot size at the current camera altitude. Dots are world-sized
 // spheres: zoom OUT and the globe shrinks away from them, zoom IN and they
@@ -180,7 +223,14 @@ export function satScaleForAltitude(altitude) {
 export function syncSatDotScale() {
   if (!store.world) return;
   const sc = satScaleForAltitude(store.world.pointOfView().altitude);
-  for (const mesh of store.satMeshes) mesh.scale.set(sc, sc, sc);
+  const camera = store.world.camera ? store.world.camera() : null;
+  const canvasHeight = canvasPixelHeight();
+  for (const mesh of store.satMeshes) {
+    mesh.scale.set(sc, sc, sc);
+    // A dot's only child is its hidden pick proxy (see satMeshFor).
+    const pick = mesh.children[0];
+    if (pick) pick.scale.setScalar(satPickLocalScale(mesh, sc, camera, canvasHeight));
+  }
 }
 
 function satMeshFor(d) {
@@ -198,8 +248,40 @@ function satMeshFor(d) {
   const sc = satScaleForAltitude(store.world ? store.world.pointOfView().altitude : DEFAULT_VIEW.altitude);
   mesh.scale.set(sc, sc, sc);
   mesh.userData = d;
+  // Hidden pick proxy (see SAT_PICK_PROXY_PX). A CHILD of the dot, so it
+  // follows the dot's position for free, and it carries the same row in
+  // userData as the dot itself. Sized here for the current camera and re-sized
+  // on every camera move by syncSatDotScale (setSatellites calls it once the
+  // dots are positioned).
+  if (!satGeoPick) {
+    satGeoPick = new THREE.SphereGeometry(SAT_BASE_RADIUS, 8, 6);
+    satMatPick = new THREE.MeshBasicMaterial();
+  }
+  const pick = new THREE.Mesh(satGeoPick, satMatPick);
+  pick.visible = false; // never drawn - three's Raycaster still hits it
+  pick.userData = d;
+  mesh.add(pick);
+  const camera = store.world.camera ? store.world.camera() : null;
+  pick.scale.setScalar(satPickLocalScale(mesh, sc, camera, canvasPixelHeight()));
   store.satMeshes.push(mesh);
   return mesh;
+}
+
+// The satellite click callback's argument shape differs by globe.gl version:
+// the installed one hands over the DATA ROW (its dataAccessors.object unwraps
+// the three-globe group's `__data`), while other paths hand over the intersected
+// THREE object. Accept both - rows pass straight through, meshes/points are
+// resolved through the userData stamped on every satellite dot and pick proxy.
+function satelliteFromClickArg(arg) {
+  if (!arg) return null;
+  if (arg.isObject3D) {
+    for (let node = arg; node; node = node.parent) {
+      const data = node.userData;
+      if (data && !data.isObject3D && data.name) return data;
+    }
+    return null;
+  }
+  return arg.name ? arg : null;
 }
 
 export function renderGSORing() {
@@ -226,6 +308,10 @@ export function renderGSORing() {
 export function setSatellites(list) {
   store.satMeshes.length = 0;
   store.world.objectsData(list || []);
+  // three-globe runs objectThreeObject() BEFORE it positions the dots, so size
+  // the pick proxies here, once every dot is actually where it belongs - and on
+  // a filter change too, not just on the next camera move.
+  syncSatDotScale();
 }
 
 // Intro dolly-in tuning. The globe parks 1.6x out and eases down once - a
@@ -297,13 +383,22 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
     .pointLat('lat')
     .pointLng('lon')
     .pointAltitude(0.01)
-    .pointRadius(0.24)
+    .pointRadius(0.10)
     .pointColor(() => PALETTE.gray_dark)
     .pointLabel(d => (store.isLeoActive ? '' : stationHoverHtml(d)))
     .onPointClick(d => {
       if (store.isLeoActive) return;
+      // Click = details card + zoom ONLY. No filtering happens here - the
+      // left filter box is the only thing that adds/removes nodes and beams.
       showStationDetails(d);
       focusCameraOn(d.lat, d.lon, 1.25);
+    })
+    .onPointHover(d => {
+      if (store.isLeoActive) return;
+      // Colour-only cue: brighten the hovered station's own beams so its
+      // connections are unmistakable among the many beams converging nearby.
+      // Lines are never added or removed by hover.
+      if (d) highlightBeams('gs', d.name); else clearBeamHighlight();
     })
     .objectsData([])
     .objectLat('lat')
@@ -313,11 +408,26 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
     .objectLabel(d => (store.isLeoActive ? '' : satelliteHoverHtml(d)))
     .onObjectClick(obj => {
       if (store.isLeoActive) return;
-      if (obj && obj.userData) {
-        const sat = obj.userData;
-        showSatelliteDetails(sat);
-        focusCameraOn(sat.lat || 0, sat.lon, 2.0);
-      }
+      // NOTE: this callback receives the DATA ROW, not the THREE mesh built in
+      // satMeshFor - globe.gl's dataAccessors.object() unwraps three-globe's
+      // `__data` off the layer group before calling us. The old `obj.userData`
+      // test therefore never matched and satellite clicks did nothing at all.
+      const sat = satelliteFromClickArg(obj);
+      if (!sat) return;
+      // Click = details card + zoom ONLY (no beam filtering - the left filter
+      // box is the only thing that changes what's drawn).
+      showSatelliteDetails(sat);
+      focusCameraOn(sat.lat || 3.5, sat.lon, 7);
+    })
+    .onObjectHover(obj => {
+      if (store.isLeoActive) return;
+      const sat = obj ? satelliteFromClickArg(obj) : null;
+      // Colour-only cue (see onPointHover): brighten THIS satellite's beams.
+      // Neighbouring GSO satellites share longitudes (EXPRESS-4/4B sit at the
+      // same 40E slot as STATSIONAR-12), so ~300 beams converge on the same
+      // dot - the highlight makes the hovered node's own connections (the
+      // ones listed in its hover card) unmistakable.
+      if (sat) highlightBeams('sat', sat.name); else clearBeamHighlight();
     });
 
   fetch('./data/globe.json')

@@ -1,0 +1,149 @@
+name: Update EPFD data (ITU Space Explorer)
+
+# Regenerates public/data/{stations,satellites,connections,globe,meta}.json via
+# spaceexplorer.py (Playwright auto-download from ITU Space Explorer) and
+# commits the result. The site build (deploy.yml) then serves the fresh data.
+#
+# Schedule: every other Tuesday at 2pm America/New_York, anchored on Tue Sep 29
+# 2026. GitHub cron is UTC-only and has no "every N weeks" primitive, so this
+# fires EVERY Tuesday at BOTH plausible UTC slots and the guard step below
+# decides whether this particular run is the one to keep:
+#   EDT (UTC-4) -> 18:00 UTC = 14:00 local   (kept)
+#   EST (UTC-5) -> 19:00 UTC = 14:00 local   (kept)
+# Two checks do the real work: "local time is 14:00 in New York" disambiguates
+# the two slots (the one that is not on DST resolves to 13:00 or 15:00 local and
+# is skipped) and the 14-day anchor parity is what makes it every OTHER Tuesday.
+# A cron slot that GitHub delays by more than ~59 minutes therefore skips, and
+# the week's refresh falls to a manual run - use the `force` input for that.
+# Manual runs: Actions tab -> "Update EPFD data" -> Run workflow (set force to
+# true to bypass both the 2pm and the alternate-week checks).
+"on":
+  schedule:
+    - cron: '0 18 * * 2'   # 2pm EDT (UTC-4)
+    - cron: '0 19 * * 2'   # 2pm EST (UTC-5)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Run even if this is not the scheduled alternate Tuesday'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: epfd-data-update
+  cancel-in-progress: false
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Alternate-Tuesday guard (every other Tue, 14:00 America/New_York)
+        id: guard
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import os
+          import zoneinfo
+
+          # Anchor: Tuesday 2026-09-29, 14:00 New York. Two rules follow from it:
+          #   * the run must land on a Tuesday at 14:00 America/New_York local
+          #     (that is the slot that survives DST, whichever UTC cron fired),
+          #   * and a whole number of 14-day cycles after the anchor.
+          ANCHOR = dt.date(2026, 9, 29)
+          HOUR_NY = 14
+
+          def should_run(now_utc):
+              local = now_utc.astimezone(zoneinfo.ZoneInfo("America/New_York"))
+              if local.date() < ANCHOR:
+                  return False, f"before the anchor ({ANCHOR})"
+              if local.weekday() != ANCHOR.weekday():
+                  return False, "not a Tuesday in New York"
+              if local.hour != HOUR_NY:
+                  return False, f"not 14:00 in New York (local {local:%H:%M})"
+              weeks = (local.date() - ANCHOR).days // 7
+              if weeks % 2:
+                  return False, f"off-week Tuesday (#{weeks} since the anchor)"
+              return True, f"alternate Tuesday #{weeks} since {ANCHOR} at {local:%H:%M} local"
+
+          force = os.environ.get("INPUT_FORCE", "").strip().lower() == "true"
+          if force:
+              run, why = True, "manual run with force=true"
+          else:
+              run, why = should_run(dt.datetime.now(dt.timezone.utc))
+
+          print(f"should_run={run} - {why}")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"should_run={'true' if run else 'false'}\n")
+          PY
+        env:
+          INPUT_FORCE: ${{ github.event.inputs.force }}
+
+      - name: Set up Python
+        if: steps.guard.outputs.should_run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python deps + Playwright Chromium
+        if: steps.guard.outputs.should_run == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          # spaceexplorer.py needs pandas (xlsx reading goes through openpyxl)
+          # and Playwright for the ITU Space Explorer downloads.
+          pip install pandas openpyxl playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Run ITU Space Explorer scraper
+        if: steps.guard.outputs.should_run == 'true'
+        run: python spaceexplorer.py
+
+      - name: Verify generated data files
+        if: steps.guard.outputs.should_run == 'true'
+        run: |
+          ls -lh public/data/
+          python - <<'EOF'
+          import json
+          from pathlib import Path
+          d = Path("public/data")
+          for name in ["stations.json", "satellites.json", "connections.json", "globe.json", "meta.json"]:
+              p = d / name
+              assert p.exists(), f"missing {p}"
+              obj = json.loads(p.read_text(encoding="utf-8"))
+              n = len(obj) if isinstance(obj, list) else len(obj.keys()) if isinstance(obj, dict) else 1
+              print(f"{name}: OK ({n} records/keys)")
+          EOF
+
+      - name: Clean stale files (exceptions removed, dist/ is build output)
+        if: steps.guard.outputs.should_run == 'true'
+        run: |
+          rm -f public/data/exceptions.json public/data/statusaexception.json
+          rm -f dist/data/exceptions.json dist/data/statusaexception.json
+          rm -f data/ITU*.csv data/ITU*.xlsx data/stations_processed.csv
+          git status --short
+
+      - name: Commit updated data
+        if: steps.guard.outputs.should_run == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/stations.json public/data/satellites.json \
+                  public/data/connections.json public/data/globe.json \
+                  public/data/meta.json
+          # Stage deletions of the retired exception files if they still exist in the index
+          git rm --cached -q public/data/exceptions.json public/data/statusaexception.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No data changes — nothing to commit."
+          else
+            META="$(python -c "import json;print(json.load(open('public/data/meta.json')).get('br_ific',''))" 2>/dev/null || true)"
+            git commit -m "chore(data): refresh ITU Space Explorer dataset${META:+ — $META}"
+            git push
+          fi

@@ -1,6 +1,5 @@
 // Part 1/2: canonicalisation helpers (see countryNorm/countryHi/countryView).
 import { COUNTRY_ALIASES } from './constants.js';
-import { store } from './state.js';
 
 export const FLAG_RE = /[\u{1F1E6}-\u{1F1FF}\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu;
 
@@ -10,6 +9,33 @@ export const FLAG_RE = /[\u{1F1E6}-\u{1F1FF}\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}
 // normalizeCountryName only collapses a qualifier when the BARE name really
 // exists in the geo set (see countryNorm.js) and the camera then falls back to
 // the filtered entities' own position (see countryView.filterView).
+//
+// BUILT-IN EXCEPTIONS (previously public/data/exceptions.json, now inlined so
+// no exceptions file is generated or fetched): territory / state names that
+// have no polygon of their own and must resolve to the parent state. This is
+// handled internally by canonicalise() below.
+export const COUNTRY_EXCEPTIONS = {
+  'alaska (state of)': 'united states of america',
+  'hawaii (state of)': 'united states of america',
+  'guam': 'united states of america',
+  'ascension island': 'united kingdom',
+  'azores': 'portugal',
+  'canary islands': 'spain',
+  'cayman islands': 'united kingdom',
+  'cocos (keeling) islands': 'australia',
+  'christmas island (indian ocean)': 'australia',
+  'diego garcia': 'united kingdom',
+  'faroe islands': 'denmark',
+  'gibraltar': 'united kingdom',
+  'guadeloupe (french department of)': 'france',
+  'guiana (french department of)': 'france',
+  'madeira': 'portugal',
+  'martinique (french department of)': 'france',
+  'mayotte (territorial collectivity of)': 'france',
+  'montserrat': 'united kingdom',
+  'reunion (french department of)': 'france',
+  'saint pierre and miquelon (territorial collectivity of)': 'france',
+};
 export const CANONICAL_OVERRIDES = {
   'russian federation': 'russia',
   'kyrgyz republic': 'kyrgyzstan',
@@ -72,6 +98,18 @@ export const CANONICAL_OVERRIDES = {
   'car': 'central african republic',
   'bahrain (kingdom of)': 'bahrain',
   'monaco (principality of)': 'monaco',
+  'serbia (republic of)': 'serbia',
+  // Geo spellings that differ from the station/ITU spelling. The polygon in
+  // globe.json is named "Republic of Serbia" while the stations carry the ITU
+  // administration code "XYU" (-> COUNTRY_ALIASES) or, after a data refresh,
+  // "Serbia"/"Serbia (Republic of)" - all of them must land on the same key, or
+  // a country that really has a polygon is linked but never outlined (the
+  // BEOGRAD KRNJACA stations talk to the France fleet). Same story for the ITU
+  // "Cape Verde" vs the geo name "Cabo Verde". A key that still has no polygon
+  // is skipped by the outline logic on purpose - its stations and link beams are
+  // unaffected (see countryHi.linkedGsCountries).
+  'republic of serbia': 'serbia',
+  'cape verde': 'cabo verde',
   // Territories that own a polygon in globe.json stay themselves - never fold
   // them into the parent state.
   'bermuda': 'bermuda',
@@ -79,11 +117,8 @@ export const CANONICAL_OVERRIDES = {
   'new caledonia': 'new caledonia',
   'falkland islands': 'falkland islands',
   'french guiana': 'french guiana',
-  // Deliberately NO entry for "Alaska (State of)", "Hawaii (State of)" or
-  // "Guam 🇬🇺": they have no polygon of their own and ver1 resolves them
-  // through exceptions.json to United States of America. An identity entry
-  // here would swallow that lookup and leave those filters with nothing to
-  // highlight (and the camera with nothing to frame).
+  // COUNTRY_EXCEPTIONS (top of this file) intentionally holds the Alaska /
+  // Hawaii / Guam -> USA parent mappings, so they still highlight the USA.
 };
 
 export function stripDecorations(name) {
@@ -99,9 +134,10 @@ export function canonicalise(raw) {
   const lower = clean.toLowerCase();
   if (Object.hasOwn(CANONICAL_OVERRIDES, lower)) return CANONICAL_OVERRIDES[lower];
   if (COUNTRY_ALIASES[lower]) return COUNTRY_ALIASES[lower];
-  for (const [key, val] of Object.entries(store.countryExceptions || {})) {
-    if (key.toLowerCase().trim() === raw || stripDecorations(key).toLowerCase() === lower) {
-      const v = val.toLowerCase().trim();
+  // Internal exceptions map (decoration-insensitive, no fetch needed).
+  for (const [key, val] of Object.entries(COUNTRY_EXCEPTIONS)) {
+    if (key === lower || stripDecorations(key).toLowerCase() === lower) {
+      const v = String(val).toLowerCase().trim();
       if (Object.hasOwn(CANONICAL_OVERRIDES, v)) return CANONICAL_OVERRIDES[v];
       return COUNTRY_ALIASES[v] || v;
     }

@@ -122,7 +122,7 @@ function shareableUrl(view, filters, commentId) {
   const qs = buildQuery(view, filters, commentId);
   const loc = window.location;
   const origin = (loc.origin && loc.origin !== 'null') ? loc.origin : loc.href.split(/[?#]/)[0];
-  return `${origin}?${qs}`;
+  return `${origin}${loc.pathname}?${qs}`;
 }
 
 // ---------- Supabase + Slack + clipboard ----------
@@ -167,9 +167,7 @@ async function ensureClient() {
 }
 
 /** Fire-and-forget via the Netlify function (auth token from the login gate). */
-function notifySlack(text) {
-  sendSlackNotification(text).catch((err) => console.warn('Slack notification failed:', err));
-}
+//function notifySlack(text) {sendSlackNotification(text).catch((err) => console.warn('Slack notification failed:', err));}
 
 async function copyToClipboard(text) {
   try {

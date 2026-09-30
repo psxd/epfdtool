@@ -3,16 +3,18 @@ import { COUNTRY_ALIASES } from './constants.js';
 import { store } from './state.js';
 import {
   canonicalise, stripDecorations, stripTrailingQualifier, CANONICAL_OVERRIDES,
+  COUNTRY_EXCEPTIONS,
 } from './countries.js';
 
+// Cache of canonicalised exception TARGET values (e.g. 'united kingdom'),
+// so a picked filter value that equals a parent state resolves identically
+// whether it came from a station record or the dropdown.
 let exceptionsValueCanon = null;
-let exceptionsValueSource = null;
 
 function buildExceptionsValueCanon() {
-  if (exceptionsValueCanon && exceptionsValueSource === store.countryExceptions) return exceptionsValueCanon;
-  exceptionsValueSource = store.countryExceptions;
+  if (exceptionsValueCanon) return exceptionsValueCanon;
   exceptionsValueCanon = new Map();
-  for (const val of Object.values(store.countryExceptions || {})) {
+  for (const val of Object.values(COUNTRY_EXCEPTIONS || {})) {
     const canon = canonicalise(String(val));
     if (canon) exceptionsValueCanon.set(String(val).toLowerCase().trim(), canon);
   }
@@ -46,7 +48,6 @@ export function normalizeCountryName(name) {
 export function resetCountryNameCache() {
   store.nameCache.clear();
   exceptionsValueCanon = null;
-  exceptionsValueSource = null;
 }
 
 export function buildGeoNameSet() {

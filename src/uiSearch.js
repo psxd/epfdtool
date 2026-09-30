@@ -1,10 +1,8 @@
 // GSO search (index-based, debounced) + restored zoom buttons + view toggle.
 import { store } from './state.js';
 import { requestApplyFilters, applyFilters } from './gsoFilters.js';
-import { focusCameraOn, zoomBy } from './globe.js';
+import { focusCameraOn, zoomBy, DEFAULT_VIEW } from './globe.js';
 import { showSatelliteDetails, showStationDetails } from './gsoNetwork.js';
-import { renderStraightLinkBeams } from './links.js';
-import { setSatellites } from './globe.js';
 
 export function setupUIEvents() {
   const searchInput = document.getElementById('searchInput');
@@ -18,6 +16,25 @@ export function setupUIEvents() {
 
   if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.75));
   if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => zoomBy(1.33));
+
+  // Reset = back to the INITIAL BOOT VIEW: every dropdown filter cleared
+  // (full dataset restored), camera at the default wide view, search box +
+  // details card cleared. Filtering still only ever happens through the left
+  // filter box.
+  const resetViewBtn = document.getElementById('resetViewBtn');
+  if (resetViewBtn) {
+    resetViewBtn.addEventListener('click', () => {
+      if (store.isLeoActive) return; // LEO tab has its own Reset View button
+      if (searchInput) searchInput.value = '';
+      if (filterStatus) filterStatus.value = 'all';
+      if (filterSatCountry) filterSatCountry.value = 'all';
+      if (filterGsCountry) filterGsCountry.value = 'all';
+      applyFilters(false);
+      const detailsBox = document.getElementById('detailsBox');
+      if (detailsBox) detailsBox.innerHTML = '<p class="placeholderText">Hover over or click nodes on the globe to inspect payload metadata.</p>';
+      focusCameraOn(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude);
+    });
+  }
 
   if (viewToggleBtn) {
     let isHorizonView = false;
@@ -43,7 +60,7 @@ export function setupUIEvents() {
     let deb = 0;
     searchInput.addEventListener('input', (e) => {
       clearTimeout(deb);
-      deb = setTimeout(() => onGsoSearchInput(e, searchInput, suggestionBox, filterStatus, filterSatCountry, filterGsCountry), 120);
+      deb = setTimeout(() => onGsoSearchInput(e, searchInput, suggestionBox), 120);
     });
     document.addEventListener('click', (e) => {
       if (suggestionBox && searchInput && !searchInput.contains(e.target) && !suggestionBox.contains(e.target)) {
@@ -53,7 +70,7 @@ export function setupUIEvents() {
   }
 }
 
-function onGsoSearchInput(e, searchInput, suggestionBox, filterStatus, filterSatCountry, filterGsCountry) {
+function onGsoSearchInput(e, searchInput, suggestionBox) {
   const val = e.target.value.toLowerCase().trim();
   if (val.length === 0) {
     if (suggestionBox) suggestionBox.style.display = 'none';
@@ -74,37 +91,30 @@ function onGsoSearchInput(e, searchInput, suggestionBox, filterStatus, filterSat
     suggestionBox.innerHTML = html;
     suggestionBox.style.display = 'block';
     suggestionBox.querySelectorAll('.suggestion-item').forEach(item => {
-      item.addEventListener('click', () => pickGsoSuggestion(item, searchInput, suggestionBox, filterStatus, filterSatCountry, filterGsCountry));
+      item.addEventListener('click', () => pickGsoSuggestion(item, searchInput, suggestionBox));
     });
   } else if (suggestionBox) {
     suggestionBox.style.display = 'none';
   }
 }
 
-function pickGsoSuggestion(item, searchInput, suggestionBox, filterStatus, filterSatCountry, filterGsCountry) {
+// Search is a LOOK-UP, not a filter: selecting a suggestion only opens the
+// details card and zooms to the node. Dropdowns, drawn nodes and beams stay
+// exactly as the left filter box left them (the only place that filters).
+function pickGsoSuggestion(item, searchInput, suggestionBox) {
   const type = item.getAttribute('data-type');
   const name = item.getAttribute('data-name');
   searchInput.value = name;
   suggestionBox.style.display = 'none';
-  if (filterStatus) filterStatus.value = 'all';
-  if (filterSatCountry) filterSatCountry.value = 'all';
-  if (filterGsCountry) filterGsCountry.value = 'all';
-  applyFilters(false);
   if (type === 'sat') {
     const sat = store.satByName.get(name);
     if (sat) {
-      setSatellites([sat]);
-      store.world.pointsData([]);
-      renderStraightLinkBeams([]);
       showSatelliteDetails(sat);
-      focusCameraOn(sat.lat || 0, sat.lon, 2.0);
+      focusCameraOn(sat.lat || 0, sat.lon, 1.6);
     }
   } else {
     const stn = store.stationByName.get(name);
     if (stn) {
-      store.world.pointsData([stn]);
-      setSatellites([]);
-      renderStraightLinkBeams([]);
       showStationDetails(stn);
       focusCameraOn(stn.lat, stn.lon, 1.25);
     }
