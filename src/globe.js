@@ -160,7 +160,7 @@ let satMatPlanned = null;
 let satMatNonPlanned = null;
 // Base radius of a satellite dot's geometry. The per-zoom value is
 // satScaleForAltitude() and is a MULTIPLIER on this, never a replacement for it.
-const SAT_BASE_RADIUS = 0.7;
+const SAT_BASE_RADIUS = 0.3;
 let satGeoPick = null;
 let satMatPick = null;
 const _pickVec = new THREE.Vector3();
