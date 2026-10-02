@@ -2,9 +2,10 @@
 import { store } from './state.js';
 import { applyFilters } from './gsoFilters.js';
 import { DEFAULT_VIEW } from './globe.js';
-import { focusCameraOn } from './globe.js';
+import { focusCameraOn, clearSelection, cancelFollow } from './globe.js';
 import { resetLeoVisualization } from './leoHighlight.js';
 import { loadAndPropagateLeo } from './leoPropagation.js';
+import { updateFilterSummary } from './filterSummary.js';
 
 export function setupTabs() {
   const tabGso = document.getElementById('tabGsoBtn');
@@ -19,6 +20,13 @@ export function setupTabs() {
     gsoSection.style.display = 'block';
     leoSection.style.display = 'none';
     resetLeoVisualization();
+    // Leaving LEO must not carry follow into the GSO view.
+    cancelFollow();
+    const followBox = document.getElementById('leoFollowCheckbox');
+    if (followBox) followBox.checked = false;
+    // An entity selected before the LEO tab was opened must not leave half the
+    // GSO beams hidden once we are back here.
+    clearSelection();
     applyFilters(true);
     focusCameraOn(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude);
   });
@@ -30,6 +38,8 @@ export function setupTabs() {
     gsoSection.style.display = 'none';
     leoSection.style.display = 'block';
     resetLeoVisualization();
+    clearSelection();
+    updateFilterSummary();
     focusCameraOn(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude);
   });
 }
@@ -38,6 +48,33 @@ export function setupLeoUIEvents() {
   const searchInput = document.getElementById('leoSearchInput');
   const suggestionBox = document.getElementById('leoSearchSuggestions');
   const resetBtn = document.getElementById('leoResetBtn');
+  const followBox = document.getElementById('leoFollowCheckbox');
+
+  // Satellite-follow toggle. Enabling snaps the camera to the satellite on the
+  // very next propagation frame (no 800 ms fly-in from the default view, which
+  // would read as a swoop rather than joining the satellite mid-orbit).
+  if (followBox) {
+    followBox.addEventListener('change', () => {
+      store.leoFollowSatellite = followBox.checked;
+      store.leoFollowBreakout = false;
+    });
+  }
+
+  // Drag / wheel breaks follow so the camera never fights the user: the globe
+  // is grabbed, following switches itself off, and the checkbox reflects it.
+  // Bound on the canvas wrapper, NOT via globe.gl's controls(): this bundle
+  // never links that method onto the Globe instance.
+  const canvasWrap = document.getElementById('canvas-wrap');
+  if (canvasWrap) {
+    const breakFollow = () => {
+      if (!store.leoFollowSatellite) return;
+      store.leoFollowSatellite = false;
+      store.leoFollowBreakout = true;
+      if (followBox) followBox.checked = false;
+    };
+    canvasWrap.addEventListener('pointerdown', breakFollow, true);
+    canvasWrap.addEventListener('wheel', breakFollow, { capture: true, passive: true });
+  }
   searchInput?.addEventListener('input', async (e) => {
     const query = e.target.value.trim();
     if (query.length < 2) {
@@ -76,6 +113,10 @@ export function setupLeoUIEvents() {
   });
   resetBtn?.addEventListener('click', () => {
     resetLeoVisualization();
+    // Reset clears follow too, and returns the camera to the default view.
+    cancelFollow();
+    if (followBox) followBox.checked = false;
+    focusCameraOn(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude);
     applyFilters(true);
   });
   document.addEventListener('click', (e) => {

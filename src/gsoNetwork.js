@@ -11,6 +11,15 @@ import { clearHoverCaches, stationClickHtml, satelliteClickHtml } from './hoverT
 // clickable ITU dashboard links. Hover tooltips stay plain text (globe.gl
 // tooltips are not clickable), so this left-panel card is where the custom
 // URLs live.
+//
+// The yellow detailsBox has exactly ONE owner (this module): it shows a clicked
+// entity's card, or the hover hint when nothing is selected. The "what is
+// filtered" sentence deliberately does NOT live here - that is the blue
+// #filterSummaryBox (filterSummary.js) - so the two panels never show the same
+// text.
+export const DETAILS_PLACEHOLDER_HTML =
+  '<p class="placeholderText">Hover over or click nodes on the globe to inspect payload metadata.</p>';
+
 export function showSatelliteDetails(sat) {
   const detailsBox = document.getElementById('detailsBox');
   if (detailsBox) detailsBox.innerHTML = satelliteClickHtml(sat);
@@ -19,6 +28,13 @@ export function showSatelliteDetails(sat) {
 export function showStationDetails(stn) {
   const detailsBox = document.getElementById('detailsBox');
   if (detailsBox) detailsBox.innerHTML = stationClickHtml(stn);
+}
+
+// Restore the yellow box to its idle hint. Called whenever the selection is
+// dropped, so the box can never be left holding the previous entity's card.
+export function showDetailsPlaceholder() {
+  const detailsBox = document.getElementById('detailsBox');
+  if (detailsBox) detailsBox.innerHTML = DETAILS_PLACEHOLDER_HTML;
 }
 
 // Renders the grey dataset-version line under the filters

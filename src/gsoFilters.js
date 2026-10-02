@@ -7,8 +7,9 @@ import { store } from './state.js';
 import { normalizeCountryName } from './countryNorm.js';
 import { updateHighlightedCountriesCache } from './countryHi.js';
 import { filterView } from './countryView.js';
-import { focusCameraOn, setSatellites } from './globe.js';
-import { renderStraightLinkBeams } from './links.js';
+import { focusCameraOn, setSatellites, selectEntity } from './globe.js';
+import { renderStraightLinkBeams, setFilterBeamHighlight } from './links.js';
+import { updateFilterSummary } from './filterSummary.js';
 
 export function populateCountryFilters(satellites, stations) {
   const satCountrySelect = document.getElementById('filterSatCountry');
@@ -106,6 +107,30 @@ export function applyFilters(adjustView = true) {
   setSatellites(visibleSatellites);
   renderStraightLinkBeams(filteredConnections, true);
 
+  // Beam emphasis for the new state. renderStraightLinkBeams reset every flag
+  // (the beam set was rebuilt), so the highlight has to be re-applied:
+  //  * an entity is still selected -> re-select it. If the filter just removed
+  //    it from view, the selection is dropped instead, so a stale highlight can
+  //    never point at something that is no longer on the globe.
+  //  * otherwise any active country / filing filter paints and thickens every
+  //    drawn beam (the filtered rows already ARE the filtered set).
+  //  * no filter and no selection -> plain grey beams.
+  const sel = store.selection;
+  if (sel) {
+    const stillVisible = sel.kind === 'sat'
+      ? visibleSatellites.some(s => s.name === sel.name)
+      : visibleStations.some(s => s.name === sel.name);
+    if (stillVisible) {
+      const row = sel.kind === 'sat' ? store.satByName.get(sel.name) : store.stationByName.get(sel.name);
+      selectEntity(sel.kind, row, { zoom: false });
+    } else {
+      store.selection = null;
+      setFilterBeamHighlight(hasSat || hasGs || filterStatus !== 'all');
+    }
+  } else {
+    setFilterBeamHighlight(hasSat || hasGs || filterStatus !== 'all');
+  }
+
   // Re-push the SAME feature array so three-globe re-runs the cap/stroke
   // color accessors against the fresh highlight sets. This is required:
   // without it the accessors are never re-evaluated and no country ever
@@ -120,6 +145,8 @@ export function applyFilters(adjustView = true) {
   const stnStat = document.getElementById('stationStat');
   if (satStat) satStat.textContent = visibleSatellites.length.toLocaleString();
   if (stnStat) stnStat.textContent = visibleStations.length.toLocaleString();
+
+  updateFilterSummary();
 
   if (adjustView) {
     const view = filterView({

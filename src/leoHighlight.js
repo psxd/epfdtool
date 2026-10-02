@@ -1,12 +1,17 @@
 // LEO side-effects: link-intersection highlight + teardown.
 // Perf: works on flat Float32 meta arrays of the instanced mesh (no Vector3
 // allocs, no per-frame polygon rebuilds); paints instances in place.
-import { PALETTE, EARTH_RADIUS_KM } from './constants.js';
+import { EARTH_RADIUS_KM } from './constants.js';
 import { store } from './state.js';
-import { paintLinkInstances, GSO_COLOR_HEX } from './links.js';
+import { markLeoConflicts, clearLeoConflicts } from './links.js';
 
-const CONE_COS = Math.cos(1.0 * Math.PI / 180);
 const DEG = Math.PI / 180;
+
+// The 1-degree conflict threshold (kept from the original rule); CONE_COS is
+// the legacy cone test's own 1-degree half-angle.
+const CONFLICT_DEG = 1.0;
+const CONE_COS = Math.cos(CONFLICT_DEG * DEG);
+
 let lastPolyKey = '';
 
 function refreshPolygonsIfNeeded() {
@@ -17,36 +22,63 @@ function refreshPolygonsIfNeeded() {
   store.world.polygonsData([...store.cachedGeoJsonFeatures]);
 }
 
-export function checkAndHighlightPassingLinks(leoCoordsVec, lat, lon) {
+// Central angle (degrees) between two geodetic points, haversine form -
+// numerically stable for the very small angles this feature fires on (a plain
+// dot-product cosine loses all precision below ~1e-4 deg).
+export function centralAngleDeg(lat1, lon1, lat2, lon2) {
+  const dLat = (lat2 - lat1) * DEG;
+  let dLon = (lon2 - lon1) * DEG;
+  if (dLon > Math.PI) dLon -= 2 * Math.PI;
+  else if (dLon < -Math.PI) dLon += 2 * Math.PI;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * DEG) * Math.cos(lat2 * DEG) * Math.sin(dLon / 2) ** 2;
+  return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) / DEG;
+}
+
+// A ground station is VISIBLE from a satellite at altitude h when it lies on
+// the near cap: the Earth-angle between the satellite's sub-point and the
+// station must not exceed the horizon angle acos(R / (R + h)). For a 400 km LEO
+// that is ~19.8 deg, growing with altitude. This replaces the old fixed 8 deg
+// lat/lon box (which silently discarded every station beyond it) and the
+// impossible 100,000 km slant-range cut.
+function horizonAngleDeg(altKm) {
+  const r = Math.max(1, 1 + (Number(altKm) || 0) / EARTH_RADIUS_KM);
+  return Math.acos(Math.min(1, 1 / r)) / DEG;
+}
+
+export function checkAndHighlightPassingLinks(leoCoordsVec, lat, lon, altKm = 0) {
   const meta = store.linkMeta;
   const lx = leoCoordsVec.x, ly = leoCoordsVec.y, lz = leoCoordsVec.z;
   if (meta) {
     const toPaint = [];
-    const latR = lat * DEG;
-    const cosLat = Math.cos(latR);
+    const horizonCos = Math.cos(horizonAngleDeg(altKm) * DEG);
     const done = store.persistentlyHighlightedLinks;
     for (let i = 0; i < meta.count; i++) {
       const id = meta.ident[i];
       if (done.has(id)) continue;
-      const dLatDeg = lat - meta.gsLat[i];
-      if (dLatDeg > 8 || dLatDeg < -8) continue;
-      let dLonDeg = Math.abs(lon - meta.gsLon[i]);
-      if (dLonDeg > 180) dLonDeg = 360 - dLonDeg;
-      if (dLonDeg * cosLat > 8) continue;
-      const dLat = dLatDeg * DEG, dLon = dLonDeg * DEG;
-      const gsLatR = meta.gsLat[i] * DEG;
-      const a = Math.sin(dLat / 2) ** 2 + Math.cos(gsLatR) * cosLat * Math.sin(dLon / 2) ** 2;
-      if (2 * EARTH_RADIUS_KM * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) > 100000) continue;
-      const vx = lx - meta.gsX[i], vy = ly - meta.gsY[i], vz = lz - meta.gsZ[i];
-      const vLen = Math.sqrt(vx * vx + vy * vy + vz * vz) || 1e-9;
-      if ((vx * meta.dirX[i] + vy * meta.dirY[i] + vz * meta.dirZ[i]) / vLen >= CONE_COS) {
-        done.add(id);
-        const c = meta.country[i];
-        if (c) store.currentHighlightedSet.add(c);
-        toPaint.push(i);
+      // Primary test: the angle between the satellite's CURRENT sub-point and
+      // the ground station, gated on the visible hemisphere.
+      const gamma = centralAngleDeg(lat, lon, meta.gsLat[i], meta.gsLon[i]);
+      let conflict = false;
+      if (gamma <= 90 && Math.cos(gamma * DEG) >= horizonCos) {
+        conflict = gamma < CONFLICT_DEG;
       }
+      if (!conflict) {
+        // Legacy test, retained: the angle AT the ground station between its
+        // drawn beam direction and the direction to the current sat position.
+        const vx = lx - meta.gsX[i], vy = ly - meta.gsY[i], vz = lz - meta.gsZ[i];
+        const vLen = Math.sqrt(vx * vx + vy * vy + vz * vz) || 1e-9;
+        conflict = (vx * meta.dirX[i] + vy * meta.dirY[i] + vz * meta.dirZ[i]) / vLen >= CONE_COS;
+      }
+      if (!conflict) continue;
+      // ONLY this link is marked: the ground station's other links stay exactly
+      // as they are.
+      done.add(id);
+      const c = meta.country[i];
+      if (c) store.currentHighlightedSet.add(c);
+      toPaint.push(i);
     }
-    if (toPaint.length > 0) paintLinkInstances(toPaint, 0x00ffcc);
+    if (toPaint.length > 0) markLeoConflicts(toPaint);
   }
   const countEl = document.getElementById('leoCompromisedCount');
   if (countEl) {
@@ -85,10 +117,10 @@ export function resetLeoVisualization() {
   if (timeEl) timeEl.textContent = '-';
   const altEl = document.getElementById('leoAltText');
   if (altEl) altEl.textContent = '-';
-  if (store.linkMeta) paintLinkInstances(Array.from({ length: store.linkMeta.count }, (_, i) => i), GSO_COLOR_HEX);
+  // Drop every conflict mark so the beam set returns to plain base styling.
+  clearLeoConflicts();
   if (store.world && store.cachedGeoJsonFeatures.length > 0) {
     lastPolyKey = '';
     store.world.polygonsData([...store.cachedGeoJsonFeatures]);
   }
-  void PALETTE;
 }

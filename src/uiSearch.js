@@ -1,8 +1,8 @@
 // GSO search (index-based, debounced) + restored zoom buttons + view toggle.
 import { store } from './state.js';
 import { requestApplyFilters, applyFilters } from './gsoFilters.js';
-import { focusCameraOn, zoomBy, DEFAULT_VIEW } from './globe.js';
-import { showSatelliteDetails, showStationDetails } from './gsoNetwork.js';
+import { focusCameraOn, zoomBy, selectEntity, clearSelection, DEFAULT_VIEW } from './globe.js';
+import { showDetailsPlaceholder } from './gsoNetwork.js';
 
 export function setupUIEvents() {
   const searchInput = document.getElementById('searchInput');
@@ -29,10 +29,22 @@ export function setupUIEvents() {
       if (filterStatus) filterStatus.value = 'all';
       if (filterSatCountry) filterSatCountry.value = 'all';
       if (filterGsCountry) filterGsCountry.value = 'all';
+      clearSelection();
       applyFilters(false);
-      const detailsBox = document.getElementById('detailsBox');
-      if (detailsBox) detailsBox.innerHTML = '<p class="placeholderText">Hover over or click nodes on the globe to inspect payload metadata.</p>';
+      showDetailsPlaceholder();
       focusCameraOn(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude);
+    });
+  }
+
+  // Clear button next to the "Filtered View" summary: drops only the entity
+  // selection (country / filing filters stay applied), and the search box is
+  // emptied to match so the two never disagree about what is selected.
+  const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+  if (clearSelectionBtn) {
+    clearSelectionBtn.addEventListener('click', () => {
+      clearSelection();
+      if (searchInput) searchInput.value = '';
+      applyFilters(false);
     });
   }
 
@@ -60,7 +72,32 @@ export function setupUIEvents() {
     let deb = 0;
     searchInput.addEventListener('input', (e) => {
       clearTimeout(deb);
-      deb = setTimeout(() => onGsoSearchInput(e, searchInput, suggestionBox), 120);
+      deb = setTimeout(() => {
+        if (e.target.value.trim().length === 0) {
+          // Empty box = no entity selected: restore the full filtered beam set.
+          // Only touch the selection here; the country filters are untouched.
+          if (store.selection) clearSelection();
+          if (suggestionBox) suggestionBox.style.display = 'none';
+          return;
+        }
+        onGsoSearchInput(e, searchInput, suggestionBox);
+      }, 120);
+    });
+    // Enter picks the top suggestion of whichever kind it belongs to, so a typed
+    // name selects + highlights + zooms without needing the mouse.
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' || !suggestionBox) return;
+      const first = suggestionBox.querySelector('.suggestion-item');
+      if (!first) return;
+      e.preventDefault();
+      first.click();
+    });
+    // Escape abandons the search: clears the box and the selection.
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      searchInput.value = '';
+      if (suggestionBox) suggestionBox.style.display = 'none';
+      clearSelection();
     });
     document.addEventListener('click', (e) => {
       if (suggestionBox && searchInput && !searchInput.contains(e.target) && !suggestionBox.contains(e.target)) {
@@ -98,25 +135,16 @@ function onGsoSearchInput(e, searchInput, suggestionBox) {
   }
 }
 
-// Search is a LOOK-UP, not a filter: selecting a suggestion only opens the
-// details card and zooms to the node. Dropdowns, drawn nodes and beams stay
-// exactly as the left filter box left them (the only place that filters).
+// Picking a search result is the SAME action as clicking the node on the globe:
+// the entity's links are highlighted + thickened, every other link is hidden,
+// the blue box names it and the camera zooms to it (all inside selectEntity).
+// The country / filing filters are NOT changed, so this stays a look-up and
+// never rewrites the filtered node set.
 function pickGsoSuggestion(item, searchInput, suggestionBox) {
   const type = item.getAttribute('data-type');
   const name = item.getAttribute('data-name');
   searchInput.value = name;
   suggestionBox.style.display = 'none';
-  if (type === 'sat') {
-    const sat = store.satByName.get(name);
-    if (sat) {
-      showSatelliteDetails(sat);
-      focusCameraOn(sat.lat || 0, sat.lon, 1.6);
-    }
-  } else {
-    const stn = store.stationByName.get(name);
-    if (stn) {
-      showStationDetails(stn);
-      focusCameraOn(stn.lat, stn.lon, 1.25);
-    }
-  }
+  if (type === 'sat') selectEntity('sat', store.satByName.get(name));
+  else selectEntity('gs', store.stationByName.get(name));
 }

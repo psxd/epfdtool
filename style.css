@@ -221,6 +221,25 @@ hr {
   background: #B0B0B0;
 }
 
+/* Selected / filtered link: thicker and orange, exactly as drawn on the globe
+   (see HIGHLIGHT_RADIAL_SCALE + PALETTE.false_sat in links.js). */
+.legendLineHighlighted {
+  width: 16px;
+  height: 5px;
+  background: #E69F00;
+}
+
+#filterSummaryBox {
+  margin-top: 6px;
+  background: #eef4f9;
+  border: 1px solid #1977AD;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #111111;
+}
+
 .detailsBox {
   margin-top: 14px;
   background: #f7dc93;

@@ -10,8 +10,20 @@ import { store } from './state.js';
 import { isCountryHighlighted, isCountryOutlined, isCountryFootprint, updateHighlightedCountriesCache } from './countryHi.js';
 import { buildGeoNameSet } from './countryNorm.js';
 import { stationHoverHtml, satelliteHoverHtml } from './hoverText.js';
-import { highlightBeams, clearBeamHighlight } from './links.js';
-export const DEFAULT_VIEW = { lat: 20, lng: 0, altitude: 2.2 };
+import { highlightBeams, clearBeamHighlight, setBeamSelection, clearBeamSelection } from './links.js';
+import { updateFilterSummary } from './filterSummary.js';
+export const DEFAULT_VIEW = { lat: 20, lng: 0, altitude: 12 };
+
+// Zoom altitudes for a selected entity, in globe radii (see DEFAULT_VIEW above).
+// Tuned by eye; the reasoning that mattered:
+//  * A GSO satellite sits on the orbit belt at 1 + GSO_ALTITUDE_RATIO ~= 6.61
+//    radii (objectAltitude below), so a satellite click has to sit above that
+//    or the camera ends up underneath the belt and the slot is off screen.
+//    ver1 used 7 here, which is barely wider than the belt itself.
+//  * A ground station is on the surface, so a low altitude frames its local
+//    neighbourhood rather than the whole planet.
+export const SELECT_SAT_ALTITUDE = 8;
+export const SELECT_STATION_ALTITUDE = 0.4;
 
 // Altitude for EVERY polygon, in globe radii (globe radius = 100 units, so
 // 0.004 == 0.4 units of lift).
@@ -153,6 +165,28 @@ export function zoomBy(factor) {
   const current = cameraTween ? cameraTween.target : (store.world.pointOfView() || DEFAULT_VIEW);
   animateCameraTo(current.lat, current.lng, clampCameraAltitude(current.altitude * factor));
 }
+// --- LEO satellite-follow camera ---------------------------------------------
+// The camera rides along with the propagating LEO satellite, re-aiming at its
+// current sub-point every frame. Hard-sets the POV (no tween) because follow is
+// already a continuous per-frame motion - animating each step would lag behind
+// the satellite instead of tracking it. applyCamera() is reused so the dot
+// rescale still runs and the shared altitude clamp still applies.
+//
+// The longitude is taken the SHORT way round. Without this the camera whips
+// ~358 degrees whenever the satellite crosses the antimeridian, which looks
+// like a glitch rather than a flight.
+export function applyCameraFollow(lat, lng, altitude) {
+  if (!store.world) return;
+  cancelCameraTween();
+  applyCamera(Number(lat) || 0, wrapLng(Number(lng) || 0), altitude);
+}
+
+// Stop following. Called when leaving the LEO tab, on reset, and when the user
+// grabs the globe (see uiTabs) so the camera never fights the user.
+export function cancelFollow() {
+  store.leoFollowSatellite = false;
+  store.leoFollowBreakout = false;
+}
 
 let satGeoPlanned = null;
 let satGeoNonPlanned = null;
@@ -160,7 +194,7 @@ let satMatPlanned = null;
 let satMatNonPlanned = null;
 // Base radius of a satellite dot's geometry. The per-zoom value is
 // satScaleForAltitude() and is a MULTIPLIER on this, never a replacement for it.
-const SAT_BASE_RADIUS = 0.7;
+const SAT_BASE_RADIUS = 0.3;
 let satGeoPick = null;
 let satMatPick = null;
 const _pickVec = new THREE.Vector3();
@@ -267,6 +301,44 @@ function satMeshFor(d) {
   return mesh;
 }
 
+// Details renderers, injected by initGlobe so the shared select/clear helpers
+// below can pin and unpin the left-panel card without importing gsoNetwork
+// (which imports this module - a cycle).
+let detailRenderers = { sat: null, gs: null, placeholder: null };
+
+// Select an entity (click on a node, or a pick from the search box):
+//   * its beams are highlighted + thickened, every other beam is hidden;
+//   * the details card is pinned in the left panel;
+//   * the blue "Filtered View" box names the entity;
+//   * the camera zooms to it.
+// This is the SINGLE place the summary is refreshed for a selection, so clicking
+// a node and picking the same node from the search box are indistinguishable.
+// `kind` is 'sat' | 'gs'. Returns false when the entity is unknown.
+export function selectEntity(kind, entity, { zoom = true } = {}) {
+  if (!entity || !entity.name) return false;
+  const name = entity.name;
+  store.selection = { kind, name };
+  setBeamSelection(kind, name);
+  if (kind === 'sat' && detailRenderers.sat) detailRenderers.sat(entity);
+  if (kind === 'gs' && detailRenderers.gs) detailRenderers.gs(entity);
+  updateFilterSummary();
+  if (zoom && store.world) {
+    if (kind === 'sat') focusCameraOn(7, entity.lon || 0, SELECT_SAT_ALTITUDE);
+    else focusCameraOn(entity.lat || 9, entity.lon || 0, SELECT_STATION_ALTITUDE);
+  }
+  return true;
+}
+
+// Drop the current selection: every beam is restored to the filtered set, the
+// yellow box goes back to its hint, and the blue box drops the entity name.
+export function clearSelection() {
+  if (!store.selection) return;
+  store.selection = null;
+  clearBeamSelection();
+  if (detailRenderers.placeholder) detailRenderers.placeholder();
+  updateFilterSummary();
+}
+
 // The satellite click callback's argument shape differs by globe.gl version:
 // the installed one hands over the DATA ROW (its dataAccessors.object unwraps
 // the three-globe group's `__data`), while other paths hand over the intersected
@@ -282,27 +354,6 @@ function satelliteFromClickArg(arg) {
     return null;
   }
   return arg.name ? arg : null;
-}
-
-export function renderGSORing() {
-  const scene = store.world.scene();
-  const radius = 1 + GSO_ALTITUDE_RATIO;
-  const geometry = new THREE.RingGeometry(radius - 0.04, radius + 0.04, 128);
-  const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(PALETTE.true_sat),
-    side: THREE.DoubleSide, transparent: true, opacity: 0.35
-  });
-  const ringMesh = new THREE.Mesh(geometry, material);
-  ringMesh.rotation.x = Math.PI / 2;
-  scene.add(ringMesh);
-  const wireGeometry = new THREE.RingGeometry(radius - 0.08, radius + 0.08, 64);
-  const wireMaterial = new THREE.MeshBasicMaterial({
-    color: new THREE.Color(PALETTE.gray_mid1),
-    side: THREE.DoubleSide, transparent: true, opacity: 0.15, wireframe: true
-  });
-  const wireRing = new THREE.Mesh(wireGeometry, wireMaterial);
-  wireRing.rotation.x = Math.PI / 2;
-  scene.add(wireRing);
 }
 
 export function setSatellites(list) {
@@ -332,8 +383,11 @@ export function startBootAnimation() {
   animateCameraTo(DEFAULT_VIEW.lat, DEFAULT_VIEW.lng, DEFAULT_VIEW.altitude, BOOT_FLIGHT_MS);
 }
 
-export function initGlobe({ showSatelliteDetails, showStationDetails }) {
+export function initGlobe({ showSatelliteDetails, showStationDetails, showDetailsPlaceholder }) {
   const container = document.getElementById('globeCanvas');
+  detailRenderers.sat = showSatelliteDetails || null;
+  detailRenderers.gs = showStationDetails || null;
+  detailRenderers.placeholder = showDetailsPlaceholder || null;
   // BUILD ORDER (staged = smooth, not random):
   //   1. shell first (globe + GSO ring + parked POV) so first paint is instant;
   //   2. globe.json resolves -> ONE polygonsData (capped DPR already applied);
@@ -388,10 +442,11 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
     .pointLabel(d => (store.isLeoActive ? '' : stationHoverHtml(d)))
     .onPointClick(d => {
       if (store.isLeoActive) return;
-      // Click = details card + zoom ONLY. No filtering happens here - the
-      // left filter box is the only thing that adds/removes nodes and beams.
-      showStationDetails(d);
-      focusCameraOn(d.lat, d.lon, 1.25);
+      // Click = details card + zoom + link highlight. The selected station's
+      // beams go orange and thicken, every other beam is hidden (see
+      // selectEntity). Filtering of the drawn node set still only happens
+      // through the left filter box.
+      selectEntity('gs', d);
     })
     .onPointHover(d => {
       if (store.isLeoActive) return;
@@ -414,10 +469,11 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
       // test therefore never matched and satellite clicks did nothing at all.
       const sat = satelliteFromClickArg(obj);
       if (!sat) return;
-      // Click = details card + zoom ONLY (no beam filtering - the left filter
-      // box is the only thing that changes what's drawn).
-      showSatelliteDetails(sat);
-      focusCameraOn(sat.lat || 3.5, sat.lon, 7);
+      // Same behaviour as a station click: card + zoom to the correct orbit
+      // altitude + this satellite's beams highlighted (others hidden). The
+      // sub-point is latitude 0 for every GSO satellite (see gsoNetwork.loadData),
+      // so the camera aims at lat 0 on the satellite's own longitude.
+      selectEntity('sat', sat);
     })
     .onObjectHover(obj => {
       if (store.isLeoActive) return;
@@ -451,7 +507,6 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
         });
     });
 
-  renderGSORing();
   // Park the camera high. The dolly-in does NOT start here - it is owned by
   // startBootAnimation() and fires once the dataset has actually landed, so
   // the intro plays over a fully populated scene instead of having stations,
@@ -475,14 +530,21 @@ export function initGlobe({ showSatelliteDetails, showStationDetails }) {
   // this is just a cheap second safety net that guarantees the final resting
   // size is right even if the tween was cancelled mid-flight.
   let rescaleQueued = false;
-  store.world.controls().addEventListener('change', () => {
-    if (rescaleQueued) return;
-    rescaleQueued = true;
-    requestAnimationFrame(() => {
-      rescaleQueued = false;
-      syncSatDotScale();
+  // Optional call: globe.gl does NOT link the renderObjs `controls()` method
+  // onto the Globe instance (linkedRenderObjsMethods only forwards
+  // postProcessingComposer), so this is undefined in this bundle - hence the
+  // optional call. A missing method here must not abort initGlobe.
+  const orbitControls = store.world.controls?.();
+  if (orbitControls && typeof orbitControls.addEventListener === 'function') {
+    orbitControls.addEventListener('change', () => {
+      if (rescaleQueued) return;
+      rescaleQueued = true;
+      requestAnimationFrame(() => {
+        rescaleQueued = false;
+        syncSatDotScale();
+      });
     });
-  });
+  }
 
   // Responsive canvas: keep the renderer at the exact container size (a
   // mismatched drawing buffer is the classic "glitchy on rotate/resize"

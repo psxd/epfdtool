@@ -57,6 +57,15 @@
       </div>
     </section>
 
+    <!-- Filtered View summary: what the globe is showing right now -->
+    <section class="panelSection" id="filterSummarySection" style="margin-top: 12px;">
+      <span class="subsectionLabel">Filtered View</span>
+      <div id="filterSummaryBox">
+        <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #111111;">No filter applied</p>
+      </div>
+      <button id="clearSelectionBtn" type="button" style="display: none; margin-top: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer; border-radius: 6px; border: 1px solid #cccccc; background: #ffffff; color: #333333;">Clear selection</button>
+    </section>
+
     <!-- LEO Section (Hidden by default) -->
     <section class="panelSection" id="leoPanel" style="display: none; position: relative;">
       <label for="leoSearchInput">Search Active LEO Satellite</label>
@@ -72,6 +81,12 @@
           <option value="10">10x Speed</option>
           <option value="100">100x Speed</option>
         </select>
+      </div>
+
+      <!-- Satellite-follow camera: rides along with the propagating satellite -->
+      <div id="leoFollowRow" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+        <input type="checkbox" id="leoFollowCheckbox" style="width: auto; margin: 0; padding: 0; cursor: pointer;" />
+        <label for="leoFollowCheckbox" style="margin: 0; cursor: pointer; user-select: none;">Follow satellite</label>
       </div>
 
       <!-- Prominent Intersection Count Card -->
@@ -136,6 +151,11 @@
           <div class="legendRow">
             <span class="legendLine legendLineLink"></span>
             <span>Active Link Paths</span>
+          </div>
+
+          <div class="legendRow">
+            <span class="legendLine legendLineHighlighted"></span>
+            <span>Highlighted Link (selected / filtered)</span>
           </div>
         </div>
       </div>
