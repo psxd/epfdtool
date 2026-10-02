@@ -1,2831 +1,3303 @@
 [
   {
+    "id": "PALAPA-B1@108.00000",
     "name": "PALAPA-B1",
     "lon": 108.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "PALAPA-B2@113.00000",
     "name": "PALAPA-B2",
     "lon": 113.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "INSAT-1B@74.00000",
     "name": "INSAT-1B",
     "lon": 74.0,
     "planned": false,
     "operator": "India 🇮🇳"
   },
   {
+    "id": "INTELSAT MCS ATL A@-18.50000",
     "name": "INTELSAT MCS ATL A",
     "lon": -18.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT MCS INDOC D@66.00000",
     "name": "INTELSAT MCS INDOC D",
     "lon": 66.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MARECS ATL1@-26.00000",
     "name": "MARECS ATL1",
     "lon": -26.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "MARECS PAC1@178.00000",
     "name": "MARECS PAC1",
     "lon": 178.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT MCS INDOC A@63.00000",
     "name": "INTELSAT MCS INDOC A",
     "lon": 63.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MARISAT-PAC@176.50000",
     "name": "MARISAT-PAC",
     "lon": 176.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 ATL4@-34.50000",
     "name": "INTELSAT5 ATL4",
     "lon": -34.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 INDOC1@63.00000",
     "name": "INTELSAT5 INDOC1",
     "lon": 63.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 ATL2@-18.50000",
     "name": "INTELSAT5 ATL2",
     "lon": -18.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "OTS@5.00000",
     "name": "OTS",
     "lon": 5.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "FLTSATCOM W PAC@172.00000",
     "name": "FLTSATCOM W PAC",
     "lon": 172.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ANIK D-1@-104.50000",
     "name": "ANIK D-1",
     "lon": -104.5,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "ARABSAT 1-B@26.00000",
     "name": "ARABSAT 1-B",
     "lon": 26.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "ARABSAT 1-A@19.00000",
     "name": "ARABSAT 1-A",
     "lon": 19.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "STW-1@125.00000",
     "name": "STW-1",
     "lon": 125.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "SBTS A2@-65.00000",
     "name": "SBTS A2",
     "lon": -65.0,
     "planned": false,
     "operator": "Brazil 🇧🇷"
   },
   {
+    "id": "SBTS A1@-70.00000",
     "name": "SBTS A1",
     "lon": -70.0,
     "planned": false,
     "operator": "Brazil 🇧🇷"
   },
   {
+    "id": "EUTELSAT 1-2@13.00000",
     "name": "EUTELSAT 1-2",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT-1@10.00000",
     "name": "EUTELSAT-1",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "USGCSS PH3 ATL@-12.00000",
     "name": "USGCSS PH3 ATL",
     "lon": -12.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH3 E PAC@-135.00000",
     "name": "USGCSS PH3 E PAC",
     "lon": -135.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH3 W PAC@175.00000",
     "name": "USGCSS PH3 W PAC",
     "lon": 175.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5A ATL2@-27.50000",
     "name": "INTELSAT5A ATL2",
     "lon": -27.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "CSDRN@95.00000",
     "name": "CSDRN",
     "lon": 95.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "WSDRN@-16.00000",
     "name": "WSDRN",
     "lon": -16.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "SATCOM PHASE-3@-18.00000",
     "name": "SATCOM PHASE-3",
     "lon": -18.0,
     "planned": false,
     "operator": "Belgium 🇧🇪"
   },
   {
+    "id": "POTOK-2@80.00000",
     "name": "POTOK-2",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "STATSIONAR-15@128.00000",
     "name": "STATSIONAR-15",
     "lon": 128.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USGCSS PH2 INDOC@60.00000",
     "name": "USGCSS PH2 INDOC",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH2 ATL@-12.00000",
     "name": "USGCSS PH2 ATL",
     "lon": -12.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 PAC1@174.00000",
     "name": "INTELSAT5 PAC1",
     "lon": 174.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 PAC3@180.00000",
     "name": "INTELSAT5 PAC3",
     "lon": 180.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "GMS-3@140.00000",
     "name": "GMS-3",
     "lon": 140.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "METEOSAT@0.00000",
     "name": "METEOSAT",
     "lon": 0.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "GOES EAST@-75.00000",
     "name": "GOES EAST",
     "lon": -75.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "PROGNOZ-3@35.00000",
     "name": "PROGNOZ-3",
     "lon": 35.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "PROGNOZ-1@-24.00000",
     "name": "PROGNOZ-1",
     "lon": -24.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "PROGNOZ-2@12.00000",
     "name": "PROGNOZ-2",
     "lon": 12.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "PROGNOZ-4@80.00000",
     "name": "PROGNOZ-4",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT5 ATL5@-21.50000",
     "name": "INTELSAT5 ATL5",
     "lon": -21.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "POTOK-1@-13.50000",
     "name": "POTOK-1",
     "lon": -13.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "ANIK D-2@-110.50000",
     "name": "ANIK D-2",
     "lon": -110.5,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "ANIK C-3@-117.50000",
     "name": "ANIK C-3",
     "lon": -117.5,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "ANIK C-2@-110.00000",
     "name": "ANIK C-2",
     "lon": -110.0,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "STATSIONAR-4@-14.00000",
     "name": "STATSIONAR-4",
     "lon": -14.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "DFS-2@28.50000",
     "name": "DFS-2",
     "lon": 28.5,
     "planned": false,
     "operator": "Germany 🇩🇪"
   },
   {
+    "id": "DFS-1@23.50000",
     "name": "DFS-1",
     "lon": 23.5,
     "planned": false,
     "operator": "Germany 🇩🇪"
   },
   {
+    "id": "POTOK-3@-168.00000",
     "name": "POTOK-3",
     "lon": -168.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "SKYNET-4A@-1.00000",
     "name": "SKYNET-4A",
     "lon": -1.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INTELSAT IBS 342E@-18.00000",
     "name": "INTELSAT IBS 342E",
     "lon": -18.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT IBS 307E@-53.00000",
     "name": "INTELSAT IBS 307E",
     "lon": -53.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT IBS 319.5E@-40.50000",
     "name": "INTELSAT IBS 319.5E",
     "lon": -40.5,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTELSAT IBS 310E@-50.00000",
     "name": "INTELSAT IBS 310E",
     "lon": -50.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5 INDOC3@57.00000",
     "name": "INTELSAT5 INDOC3",
     "lon": 57.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-4A@-14.00000",
     "name": "STATSIONAR-4A",
     "lon": -14.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "TELECOM-1A@-8.00000",
     "name": "TELECOM-1A",
     "lon": -8.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "TELECOM-1B@-5.00000",
     "name": "TELECOM-1B",
     "lon": -5.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT6 60E@60.00000",
     "name": "INTELSAT6 60E",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT6 332.5E@-27.50000",
     "name": "INTELSAT6 332.5E",
     "lon": -27.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT6 335.5E@-24.50000",
     "name": "INTELSAT6 335.5E",
     "lon": -24.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ESDRN@-160.00000",
     "name": "ESDRN",
     "lon": -160.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "GDL-6@19.20000",
     "name": "GDL-6",
     "lon": 19.2,
     "planned": true,
     "operator": "Luxembourg 🇱🇺"
   },
   {
+    "id": "TELECOM-1C@3.00000",
     "name": "TELECOM-1C",
     "lon": 3.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "USASAT-12C@-76.00000",
     "name": "USASAT-12C",
     "lon": -76.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EUTELSAT 1-3@7.00000",
     "name": "EUTELSAT 1-3",
     "lon": 7.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "ETS-5@150.00000",
     "name": "ETS-5",
     "lon": 150.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "USASAT-6C@-95.00000",
     "name": "USASAT-6C",
     "lon": -95.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-6A@-97.00000",
     "name": "USASAT-6A",
     "lon": -97.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-D1@-26.50000",
     "name": "STATSIONAR-D1",
     "lon": -26.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "STATSIONAR-D2@-170.00000",
     "name": "STATSIONAR-D2",
     "lon": -170.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "STATSIONAR-D6@128.00000",
     "name": "STATSIONAR-D6",
     "lon": 128.0,
     "planned": true,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INMARSAT-2 AOR EAST@-15.50000",
     "name": "INMARSAT-2 AOR EAST",
     "lon": -15.5,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INMARSAT-2 IOR 1@64.50000",
     "name": "INMARSAT-2 IOR 1",
     "lon": 64.5,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "CS-3B@136.00000",
     "name": "CS-3B",
     "lon": 136.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "CS-3A@132.00000",
     "name": "CS-3A",
     "lon": 132.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "STATSIONAR-6@90.00000",
     "name": "STATSIONAR-6",
     "lon": 90.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "STATSIONAR-7@140.00000",
     "name": "STATSIONAR-7",
     "lon": 140.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "LOUTCH-3@90.00000",
     "name": "LOUTCH-3",
     "lon": 90.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USASAT-11D@-134.00000",
     "name": "USASAT-11D",
     "lon": -134.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "WESTAR-5@-123.00000",
     "name": "WESTAR-5",
     "lon": -123.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-21@103.00000",
     "name": "STATSIONAR-21",
     "lon": 103.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USASAT-7A@-74.00000",
     "name": "USASAT-7A",
     "lon": -74.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "SUPERBIRD-A@158.00000",
     "name": "SUPERBIRD-A",
     "lon": 158.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "SUPERBIRD-B@162.00000",
     "name": "SUPERBIRD-B",
     "lon": 162.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "INTELSAT5A INDOC1@60.00000",
     "name": "INTELSAT5A INDOC1",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-13A@80.00000",
     "name": "STATSIONAR-13A",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT5 INDOC4@66.00000",
     "name": "INTELSAT5 INDOC4",
     "lon": 66.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "JCSAT-1@150.00000",
     "name": "JCSAT-1",
     "lon": 150.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "USASAT-20A@-126.00000",
     "name": "USASAT-20A",
     "lon": -126.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-3C@-86.00000",
     "name": "USASAT-3C",
     "lon": -86.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "BSB-1@-31.00000",
     "name": "BSB-1",
     "lon": -31.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "VSSRD-2@167.00000",
     "name": "VSSRD-2",
     "lon": 167.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "CSSRD-2@77.00000",
     "name": "CSSRD-2",
     "lon": 77.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "GMS-4@140.00000",
     "name": "GMS-4",
     "lon": 140.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "TDRS-C2@-79.00000",
     "name": "TDRS-C2",
     "lon": -79.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "L-SAT@-19.00000",
     "name": "L-SAT",
     "lon": -19.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "BS-3@110.00000",
     "name": "BS-3",
     "lon": 110.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "JCSAT-2@154.00000",
     "name": "JCSAT-2",
     "lon": 154.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "INTELSAT5 PAC2@177.00000",
     "name": "INTELSAT5 PAC2",
     "lon": 177.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5A 342E@-18.00000",
     "name": "INTELSAT5A 342E",
     "lon": -18.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5A CONT1@-53.00000",
     "name": "INTELSAT5A CONT1",
     "lon": -53.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INMARSAT-2 AOR WEST@-55.00000",
     "name": "INMARSAT-2 AOR WEST",
     "lon": -55.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INMARSAT-2 AOR CL 2A@-32.00000",
     "name": "INMARSAT-2 AOR CL 2A",
     "lon": -32.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INMARSAT-2 IOR 2@65.00000",
     "name": "INMARSAT-2 IOR 2",
     "lon": 65.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "TELE-X@5.00000",
     "name": "TELE-X",
     "lon": 5.0,
     "planned": false,
     "operator": "Sweden 🇸🇪"
   },
   {
+    "id": "TELSTAR-3A@-97.00000",
     "name": "TELSTAR-3A",
     "lon": -97.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5A CONT4@-1.00000",
     "name": "INTELSAT5A CONT4",
     "lon": -1.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT5A 338.5E@-21.50000",
     "name": "INTELSAT5A 338.5E",
     "lon": -21.5,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTELSAT6 63E@63.00000",
     "name": "INTELSAT6 63E",
     "lon": 63.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EUTELSAT 2-7E@7.00000",
     "name": "EUTELSAT 2-7E",
     "lon": 7.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT 2-36E@36.00000",
     "name": "EUTELSAT 2-36E",
     "lon": 36.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "HIPPARCOS@-12.00000",
     "name": "HIPPARCOS",
     "lon": -12.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "STATSIONAR-20@70.00000",
     "name": "STATSIONAR-20",
     "lon": 70.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EUTELSAT 2-10E@10.00000",
     "name": "EUTELSAT 2-10E",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT 2-13E@13.00000",
     "name": "EUTELSAT 2-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT6 325.5E@-34.50000",
     "name": "INTELSAT6 325.5E",
     "lon": -34.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ASC-1@-128.00000",
     "name": "ASC-1",
     "lon": -128.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "TDRS 174W@-174.00000",
     "name": "TDRS 174W",
     "lon": -174.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "TDRS 46W@-46.00000",
     "name": "TDRS 46W",
     "lon": -46.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "SATCOM-4@-17.80000",
     "name": "SATCOM-4",
     "lon": -17.8,
     "planned": false,
     "operator": "Belgium 🇧🇪"
   },
   {
+    "id": "USASAT-7D@-101.00000",
     "name": "USASAT-7D",
     "lon": -101.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-11@-11.00000",
     "name": "STATSIONAR-11",
     "lon": -11.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "STATSIONAR-12@40.00000",
     "name": "STATSIONAR-12",
     "lon": 40.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "METEOSAT S1@10.00000",
     "name": "METEOSAT S1",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "METEOSAT S2@-10.00000",
     "name": "METEOSAT S2",
     "lon": -10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT5A INDOC3@63.00000",
     "name": "INTELSAT5A INDOC3",
     "lon": 63.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT MCS PAC A@180.00000",
     "name": "INTELSAT MCS PAC A",
     "lon": 180.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "PALAPA-B3@118.00000",
     "name": "PALAPA-B3",
     "lon": 118.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "STATSIONAR-1@80.00000",
     "name": "STATSIONAR-1",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USASAT-13I@-45.00000",
     "name": "USASAT-13I",
     "lon": -45.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EUTELSAT 1-4@16.00000",
     "name": "EUTELSAT 1-4",
     "lon": 16.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "ASIASAT-1@105.50000",
     "name": "ASIASAT-1",
     "lon": 105.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EUTELSAT 1-5@21.50000",
     "name": "EUTELSAT 1-5",
     "lon": 21.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "HISPASAT-1@-30.00000",
     "name": "HISPASAT-1",
     "lon": -30.0,
     "planned": false,
     "operator": "Spain 🇪🇸"
   },
   {
+    "id": "GMS-120E@120.00000",
     "name": "GMS-120E",
     "lon": 120.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "ACTS@-100.00000",
     "name": "ACTS",
     "lon": -100.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MARISAT-INDOC@72.50000",
     "name": "MARISAT-INDOC",
     "lon": 72.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-24E@-89.00000",
     "name": "USASAT-24E",
     "lon": -89.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MARECS ATL4@-55.50000",
     "name": "MARECS ATL4",
     "lon": -55.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "SJC-1@124.00000",
     "name": "SJC-1",
     "lon": 124.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "SJC-2@120.00000",
     "name": "SJC-2",
     "lon": 120.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "TOR-3@45.00000",
     "name": "TOR-3",
     "lon": 45.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "TOR-4@85.00000",
     "name": "TOR-4",
     "lon": 85.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EUTELSAT 2-16E@16.00000",
     "name": "EUTELSAT 2-16E",
     "lon": 16.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT6 335.5E@24.50000",
     "name": "INTELSAT6 335.5E",
     "lon": 24.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-27@12.00000",
     "name": "STATSIONAR-27",
     "lon": 12.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT5A INDOC2@57.00000",
     "name": "INTELSAT5A INDOC2",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTELSAT5 183E@-177.00000",
     "name": "INTELSAT5 183E",
     "lon": -177.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "ANIK E-A@-107.30000",
     "name": "ANIK E-A",
     "lon": -107.3,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "ANIK E-B@-111.10000",
     "name": "ANIK E-B",
     "lon": -111.1,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "FOTON-1@-13.50000",
     "name": "FOTON-1",
     "lon": -13.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INSAT-2(83)@83.00000",
     "name": "INSAT-2(83)",
     "lon": 83.0,
     "planned": false,
     "operator": "India 🇮🇳"
   },
   {
+    "id": "INSAT-2(93.5)@93.50000",
     "name": "INSAT-2(93.5)",
     "lon": 93.5,
     "planned": false,
     "operator": "India 🇮🇳"
   },
   {
+    "id": "INTELSAT7 359E@-1.00000",
     "name": "INTELSAT7 359E",
     "lon": -1.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-22@1.00000",
     "name": "STATSIONAR-22",
     "lon": 1.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "ZSSRD-2@-16.00000",
     "name": "ZSSRD-2",
     "lon": -16.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "FOTON-2@80.00000",
     "name": "FOTON-2",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "KOREASAT-1@116.00000",
     "name": "KOREASAT-1",
     "lon": 116.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "GOMS-M@76.00000",
     "name": "GOMS-M",
     "lon": 76.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USGCSS PH3 INDOC@60.00000",
     "name": "USGCSS PH3 INDOC",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "FOTON-3@-168.00000",
     "name": "FOTON-3",
     "lon": -168.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USGCSS PH3 MID-ATL@-42.50000",
     "name": "USGCSS PH3 MID-ATL",
     "lon": -42.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH3B ATL@-12.00000",
     "name": "USGCSS PH3B ATL",
     "lon": -12.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH3 E PAC-2@-130.00000",
     "name": "USGCSS PH3 E PAC-2",
     "lon": -130.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USGCSS PH3B E PAC@-135.00000",
     "name": "USGCSS PH3B E PAC",
     "lon": -135.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "AUSSAT B 160E@160.00000",
     "name": "AUSSAT B 160E",
     "lon": 160.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "N-SAT-146@144.00000",
     "name": "N-SAT-146",
     "lon": 144.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "ARABSAT 2-B@26.00000",
     "name": "ARABSAT 2-B",
     "lon": 26.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "ARABSAT 2-A@30.50000",
     "name": "ARABSAT 2-A",
     "lon": 30.5,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "INTELSAT7 307E@-53.00000",
     "name": "INTELSAT7 307E",
     "lon": -53.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT7 66E@66.00000",
     "name": "INTELSAT7 66E",
     "lon": 66.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "STATSIONAR-3@85.00000",
     "name": "STATSIONAR-3",
     "lon": 85.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT7 57E@57.00000",
     "name": "INTELSAT7 57E",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTELSAT7 342E@-18.00000",
     "name": "INTELSAT7 342E",
     "lon": -18.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "SIRIUS-2@4.80000",
     "name": "SIRIUS-2",
     "lon": 4.8,
     "planned": false,
     "operator": "Sweden 🇸🇪"
   },
   {
+    "id": "EXPRESS-6@80.00000",
     "name": "EXPRESS-6",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "ASIASAT-E@100.50000",
     "name": "ASIASAT-E",
     "lon": 100.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "TDRS WEST@-171.00000",
     "name": "TDRS WEST",
     "lon": -171.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "APSTAR-4@76.50000",
     "name": "APSTAR-4",
     "lon": 76.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "ASIASAT-CK@105.50000",
     "name": "ASIASAT-CK",
     "lon": 105.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "INTELSAT7 180E@180.00000",
     "name": "INTELSAT7 180E",
     "lon": 180.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "DJCF-2A@-39.00000",
     "name": "DJCF-2A",
     "lon": -39.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "DJCF-1A@39.50000",
     "name": "DJCF-1A",
     "lon": 39.5,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "DEF-R-SAT-1A@82.00000",
     "name": "DEF-R-SAT-1A",
     "lon": 82.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "DEF-R-SAT-2A@72.00000",
     "name": "DEF-R-SAT-2A",
     "lon": 72.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "DEF-R-SAT-3A@93.00000",
     "name": "DEF-R-SAT-3A",
     "lon": 93.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "USCSID-W2@-144.00000",
     "name": "USCSID-W2",
     "lon": -144.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-W1@-141.00000",
     "name": "USCSID-W1",
     "lon": -141.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-E1@-10.00000",
     "name": "USCSID-E1",
     "lon": -10.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-E2@-13.00000",
     "name": "USCSID-E2",
     "lon": -13.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-E3@-24.00000",
     "name": "USCSID-E3",
     "lon": -24.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-E4@-30.00000",
     "name": "USCSID-E4",
     "lon": -30.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-14G@169.00000",
     "name": "USASAT-14G",
     "lon": 169.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A3@75.00000",
     "name": "USCSID-A3",
     "lon": 75.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A4@82.00000",
     "name": "USCSID-A4",
     "lon": 82.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A5@92.00000",
     "name": "USCSID-A5",
     "lon": 92.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A6@110.00000",
     "name": "USCSID-A6",
     "lon": 110.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A1@0.00000",
     "name": "USCSID-A1",
     "lon": 0.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USCSID-A2@44.00000",
     "name": "USCSID-A2",
     "lon": 44.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "CHINASAT-6@110.50000",
     "name": "CHINASAT-6",
     "lon": 110.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "INTELSAT6 62E@62.00000",
     "name": "INTELSAT6 62E",
     "lon": 62.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EXPRESS-4@40.00000",
     "name": "EXPRESS-4",
     "lon": 40.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USDKH2@-30.40000",
     "name": "USDKH2",
     "lon": -30.4,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "N-STAR-A@132.00000",
     "name": "N-STAR-A",
     "lon": 132.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "N-STAR-B@136.00000",
     "name": "N-STAR-B",
     "lon": 136.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "TELECOM-2A@-8.00000",
     "name": "TELECOM-2A",
     "lon": -8.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "USASAT-14I@68.50000",
     "name": "USASAT-14I",
     "lon": 68.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-14H@166.00000",
     "name": "USASAT-14H",
     "lon": 166.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "TDRS 85E@85.00000",
     "name": "TDRS 85E",
     "lon": 85.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "N-SAT-128@128.00000",
     "name": "N-SAT-128",
     "lon": 128.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "FLTSATCOM-C E ATL-1@-22.50000",
     "name": "FLTSATCOM-C E ATL-1",
     "lon": -22.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "CHINASAT-2@110.50000",
     "name": "CHINASAT-2",
     "lon": 110.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "INMARSAT-3 IOR-1@64.00000",
     "name": "INMARSAT-3 IOR-1",
     "lon": 64.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "DJCF-2B@-26.00000",
     "name": "DJCF-2B",
     "lon": -26.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "DJCF-1B@46.00000",
     "name": "DJCF-1B",
     "lon": 46.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INTELSAT8 328.5E@-31.50000",
     "name": "INTELSAT8 328.5E",
     "lon": -31.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EXPRESS-9@103.00000",
     "name": "EXPRESS-9",
     "lon": 103.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "KOREASAT-2@113.00000",
     "name": "KOREASAT-2",
     "lon": 113.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "EXPRESS-7@90.00000",
     "name": "EXPRESS-7",
     "lon": 90.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "SICRAL-2A@16.20000",
     "name": "SICRAL-2A",
     "lon": 16.2,
     "planned": false,
     "operator": "Italy 🇮🇹"
   },
   {
+    "id": "EUTELSAT 3-7E@7.00000",
     "name": "EUTELSAT 3-7E",
     "lon": 7.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT B-13E@13.00000",
     "name": "EUTELSAT B-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EXPRESS-2@-14.00000",
     "name": "EXPRESS-2",
     "lon": -14.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-3@-11.00000",
     "name": "EXPRESS-3",
     "lon": -11.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "ASIASAT-AKX@122.00000",
     "name": "ASIASAT-AKX",
     "lon": 122.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EXPRESS-11@145.00000",
     "name": "EXPRESS-11",
     "lon": 145.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "CHINASAT-138E@138.00000",
     "name": "CHINASAT-138E",
     "lon": 138.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EUTELSAT-KA-36E@36.00000",
     "name": "EUTELSAT-KA-36E",
     "lon": 36.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "PALAPA PAC-C 146E@108.00000",
     "name": "PALAPA PAC-C 146E",
     "lon": 108.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "USASAT-14J@72.00000",
     "name": "USASAT-14J",
     "lon": 72.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-14L@-15.00000",
     "name": "USASAT-14L",
     "lon": -15.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EUTELSAT 3-36E@36.00000",
     "name": "EUTELSAT 3-36E",
     "lon": 36.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "FY-2B@86.50000",
     "name": "FY-2B",
     "lon": 86.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "FY-2C@123.50000",
     "name": "FY-2C",
     "lon": 123.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "FY-2AS@105.00000",
     "name": "FY-2AS",
     "lon": 105.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "FY-2BS@86.50000",
     "name": "FY-2BS",
     "lon": 86.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "FY-2CS@123.50000",
     "name": "FY-2CS",
     "lon": 123.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "THAICOM-A3@120.00000",
     "name": "THAICOM-A3",
     "lon": 120.0,
     "planned": false,
     "operator": "Thailand 🇹🇭"
   },
   {
+    "id": "AM-SAT A4@108.20000",
     "name": "AM-SAT A4",
     "lon": 108.2,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INTELSAT8 95E@95.00000",
     "name": "INTELSAT8 95E",
     "lon": 95.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "JCSAT-3A@128.00000",
     "name": "JCSAT-3A",
     "lon": 128.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "INTELSAT9 62E@62.00000",
     "name": "INTELSAT9 62E",
     "lon": 62.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "JCSAT-2R@154.00000",
     "name": "JCSAT-2R",
     "lon": 154.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "JCSAT-1R@150.00000",
     "name": "JCSAT-1R",
     "lon": 150.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "STATSIONAR-24@49.00000",
     "name": "STATSIONAR-24",
     "lon": 49.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-8@96.50000",
     "name": "EXPRESS-8",
     "lon": 96.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-5@53.00000",
     "name": "EXPRESS-5",
     "lon": 53.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "NSS-16@-22.00000",
     "name": "NSS-16",
     "lon": -22.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTELSAT6 340E@-20.00000",
     "name": "INTELSAT6 340E",
     "lon": -20.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "PALAPA PAC-C 146E@146.00000",
     "name": "PALAPA PAC-C 146E",
     "lon": 146.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "INTELSAT8 62E@62.00000",
     "name": "INTELSAT8 62E",
     "lon": 62.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EUTELSAT 3-12.5W@-12.50000",
     "name": "EUTELSAT 3-12.5W",
     "lon": -12.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTERBELAR-2@75.00000",
     "name": "INTERBELAR-2",
     "lon": 75.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-10B@140.00000",
     "name": "EXPRESS-10B",
     "lon": 140.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "HELLAS-SAT@39.00000",
     "name": "HELLAS-SAT",
     "lon": 39.0,
     "planned": false,
     "operator": "Greece 🇬🇷"
   },
   {
+    "id": "EXPRESS-6B@80.00000",
     "name": "EXPRESS-6B",
     "lon": 80.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-5B@53.00000",
     "name": "EXPRESS-5B",
     "lon": 53.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT7 62E@62.00000",
     "name": "INTELSAT7 62E",
     "lon": 62.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MEASAT-1@91.50000",
     "name": "MEASAT-1",
     "lon": 91.5,
     "planned": false,
     "operator": "Malaysia 🇲🇾"
   },
   {
+    "id": "VIDEOSAT-7@-5.00000",
     "name": "VIDEOSAT-7",
     "lon": -5.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUROPE*STAR-1@45.00000",
     "name": "EUROPE*STAR-1",
     "lon": 45.0,
     "planned": false,
     "operator": "Germany 🇩🇪"
   },
   {
+    "id": "INTELSAT8 335.5E@-24.50000",
     "name": "INTELSAT8 335.5E",
     "lon": -24.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EXPRESS-7B@90.00000",
     "name": "EXPRESS-7B",
     "lon": 90.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "DEF-R-SAT-4B 121.0E@121.00000",
     "name": "DEF-R-SAT-4B 121.0E",
     "lon": 121.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "INTELSAT6 330.5E@-29.50000",
     "name": "INTELSAT6 330.5E",
     "lon": -29.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "HISPASAT-1D KU@-30.00000",
     "name": "HISPASAT-1D KU",
     "lon": -30.0,
     "planned": false,
     "operator": "Spain 🇪🇸"
   },
   {
+    "id": "INTELSAT8 64E@64.00000",
     "name": "INTELSAT8 64E",
     "lon": 64.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EXPRESS-10@140.00000",
     "name": "EXPRESS-10",
     "lon": 140.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EUTELSAT EXB-13E@13.00000",
     "name": "EUTELSAT EXB-13E",
     "lon": 13.0,
     "planned": true,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "TONGASAT C/KU-3@138.00000",
     "name": "TONGASAT C/KU-3",
     "lon": 138.0,
     "planned": false,
     "operator": "Tonga 🇹🇴"
   },
   {
+    "id": "INMARSAT-3 IOR WEST@25.00000",
     "name": "INMARSAT-3 IOR WEST",
     "lon": 25.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INSAT-2E83@83.00000",
     "name": "INSAT-2E83",
     "lon": 83.0,
     "planned": false,
     "operator": "India 🇮🇳"
   },
   {
+    "id": "INTELSAT8 60E@60.00000",
     "name": "INTELSAT8 60E",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ROSCOM-4@49.00000",
     "name": "ROSCOM-4",
     "lon": 49.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT8 319.5E@-40.50000",
     "name": "INTELSAT8 319.5E",
     "lon": -40.5,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "BIFROST-3-FSS@-0.80000",
     "name": "BIFROST-3-FSS",
     "lon": -0.8,
     "planned": true,
     "operator": "Norway 🇳🇴"
   },
   {
+    "id": "FY-2A@105.00000",
     "name": "FY-2A",
     "lon": 105.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EUTELSAT 3-13E@13.00000",
     "name": "EUTELSAT 3-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT 3-33E@33.00000",
     "name": "EUTELSAT 3-33E",
     "lon": 33.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "GOES-EAST-1@-75.00000",
     "name": "GOES-EAST-1",
     "lon": -75.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "MEASAT-IC 91.5@91.50000",
     "name": "MEASAT-IC 91.5",
     "lon": 91.5,
     "planned": false,
     "operator": "Malaysia 🇲🇾"
   },
   {
+    "id": "INMARSAT-3 POR-2@178.00000",
     "name": "INMARSAT-3 POR-2",
     "lon": 178.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INTELSAT8 359E@-1.00000",
     "name": "INTELSAT8 359E",
     "lon": -1.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "VIDEOSAT-6@-8.00000",
     "name": "VIDEOSAT-6",
     "lon": -8.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "NSS-9@95.00000",
     "name": "NSS-9",
     "lon": 95.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "EUTELSAT 3-16E@16.00000",
     "name": "EUTELSAT 3-16E",
     "lon": 16.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "VINASAT-4A2@132.00000",
     "name": "VINASAT-4A2",
     "lon": 132.0,
     "planned": false,
     "operator": "Vietnam 🇻🇳"
   },
   {
+    "id": "SIRIUS-5-BSS@4.80000",
     "name": "SIRIUS-5-BSS",
     "lon": 4.8,
     "planned": false,
     "operator": "Sweden 🇸🇪"
   },
   {
+    "id": "USASAT-25G@-58.00000",
     "name": "USASAT-25G",
     "lon": -58.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "HISPASAT-2A X@-30.00000",
     "name": "HISPASAT-2A X",
     "lon": -30.0,
     "planned": false,
     "operator": "Spain 🇪🇸"
   },
   {
+    "id": "KOREASAT-113X@113.00000",
     "name": "KOREASAT-113X",
     "lon": 113.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "INMARSAT-3 AOR WEST2@-54.00000",
     "name": "INMARSAT-3 AOR WEST2",
     "lon": -54.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "THAICOM-A2B@78.50000",
     "name": "THAICOM-A2B",
     "lon": 78.5,
     "planned": false,
     "operator": "Thailand 🇹🇭"
   },
   {
+    "id": "TELECOM-3B@-5.00000",
     "name": "TELECOM-3B",
     "lon": -5.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "USASAT-26A@-37.50000",
     "name": "USASAT-26A",
     "lon": -37.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EMARSAT-1F@44.00000",
     "name": "EMARSAT-1F",
     "lon": 44.0,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "CANSAT KA-4@-111.10000",
     "name": "CANSAT KA-4",
     "lon": -111.1,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "INTELSAT7 332.5E@-27.50000",
     "name": "INTELSAT7 332.5E",
     "lon": -27.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ANIK-F2@-111.10000",
     "name": "ANIK-F2",
     "lon": -111.1,
     "planned": false,
     "operator": "Canada 🇨🇦"
   },
   {
+    "id": "VINASAT-TTC@132.00000",
     "name": "VINASAT-TTC",
     "lon": 132.0,
     "planned": false,
     "operator": "Vietnam 🇻🇳"
   },
   {
+    "id": "INTELSAT9 342E@-18.00000",
     "name": "INTELSAT9 342E",
     "lon": -18.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "DFH-5-OD@115.50000",
     "name": "DFH-5-OD",
     "lon": 115.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "SUPERBIRD-C2@144.00000",
     "name": "SUPERBIRD-C2",
     "lon": 144.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "EUTELSAT 2-21.5E@21.50000",
     "name": "EUTELSAT 2-21.5E",
     "lon": 21.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EMARSAT-1F/M@44.00000",
     "name": "EMARSAT-1F/M",
     "lon": 44.0,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "INTELSAT8 332.5E@-27.50000",
     "name": "INTELSAT8 332.5E",
     "lon": -27.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "KYPROS-SAT-C@39.00000",
     "name": "KYPROS-SAT-C",
     "lon": 39.0,
     "planned": false,
     "operator": "Cyprus 🇨🇾"
   },
   {
+    "id": "INTELSAT9 64E@64.00000",
     "name": "INTELSAT9 64E",
     "lon": 64.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 325.5E@-34.50000",
     "name": "INTELSAT9 325.5E",
     "lon": -34.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 335.5E@-24.50000",
     "name": "INTELSAT9 335.5E",
     "lon": -24.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "SKYNET-5A@-34.00000",
     "name": "SKYNET-5A",
     "lon": -34.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "SKYNET-5B@-1.00000",
     "name": "SKYNET-5B",
     "lon": -1.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "SKYNET-5D@53.00000",
     "name": "SKYNET-5D",
     "lon": 53.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "ASIASAT-AK1@122.00000",
     "name": "ASIASAT-AK1",
     "lon": 122.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "TELECOM-2C@3.00000",
     "name": "TELECOM-2C",
     "lon": 3.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT10 359E@-1.00000",
     "name": "INTELSAT10 359E",
     "lon": -1.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "THAICOM-A2@78.50000",
     "name": "THAICOM-A2",
     "lon": 78.5,
     "planned": false,
     "operator": "Thailand 🇹🇭"
   },
   {
+    "id": "EMARSAT-4F@44.00000",
     "name": "EMARSAT-4F",
     "lon": 44.0,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "DBL@19.20000",
     "name": "DBL",
     "lon": 19.2,
     "planned": true,
     "operator": "Luxembourg 🇱🇺"
   },
   {
+    "id": "NSS-19@-177.00000",
     "name": "NSS-19",
     "lon": -177.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "NSS-8@57.00000",
     "name": "NSS-8",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "F-SAT-C-E-10E@10.00000",
     "name": "F-SAT-C-E-10E",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTERSPUTNIK-3W-Q@-3.00000",
     "name": "INTERSPUTNIK-3W-Q",
     "lon": -3.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "F-SAT-KU2-E-13E@13.00000",
     "name": "F-SAT-KU2-E-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EXPRESS-8B@96.50000",
     "name": "EXPRESS-8B",
     "lon": 96.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "LUX-G3-19.2E@19.20000",
     "name": "LUX-G3-19.2E",
     "lon": 19.2,
     "planned": false,
     "operator": "Luxembourg 🇱🇺"
   },
   {
+    "id": "EUTELSAT-KA-16E@16.00000",
     "name": "EUTELSAT-KA-16E",
     "lon": 16.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT9 359E@-1.00000",
     "name": "INTELSAT9 359E",
     "lon": -1.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 340E@-20.00000",
     "name": "INTELSAT9 340E",
     "lon": -20.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 60E@60.00000",
     "name": "INTELSAT9 60E",
     "lon": 60.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "BIFROST-17@-0.80000",
     "name": "BIFROST-17",
     "lon": -0.8,
     "planned": true,
     "operator": "Norway 🇳🇴"
   },
   {
+    "id": "JCSAT-FO-132E@132.00000",
     "name": "JCSAT-FO-132E",
     "lon": 132.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "USASAT-60B@166.00000",
     "name": "USASAT-60B",
     "lon": 166.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-60C@68.50000",
     "name": "USASAT-60C",
     "lon": 68.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "ARABSAT 2-C@20.00000",
     "name": "ARABSAT 2-C",
     "lon": 20.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "TURKSAT-42E-A@42.00000",
     "name": "TURKSAT-42E-A",
     "lon": 42.0,
     "planned": false,
     "operator": "Turkey 🇹🇷"
   },
   {
+    "id": "SKYNET-5E@-17.80000",
     "name": "SKYNET-5E",
     "lon": -17.8,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "ASIASAT-EK1@100.50000",
     "name": "ASIASAT-EK1",
     "lon": 100.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "DFH-3-OC@87.50000",
     "name": "DFH-3-OC",
     "lon": 87.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "ASIASAT-CK1@105.50000",
     "name": "ASIASAT-CK1",
     "lon": 105.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EUROPESTAR-47.5E@47.50000",
     "name": "EUROPESTAR-47.5E",
     "lon": 47.5,
     "planned": false,
     "operator": "Germany 🇩🇪"
   },
   {
+    "id": "USASAT-14K@172.00000",
     "name": "USASAT-14K",
     "lon": 172.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "TDRS 167.5W@-167.50000",
     "name": "TDRS 167.5W",
     "lon": -167.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 66E@66.00000",
     "name": "INTELSAT9 66E",
     "lon": 66.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "KUPON-1M@55.00000",
     "name": "KUPON-1M",
     "lon": 55.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EUTELSAT-B1-13E@13.00000",
     "name": "EUTELSAT-B1-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "PALAPA-C1@113.00000",
     "name": "PALAPA-C1",
     "lon": 113.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "CHNSAT-130E@130.00000",
     "name": "CHNSAT-130E",
     "lon": 130.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "PALAPA-C2@108.00000",
     "name": "PALAPA-C2",
     "lon": 108.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "PALAPA-B1-EC@108.00000",
     "name": "PALAPA-B1-EC",
     "lon": 108.0,
     "planned": false,
     "operator": "Indonesia 🇮🇩"
   },
   {
+    "id": "JCSAT-FO-154E@154.00000",
     "name": "JCSAT-FO-154E",
     "lon": 154.0,
     "planned": false,
     "operator": "Japan 🇯🇵"
   },
   {
+    "id": "APSTAR-5-KU@138.00000",
     "name": "APSTAR-5-KU",
     "lon": 138.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "CHINASAT-45@101.50000",
     "name": "CHINASAT-45",
     "lon": 101.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "CHNSAT-98E@98.20000",
     "name": "CHNSAT-98E",
     "lon": 98.2,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "CHINASAT-134E@134.00000",
     "name": "CHINASAT-134E",
     "lon": 134.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "USASAT-60F@-95.00000",
     "name": "USASAT-60F",
     "lon": -95.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT9 332.5E@-27.50000",
     "name": "INTELSAT9 332.5E",
     "lon": -27.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "NSS-35@-40.50000",
     "name": "NSS-35",
     "lon": -40.5,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "YAMAL-49E@49.00000",
     "name": "YAMAL-49E",
     "lon": 49.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-7C@90.00000",
     "name": "EXPRESS-7C",
     "lon": 90.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EXPRESS-9B@103.00000",
     "name": "EXPRESS-9B",
     "lon": 103.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "USASAT-14I-3@68.50000",
     "name": "USASAT-14I-3",
     "lon": 68.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "INTELSAT7 157E@157.00000",
     "name": "INTELSAT7 157E",
     "lon": 157.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-60J@169.00000",
     "name": "USASAT-60J",
     "lon": 169.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "CHINASAT-51.5E@51.50000",
     "name": "CHINASAT-51.5E",
     "lon": 51.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "APSTAR-76E@76.50000",
     "name": "APSTAR-76E",
     "lon": 76.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "CHINASAT-33@110.50000",
     "name": "CHINASAT-33",
     "lon": 110.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "ASIASAT-EKX@100.50000",
     "name": "ASIASAT-EKX",
     "lon": 100.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EUTELSAT 3-10E@10.00000",
     "name": "EUTELSAT 3-10E",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "SINOSAT-5@110.50000",
     "name": "SINOSAT-5",
     "lon": 110.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "ASIASAT-AKZ@122.20000",
     "name": "ASIASAT-AKZ",
     "lon": 122.2,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "INTERSPUTNIK-75E-CK@75.00000",
     "name": "INTERSPUTNIK-75E-CK",
     "lon": 75.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "EMARSAT-4S@98.50000",
     "name": "EMARSAT-4S",
     "lon": 98.5,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "ASIASAT-CKX@105.50000",
     "name": "ASIASAT-CKX",
     "lon": 105.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "DFH-3-OC M@87.50000",
     "name": "DFH-3-OC M",
     "lon": 87.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "DEF-R-SAT-5B@68.00000",
     "name": "DEF-R-SAT-5B",
     "lon": 68.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "DEF-R-SAT-6B@95.60000",
     "name": "DEF-R-SAT-6B",
     "lon": 95.6,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "EXPRESS-4B@40.00000",
     "name": "EXPRESS-4B",
     "lon": 40.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT7 64E@64.00000",
     "name": "INTELSAT7 64E",
     "lon": 64.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "USASAT-60A@172.00000",
     "name": "USASAT-60A",
     "lon": 172.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "EXPRESS-10P@140.00000",
     "name": "EXPRESS-10P",
     "lon": 140.0,
     "planned": true,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "F-SAT-KA-E-9E@9.00000",
     "name": "F-SAT-KA-E-9E",
     "lon": 9.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "CHINASAT-ROUTE1@51.50000",
     "name": "CHINASAT-ROUTE1",
     "lon": 51.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "EXPRESS-2B@-14.00000",
     "name": "EXPRESS-2B",
     "lon": -14.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "CHINASAT-64@98.00000",
     "name": "CHINASAT-64",
     "lon": 98.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "DBL-G3-23.5E@23.50000",
     "name": "DBL-G3-23.5E",
     "lon": 23.5,
     "planned": true,
     "operator": "Luxembourg 🇱🇺"
   },
   {
+    "id": "EXPRESS-B 11W@-11.00000",
     "name": "EXPRESS-B 11W",
     "lon": -11.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "KOR11201@116.00000",
     "name": "KOR11201",
     "lon": 116.0,
     "planned": true,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "YAMAL-55E@55.00000",
     "name": "YAMAL-55E",
     "lon": 55.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT8 57E@57.00000",
     "name": "INTELSAT8 57E",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "KOREASAT-113K@113.00000",
     "name": "KOREASAT-113K",
     "lon": 113.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "KOREASAT-116K@116.00000",
     "name": "KOREASAT-116K",
     "lon": 116.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "ARABSAT-BSS1A@26.00000",
     "name": "ARABSAT-BSS1A",
     "lon": 26.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "IRNDBS-2@26.00000",
     "name": "IRNDBS-2",
     "lon": 26.0,
     "planned": true,
     "operator": "Iran 🇮🇷"
   },
   {
+    "id": "ARABSAT-BSS1B@26.00000",
     "name": "ARABSAT-BSS1B",
     "lon": 26.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "YAMAL-183E@-177.00000",
     "name": "YAMAL-183E",
     "lon": -177.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "YAMAL-PK2@55.00000",
     "name": "YAMAL-PK2",
     "lon": 55.0,
     "planned": true,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INTELSAT9 304.5E@-55.50000",
     "name": "INTELSAT9 304.5E",
     "lon": -55.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "F-SAT-N3-28.5E@28.50000",
     "name": "F-SAT-N3-28.5E",
     "lon": 28.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "EUTELSAT 3-21.5E@21.50000",
     "name": "EUTELSAT 3-21.5E",
     "lon": 21.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-N-E-48E@48.00000",
     "name": "F-SAT-N-E-48E",
     "lon": 48.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-N3-25.5E@25.50000",
     "name": "F-SAT-N3-25.5E",
     "lon": 25.5,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-KU-E-8W@-8.00000",
     "name": "F-SAT-KU-E-8W",
     "lon": -8.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-KU-E-5W@-5.00000",
     "name": "F-SAT-KU-E-5W",
     "lon": -5.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-T-E-13E@13.00000",
     "name": "F-SAT-T-E-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-T-E-36E@36.00000",
     "name": "F-SAT-T-E-36E",
     "lon": 36.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "INTELSAT7 325.5E@-34.50000",
     "name": "INTELSAT7 325.5E",
     "lon": -34.5,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "GK2-128.2E@128.20000",
     "name": "GK2-128.2E",
     "lon": 128.2,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "CSDRN-M@95.00000",
     "name": "CSDRN-M",
     "lon": 95.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "HISPASAT-3@-30.00000",
     "name": "HISPASAT-3",
     "lon": -30.0,
     "planned": true,
     "operator": "Spain 🇪🇸"
   },
   {
+    "id": "EUTELSAT EXB-36E@36.00000",
     "name": "EUTELSAT EXB-36E",
     "lon": 36.0,
     "planned": true,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "NSS-36@57.00000",
     "name": "NSS-36",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "CERES-1@-4.00000",
     "name": "CERES-1",
     "lon": -4.0,
     "planned": true,
     "operator": "Hungary 🇭🇺"
   },
   {
+    "id": "COMPASS-110.5E@110.50000",
     "name": "COMPASS-110.5E",
     "lon": 110.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "CHINASAT-65@103.00000",
     "name": "CHINASAT-65",
     "lon": 103.0,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "SE-KA-56.5E@56.50000",
     "name": "SE-KA-56.5E",
     "lon": 56.5,
     "planned": false,
     "operator": "Norway 🇳🇴"
   },
   {
+    "id": "MCO-FSS-52E@52.00000",
     "name": "MCO-FSS-52E",
     "lon": 52.0,
     "planned": true,
     "operator": "Monaco 🇲🇨"
   },
   {
+    "id": "MCO-BSS-52E@52.00000",
     "name": "MCO-BSS-52E",
     "lon": 52.0,
     "planned": true,
     "operator": "Monaco 🇲🇨"
   },
   {
+    "id": "GRC15002@39.00000",
     "name": "GRC15002",
     "lon": 39.0,
     "planned": true,
     "operator": "Greece 🇬🇷"
   },
   {
+    "id": "EUTELSAT B-9E@9.00000",
     "name": "EUTELSAT B-9E",
     "lon": 9.0,
     "planned": true,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-N-E-16E@16.00000",
     "name": "F-SAT-N-E-16E",
     "lon": 16.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-N-E-7E@7.00000",
     "name": "F-SAT-N-E-7E",
     "lon": 7.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "GEO-KOMPSAT-2-128.2E@128.20000",
     "name": "GEO-KOMPSAT-2-128.2E",
     "lon": 128.2,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "F-SAT-N3-13E@13.00000",
     "name": "F-SAT-N3-13E",
     "lon": 13.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "F-SAT-N3-10E@10.00000",
     "name": "F-SAT-N3-10E",
     "lon": 10.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "TELECOM-4C@3.00000",
     "name": "TELECOM-4C",
     "lon": 3.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "KOREASAT-116@116.00000",
     "name": "KOREASAT-116",
     "lon": 116.0,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "AMOS 2-B@-4.00000",
     "name": "AMOS 2-B",
     "lon": -4.0,
     "planned": false,
     "operator": "Israel 🇮🇱"
   },
   {
+    "id": "ARABSAT 8G-11E@11.00000",
     "name": "ARABSAT 8G-11E",
     "lon": 11.0,
     "planned": false,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "INTELSAT8 342E@-18.00000",
     "name": "INTELSAT8 342E",
     "lon": -18.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "KAZSAT2@86.50000",
     "name": "KAZSAT2",
     "lon": 86.5,
     "planned": false,
     "operator": "Kazakhstan 🇰🇿"
   },
   {
+    "id": "NSS-G5-18@57.00000",
     "name": "NSS-G5-18",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "INTERSPUTNIK-75E-Q@75.00000",
     "name": "INTERSPUTNIK-75E-Q",
     "lon": 75.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "YAHSAT-KA-47.5E@47.50000",
     "name": "YAHSAT-KA-47.5E",
     "lon": 47.5,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "F-SAT-N-E-36E@36.00000",
     "name": "F-SAT-N-E-36E",
     "lon": 36.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "KAZSAT1@58.50000",
     "name": "KAZSAT1",
     "lon": 58.5,
     "planned": false,
     "operator": "Kazakhstan 🇰🇿"
   },
   {
+    "id": "COMS-128.2E@128.20000",
     "name": "COMS-128.2E",
     "lon": 128.2,
     "planned": false,
     "operator": "South Korea 🇰🇷"
   },
   {
+    "id": "RUSATCOM-145E@145.00000",
     "name": "RUSATCOM-145E",
     "lon": 145.0,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "KAZSAT-30B-58.5E@58.50000",
     "name": "KAZSAT-30B-58.5E",
     "lon": 58.5,
     "planned": true,
     "operator": "Kazakhstan 🇰🇿"
   },
   {
+    "id": "USASAT-60I@-45.00000",
     "name": "USASAT-60I",
     "lon": -45.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "DEF-R-SAT-7C@106.00000",
     "name": "DEF-R-SAT-7C",
     "lon": 106.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "DEF-R-SAT-8C@127.00000",
     "name": "DEF-R-SAT-8C",
     "lon": 127.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "AUSSAT-H-160E@160.00000",
     "name": "AUSSAT-H-160E",
     "lon": 160.0,
     "planned": false,
     "operator": "Australia 🇦🇺"
   },
   {
+    "id": "TURKSAT-42E-B@42.00000",
     "name": "TURKSAT-42E-B",
     "lon": 42.0,
     "planned": false,
     "operator": "Turkey 🇹🇷"
   },
   {
+    "id": "MEASAT-1A@91.50000",
     "name": "MEASAT-1A",
     "lon": 91.5,
     "planned": false,
     "operator": "Malaysia 🇲🇾"
   },
   {
+    "id": "ARABSAT-AXB26E_C@26.00000",
     "name": "ARABSAT-AXB26E_C",
     "lon": 26.0,
     "planned": true,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "ARABSAT-AXB30.5E@30.50000",
     "name": "ARABSAT-AXB30.5E",
     "lon": 30.5,
     "planned": true,
     "operator": "Saudi Arabia 🇸🇦"
   },
   {
+    "id": "INMARSAT-4A 25E@25.00000",
     "name": "INMARSAT-4A 25E",
     "lon": 25.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INMARSAT-4B 64E@64.00000",
     "name": "INMARSAT-4B 64E",
     "lon": 64.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "INMARSAT-4 143.5E@143.50000",
     "name": "INMARSAT-4 143.5E",
     "lon": 143.5,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "GOMS-14.5W@-14.50000",
     "name": "GOMS-14.5W",
     "lon": -14.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "INMARSAT-S4-R@39.00000",
     "name": "INMARSAT-S4-R",
     "lon": 39.0,
     "planned": false,
     "operator": "United Kingdom 🇬🇧"
   },
   {
+    "id": "KYPROS-SAT-7@39.00000",
     "name": "KYPROS-SAT-7",
     "lon": 39.0,
     "planned": false,
     "operator": "Cyprus 🇨🇾"
   },
   {
+    "id": "KYPROS-SAT-L4@39.00000",
     "name": "KYPROS-SAT-L4",
     "lon": 39.0,
     "planned": false,
     "operator": "Cyprus 🇨🇾"
   },
   {
+    "id": "F-SAT-N7-3E@3.00000",
     "name": "F-SAT-N7-3E",
     "lon": 3.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "NSS-G2-17@57.00000",
     "name": "NSS-G2-17",
     "lon": 57.0,
     "planned": false,
     "operator": "Netherlands 🇳🇱"
   },
   {
+    "id": "ITS-AR-77.2W@-77.20000",
     "name": "ITS-AR-77.2W",
     "lon": -77.2,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "AZERSAT-46E@46.00000",
     "name": "AZERSAT-46E",
     "lon": 46.0,
     "planned": false,
     "operator": "Azerbaijan 🇦🇿"
   },
   {
+    "id": "USASAT-60V@169.00000",
     "name": "USASAT-60V",
     "lon": 169.0,
     "planned": false,
     "operator": "United States of America 🇺🇸"
   },
   {
+    "id": "YAMAL-E5-1@163.50000",
     "name": "YAMAL-E5-1",
     "lon": 163.5,
     "planned": false,
     "operator": "Russia 🇷🇺"
   },
   {
+    "id": "CNSAT-152.8E@152.80000",
     "name": "CNSAT-152.8E",
     "lon": 152.8,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "HELLAS-SAT-2G@39.00000",
     "name": "HELLAS-SAT-2G",
     "lon": 39.0,
     "planned": false,
     "operator": "Greece 🇬🇷"
   },
   {
+    "id": "VIDEOSAT-8-KU-C@3.00000",
     "name": "VIDEOSAT-8-KU-C",
     "lon": 3.0,
     "planned": false,
     "operator": "France 🇫🇷"
   },
   {
+    "id": "CHINASAT-E-33.5E@33.50000",
     "name": "CHINASAT-E-33.5E",
     "lon": 33.5,
     "planned": false,
     "operator": "China 🇨🇳"
   },
   {
+    "id": "TURKSAT-31E-F@31.00000",
     "name": "TURKSAT-31E-F",
     "lon": 31.0,
     "planned": false,
     "operator": "Turkey 🇹🇷"
   },
   {
+    "id": "TURKSAT-42E-F@42.00000",
     "name": "TURKSAT-42E-F",
     "lon": 42.0,
     "planned": false,
     "operator": "Turkey 🇹🇷"
   },
   {
+    "id": "YAHSAT-N-20W@-20.00000",
     "name": "YAHSAT-N-20W",
     "lon": -20.0,
     "planned": false,
     "operator": "United Arab Emirates 🇦🇪"
   },
   {
+    "id": "PACIFISAT BSS-75E@75.00000",
     "name": "PACIFISAT BSS-75E",
     "lon": 75.0,
     "planned": false,
     "operator": "Papua New Guinea 🇵🇬"
   },
   {
+    "id": "KOREASAT-116.0E-A30B-M2@116.00000",
     "name": "KOREASAT-116.0E-A30B-M2",
     "lon": 116.0,
     "planned": false,

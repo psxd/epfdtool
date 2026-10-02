@@ -59,12 +59,12 @@ export function applyFilters(adjustView = true) {
     ? store.rawData.stations.filter(stn => normalizeCountryName(stn.country || stn.gscountry || '') === targetGs)
     : store.rawData.stations;
 
-  let gsScopedSatNames = null;
+  let gsScopedSatIds = null;
   if (hasGs) {
-    gsScopedSatNames = new Set();
+    gsScopedSatIds = new Set();
     for (const stn of filteredStations) {
-      const links = store.satsByGsName.get(stn.name);
-      if (links) for (const l of links) gsScopedSatNames.add(l.name);
+      const links = store.satsByGsId.get(stn.id);
+      if (links) for (const l of links) gsScopedSatIds.add(l.id);
     }
   }
   const filteredSatellites = store.rawData.satellites.filter(sat => {
@@ -72,35 +72,34 @@ export function applyFilters(adjustView = true) {
     if (filterStatus === 'planned' && !isPlanned) return false;
     if (filterStatus === 'nonplanned' && isPlanned) return false;
     if (hasSat && normalizeCountryName(sat.operator || sat.satcountry || '') !== targetSat) return false;
-    if (gsScopedSatNames && !gsScopedSatNames.has(sat.name)) return false;
+    if (gsScopedSatIds && !gsScopedSatIds.has(sat.id)) return false;
     return true;
   });
 
   if (hasSat) {
-    const activeSatNames = new Set(filteredSatellites.map(s => s.name));
-    const validGsNames = new Set();
+    const activeSatIds = new Set(filteredSatellites.map(s => s.id));
+    const validGsIds = new Set();
     for (const conn of store.rawData.connections) {
-      if (activeSatNames.has(conn.sat_name)) validGsNames.add(conn.gs_name);
+      if (activeSatIds.has(conn.sat_id)) validGsIds.add(conn.gs_id);
     }
-    filteredStations = filteredStations.filter(stn => validGsNames.has(stn.name));
+    filteredStations = filteredStations.filter(stn => validGsIds.has(stn.id));
   }
 
-  // Dedupe rows by name before they reach the scene, the beam intersection
-  // and the stat counters: the source files carry duplicate rows (120 station
-  // names appear twice, e.g. SIDODADI; 2 satellites likewise), while hover +
-  // click only ever resolve ONE row per name (last one wins in
-  // stationByName/satByName). Counting raw rows inflated the left-panel
-  // totals above the unique satellites / ground stations actually shown.
-  // `filteredSatellites` is a const above, so the deduped rows get their own
-  // names rather than a reassignment.
-  const visibleStations = [...new Map(filteredStations.map(s => [s.name, s])).values()];
-  const visibleSatellites = [...new Map(filteredSatellites.map(s => [s.name, s])).values()];
+  // NO de-duplication by name. Rows in the source are already unique per node
+  // POSITION, and two rows sharing a name are two genuinely different sites
+  // that each keep their own beams - collapsing them by name is what used to
+  // drop a station off the globe and desync the list from the drawn lines. The
+  // row lists in hoverText are likewise per node id, never per name.
+  const visibleStations = filteredStations;
+  const visibleSatellites = filteredSatellites;
 
-  const finalActiveSatNames = new Set(visibleSatellites.map(s => s.name));
-  const stationSet = new Set(visibleStations.map(s => s.name));
+  // A link is drawn iff BOTH of its exact endpoint nodes survived the filter,
+  // so the beams are exactly the union of the per-node lists shown to the user.
+  const finalActiveSatIds = new Set(visibleSatellites.map(s => s.id));
+  const stationIdSet = new Set(visibleStations.map(s => s.id));
   const filteredConnections = [];
   for (const conn of store.rawData.connections) {
-    if (finalActiveSatNames.has(conn.sat_name) && stationSet.has(conn.gs_name)) filteredConnections.push(conn);
+    if (finalActiveSatIds.has(conn.sat_id) && stationIdSet.has(conn.gs_id)) filteredConnections.push(conn);
   }
 
   store.world.pointsData(visibleStations);
@@ -118,10 +117,10 @@ export function applyFilters(adjustView = true) {
   const sel = store.selection;
   if (sel) {
     const stillVisible = sel.kind === 'sat'
-      ? visibleSatellites.some(s => s.name === sel.name)
-      : visibleStations.some(s => s.name === sel.name);
+      ? visibleSatellites.some(s => s.id === sel.id)
+      : visibleStations.some(s => s.id === sel.id);
     if (stillVisible) {
-      const row = sel.kind === 'sat' ? store.satByName.get(sel.name) : store.stationByName.get(sel.name);
+      const row = sel.kind === 'sat' ? store.satById.get(sel.id) : store.stationById.get(sel.id);
       selectEntity(sel.kind, row, { zoom: false });
     } else {
       store.selection = null;
@@ -141,10 +140,40 @@ export function applyFilters(adjustView = true) {
     store.world.polygonsData(store.cachedGeoJsonFeatures);
   }
 
+  // Counts are the endpoints of the DRAWN LINES, not the drawn node arrays, and
+  // they are counted as DISTINCT NAMES so the figure reads as "unique entities"
+  // (the two SIDODADI sites are one entity name shown at two positions). A
+  // satellite that passes the dropdown filters but has no surviving link is not
+  // on the globe either, so counting it would report a total the viewer cannot
+  // see. Deriving both from filteredConnections also keeps the two numbers
+  // consistent with each other: a country filter narrows the LINKS and both
+  // sides follow from them (GS=France shows only satellites wired to French
+  // stations).
+  const connectedSatIds = new Set(filteredConnections.map(c => c.sat_id));
+  const connectedGsIds = new Set(filteredConnections.map(c => c.gs_id));
+  const connectedSatNames = new Set();
+  for (const id of connectedSatIds) {
+    const s = store.satById.get(id);
+    if (s) connectedSatNames.add(s.name);
+  }
+  const connectedGsNames = new Set();
+  for (const id of connectedGsIds) {
+    const stn = store.stationById.get(id);
+    if (stn) connectedGsNames.add(stn.name);
+  }
   const satStat = document.getElementById('satelliteStat');
   const stnStat = document.getElementById('stationStat');
-  if (satStat) satStat.textContent = visibleSatellites.length.toLocaleString();
-  if (stnStat) stnStat.textContent = visibleStations.length.toLocaleString();
+  const satLabel = document.getElementById('satelliteStatLabel');
+  const stnLabel = document.getElementById('stationStatLabel');
+  const satCount = connectedSatNames.size.toLocaleString();
+  const stnCount = connectedGsNames.size.toLocaleString();
+  if (satStat) satStat.textContent = satCount;
+  if (stnStat) stnStat.textContent = stnCount;
+  // The country is named ONLY when that dimension is actually filtered, so a bare
+  // total is never shown beside a filtered figure. The big .statNumber holds
+  // the figure, so the label below it is just the unit + optional country.
+  if (satLabel) satLabel.textContent = 'satellites' + (hasSat ? ' in ' + satCountry : '');
+  if (stnLabel) stnLabel.textContent = 'ground stations' + (hasGs ? ' in ' + gsCountry : '');
 
   updateFilterSummary();
 

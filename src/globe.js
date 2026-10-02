@@ -314,11 +314,13 @@ let detailRenderers = { sat: null, gs: null, placeholder: null };
 // This is the SINGLE place the summary is refreshed for a selection, so clicking
 // a node and picking the same node from the search box are indistinguishable.
 // `kind` is 'sat' | 'gs'. Returns false when the entity is unknown.
+// The node's `id` (not its name) identifies it: 120 station names and 2
+// satellite names exist at two positions each, so a name cannot pick one node.
 export function selectEntity(kind, entity, { zoom = true } = {}) {
-  if (!entity || !entity.name) return false;
-  const name = entity.name;
-  store.selection = { kind, name };
-  setBeamSelection(kind, name);
+  if (!entity || !entity.id) return false;
+  const { id, name } = entity;
+  store.selection = { kind, id, name };
+  setBeamSelection(kind, id);
   if (kind === 'sat' && detailRenderers.sat) detailRenderers.sat(entity);
   if (kind === 'gs' && detailRenderers.gs) detailRenderers.gs(entity);
   updateFilterSummary();
@@ -453,7 +455,7 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
       // Colour-only cue: brighten the hovered station's own beams so its
       // connections are unmistakable among the many beams converging nearby.
       // Lines are never added or removed by hover.
-      if (d) highlightBeams('gs', d.name); else clearBeamHighlight();
+      if (d) highlightBeams('gs', d.id); else clearBeamHighlight();
     })
     .objectsData([])
     .objectLat('lat')
@@ -483,7 +485,7 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
       // same 40E slot as STATSIONAR-12), so ~300 beams converge on the same
       // dot - the highlight makes the hovered node's own connections (the
       // ones listed in its hover card) unmistakable.
-      if (sat) highlightBeams('sat', sat.name); else clearBeamHighlight();
+      if (sat) highlightBeams('sat', sat.id); else clearBeamHighlight();
     });
 
   fetch('./data/globe.json')

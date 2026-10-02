@@ -13,6 +13,7 @@
 // Reply logs in if needed and appends with parent_id = root id, so the shared
 // comment URL always opens the whole updated thread.
 import { store } from './state.js';
+import { syncFilingBoxes } from './uiSearch.js';
 import { applyFilters } from './gsoFilters.js';
 import { focusCameraOn } from './globe.js';
 import { getSupabaseConfig, verifyLogin, sendSlackNotification, getAuthUser, getAuthName } from './commentConfig.js';
@@ -86,6 +87,7 @@ function applyViewAndFilters(view, filters) {
       if (s) s.value = normalizeFilter('filterStatus', filters.status);
       if (sc) sc.value = normalizeFilter('filterSatCountry', filters.sat);
       if (gc) gc.value = normalizeFilter('filterGsCountry', filters.gs);
+      syncFilingBoxes();
       applyFilters(false);
     }
     if (view && store.world) focusCameraOn(view.lat, view.lng, view.altitude);

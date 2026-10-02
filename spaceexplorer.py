@@ -24,6 +24,25 @@ SATELLITES_JSON_PATH = PUBLIC_DATA_DIR / "satellites.json"
 CONNECTIONS_JSON_PATH = PUBLIC_DATA_DIR / "connections.json"
 HEADLESS_MODE = True  # Set to False to watch it run locally
 
+
+# ==============================================================================
+# STABLE NODE IDS
+# ==============================================================================
+# A NAME is not a unique identifier in the ITU export: 120 station names are
+# filed at two different coordinates (e.g. SIDODADI at -0.5 and -0.4, lon
+# 117.15) and 2 satellite names sit at two different longitudes. Anything
+# keyed by name alone therefore merges or drops one of the real nodes - which
+# is what used to make a station's listed satellites disagree with the number
+# of beams drawn from it. Every node therefore carries a POSITION-derived id,
+# and every connection row references its two endpoint ids. Names are kept
+# alongside purely as a display label.
+def make_gs_id(name, lat, lon):
+    return f"{name}@{float(lat):.5f},{float(lon):.5f}"
+
+
+def make_sat_id(name, lon):
+    return f"{name}@{float(lon):.5f}"
+
 # ==============================================================================
 # STEP 1: AUTOMATED BROWSER DOWNLOAD & META SCRAPING
 # ==============================================================================
@@ -179,9 +198,19 @@ def process_file(file_path):
     df_gs = df.dropna(subset=['lat_dec', 'long_dec']).copy()
     df_gs = df_gs[(df_gs['lat_dec'].between(-90, 90)) & (df_gs['long_dec'].between(-180, 180))]
     
-    stations_df = df_gs[['stn_name', 'ctry', 'adm__ntwk_org', 'lat_dec', 'long_dec']].drop_duplicates()
+    # Keyed on the COORDINATES, not the name: 120 station names are filed at two
+    # different positions each, and those are two genuinely different ground
+    # stations that must BOTH survive as their own node with their own links.
+    stations_df = df_gs[['stn_name', 'ctry', 'adm__ntwk_org', 'lat_dec', 'long_dec']].drop_duplicates(
+        subset=['stn_name', 'lat_dec', 'long_dec']
+    )
     stations = [
         {
+            "id": make_gs_id(
+                str(r["stn_name"]) if pd.notna(r["stn_name"]) else "Unknown",
+                r["lat_dec"],
+                r["long_dec"],
+            ),
             "name": str(r["stn_name"]) if pd.notna(r["stn_name"]) else "Unknown",
             "country": get_formatted_country(r["ctry"]),
             "operator": get_formatted_country(r["adm__ntwk_org"]),
@@ -197,9 +226,14 @@ def process_file(file_path):
     # --- C. Export satellites.json ---
     print("Generating satellites.json...")
     df_sats = df.dropna(subset=['sat_name', 'long_nom']).copy()
-    sats_df = df_sats[['sat_name', 'long_nom', 'plan_nonplan', 'sat_adm__sat_ntwk_org']].drop_duplicates()
+    # Keyed on the LONGITUDE, not the name: 2 satellite names are filed at two
+    # different orbital slots, and each slot is its own node with its own links.
+    sats_df = df_sats[['sat_name', 'long_nom', 'plan_nonplan', 'sat_adm__sat_ntwk_org']].drop_duplicates(
+        subset=['sat_name', 'long_nom']
+    )
     satellites = [
         {
+            "id": make_sat_id(r["sat_name"], r["long_nom"]),
             "name": str(r["sat_name"]),
             "lon": float(r["long_nom"]),
             "planned": bool(r["plan_nonplan"]) if pd.notna(r["plan_nonplan"]) else False,
@@ -218,7 +252,14 @@ def process_file(file_path):
 
     connections_dict = {}
     for r in df_conn.to_dict(orient="records"):
-        key = (str(r["stn_name"]), str(r["sat_name"]))
+        gs_id = make_gs_id(r["stn_name"], r["lat_dec"], r["long_dec"])
+        sat_id = make_sat_id(r["sat_name"], r["long_nom"])
+        # Keyed on the two ENDPOINT IDS, not on the names. Keying on names
+        # collapsed the 35 (station, satellite) pairs that are filed at two
+        # different station positions into a single row, which silently lost 35
+        # links and left 33 station positions on the globe with no beam at all.
+        # The ids make each distinct link its own row.
+        key = (gs_id, sat_id)
         
         f_from = r.get("freq_from")
         f_to = r.get("freq_to")
@@ -243,6 +284,8 @@ def process_file(file_path):
 
         if key not in connections_dict:
             connections_dict[key] = {
+                "gs_id": gs_id,
+                "sat_id": sat_id,
                 "gs_name": str(r["stn_name"]),
                 "sat_name": str(r["sat_name"]),
                 "gs_lat": float(r["lat_dec"]),
@@ -266,6 +309,28 @@ def process_file(file_path):
     with open(CONNECTIONS_JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(connections, f, indent=2, ensure_ascii=False)
     print(f" Saved: connections.json ({len(connections)} aggregated link records) -> {CONNECTIONS_JSON_PATH}")
+
+    # --- E. Integrity check: no link may be lost or dangling ---
+    # The invariant the dashboard depends on: every connection row resolves to a
+    # real node on BOTH ends, and every node that can hold a link holds one.
+    # Anything else is a "line to nowhere" or a dot with no line, which is
+    # exactly the mismatch this check exists to catch. Verified on every run so
+    # a future dataset cannot regress it silently.
+    gs_ids = {s["id"] for s in stations}
+    sat_ids = {s["id"] for s in satellites}
+    dangling = [c for c in connections if c["gs_id"] not in gs_ids or c["sat_id"] not in sat_ids]
+    linked_gs = {c["gs_id"] for c in connections}
+    linked_sat = {c["sat_id"] for c in connections}
+    orphan_gs = gs_ids - linked_gs
+    orphan_sat = sat_ids - linked_sat
+    print(f" Check: {len(connections)} links, {len(dangling)} dangling, "
+          f"{len(orphan_gs)} stations with no link, {len(orphan_sat)} satellites with no link")
+    if dangling or orphan_gs or orphan_sat:
+        raise SystemExit(
+            f"Dataset integrity check FAILED: {len(dangling)} dangling links, "
+            f"{len(orphan_gs)} stations with no link, {len(orphan_sat)} satellites with no link. "
+            "Refusing to publish inconsistent JSON."
+        )
 
     print(f"\n🎉 All pipeline tasks successfully completed. Website data -> {PUBLIC_DATA_DIR}")
 

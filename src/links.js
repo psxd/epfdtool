@@ -123,17 +123,19 @@ function clearFlags(mask) {
 // Every beam touching the selected satellite or ground station is highlighted
 // AND thickened; every other beam is removed from view, so the selected entity's
 // links are the only ones left on the globe.
-export function setBeamSelection(kind, name) {
+export function setBeamSelection(kind, id) {
   const meta = store.linkMeta;
   if (!meta || store.isLeoActive) return;
-  const key = kind + ':' + name;
+  const key = kind + ':' + id;
   if (selectionKey === key) return;
   selectionKey = key;
   hoverKey = null;
   filterHighlightAll = false;
-  const names = kind === 'sat' ? meta.satName : meta.gsName;
+  // Matched on the endpoint ID, so exactly this node's own beams are kept and
+  // every other beam hidden - the number lit always equals the number listed.
+  const ids = kind === 'sat' ? meta.satId : meta.gsId;
   for (let i = 0; i < meta.count; i++) {
-    beamFlags[i] = names[i] === name ? FLAG_SELECTED : FLAG_HIDDEN;
+    beamFlags[i] = ids[i] === id ? FLAG_SELECTED : FLAG_HIDDEN;
   }
   refreshBeamVisuals();
 }
@@ -232,17 +234,21 @@ export function renderStraightLinkBeams(connections, isGsoMode = false) {
   const ident = new Array(n);
   const satName = new Array(n);
   const gsName = new Array(n);
+  // Beam identity is the ENDPOINT ID, not the name. Name-based matching merged
+  // every beam of two same-named stations into one highlight set, so a click
+  // lit beams belonging to the other site.
+  const satId = new Array(n);
+  const gsId = new Array(n);
 
   for (let i = 0; i < n; i++) {
     const conn = list[i];
-    const satLon = store.satLonByName.get(conn.sat_name) ?? conn.sat_lon ?? 0;
-    // Snap the GS endpoint to the drawn node's coords: rows for duplicate
-    // station names (e.g. SIDODADI appears twice with different coordinates)
-    // can carry coords slightly different from the deduped node that is
-    // actually drawn, leaving beams a hair off their dot. Beam end == dot.
-    const stn = store.stationByName.get(conn.gs_name);
-    const gLat = (stn && stn.lat != null) ? stn.lat : conn.gs_lat;
-    const gLon = (stn && stn.lon != null) ? stn.lon : conn.gs_lon;
+    // Resolve BOTH endpoints by id. The connection row already carries the exact
+    // position it was filed against, so the beam is built from the row itself -
+    // no name lookup that could snap it onto a different station sharing the
+    // name, and no ambiguity when a satellite name spans two orbital slots.
+    const satLon = store.satLonById.get(conn.sat_id) ?? conn.sat_lon ?? 0;
+    const gLat = conn.gs_lat;
+    const gLon = conn.gs_lon;
     const p1 = store.world.getCoords(gLat, gLon, 0.01);
     const p2 = store.world.getCoords(0, satLon, GSO_ALTITUDE_RATIO);
     _dir.set(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
@@ -252,15 +258,18 @@ export function renderStraightLinkBeams(connections, isGsoMode = false) {
     gsX[i] = p1.x; gsY[i] = p1.y; gsZ[i] = p1.z;
     dirX[i] = (p2.x - p1.x) / beamLen; dirY[i] = (p2.y - p1.y) / beamLen; dirZ[i] = (p2.z - p1.z) / beamLen;
     len[i] = beamLen;
+    const stn = store.stationById.get(conn.gs_id);
     country[i] = stn ? normalizeCountryName(stn.country || stn.gscountry || '') : '';
     ident[i] = `${gLat},${gLon}-${satLon}`;
     satName[i] = conn.sat_name;
     gsName[i] = conn.gs_name;
+    satId[i] = conn.sat_id;
+    gsId[i] = conn.gs_id;
   }
 
   // Fresh link set: every flag cleared (a beam re-render invalidates any
   // previous selection / filter highlight), then one pass of colours + matrices.
-  store.linkMeta = { count: n, gsLat, gsLon, gsX, gsY, gsZ, dirX, dirY, dirZ, len, country, ident, satName, gsName, isGsoMode };
+  store.linkMeta = { count: n, gsLat, gsLon, gsX, gsY, gsZ, dirX, dirY, dirZ, len, country, ident, satName, gsName, satId, gsId, isGsoMode };
   ensureBeamState(n);
   hoverKey = null;
   selectionKey = null;
@@ -287,17 +296,17 @@ export function paintLinkInstances(indices, hex) {
 // exactly the (filtered) connection rows. Suppressed while a selection or a
 // country-filter highlight is active: those already decide which beams are
 // orange, and hover must not repaint over them.
-export function highlightBeams(kind, name) {
+export function highlightBeams(kind, id) {
   const meta = store.linkMeta;
   if (!meta || !meta.isGsoMode || store.isLeoActive) return;
   if (selectionKey || filterHighlightAll) return;
-  const key = kind + ':' + name;
+  const key = kind + ':' + id;
   if (hoverKey === key) return;
   clearFlags(FLAG_HOVER);
   hoverKey = key;
-  const names = kind === 'sat' ? meta.satName : meta.gsName;
+  const ids = kind === 'sat' ? meta.satId : meta.gsId;
   for (let i = 0; i < meta.count; i++) {
-    if (names[i] === name) beamFlags[i] |= FLAG_HOVER;
+    if (ids[i] === id) beamFlags[i] |= FLAG_HOVER;
   }
   refreshBeamVisuals();
 }

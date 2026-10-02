@@ -13,17 +13,24 @@ export const store = {
   currentFootprintSet: new Set(), // sat-filter linked GS countries (outline only)
   persistentlyHighlightedLinks: new Set(),
   // Currently selected entity (click on a node / picked from search):
-  // { kind: 'sat' | 'gs', name }. Its beams are highlighted and thickened, all
-  // other beams are hidden from view.
+  // { kind: 'sat' | 'gs', id, name }. Its beams are highlighted and thickened,
+  // all other beams are hidden from view. `id` (not `name`) is the authority:
+  // 120 station names and 2 satellite names exist at two positions each, so a
+  // name can never identify one node.
   selection: null,
   // Lookup indexes built once in loadData (avoid O(N^2) scans in filters/hovers).
-  satByName: new Map(),
-  stationByName: new Map(),
-  satsByGsName: new Map(), // gsName -> [{ name, country, ntcId }]
-  gsBySatName: new Map(),  // satName -> [{ name, country, ntcId }]
-  satLonByName: new Map(),
-  ntcByGsSat: new Map(), // JSON "[gsName, satName]" -> ntc id (dashboard deep-link)
-  searchIndex: [], // [{ kind, name, lcName, country }]
+  // All keyed by the stable position-derived node id.
+  satById: new Map(),
+  stationById: new Map(),
+  satsByGsId: new Map(), // gsId -> [{ id, name, country, ntcId }]
+  gsBySatId: new Map(),  // satId -> [{ id, name, country, ntcId }]
+  satLonById: new Map(),
+  // Search still matches on NAME, so it needs name -> ids. A name can resolve to
+  // several real nodes; every one of them gets its own search entry.
+  gsIdsByName: new Map(),  // station name -> [gsId, ...]
+  satIdsByName: new Map(), // satellite name -> [satId, ...]
+  ntcByGsSat: new Map(), // JSON "[gsId, satId]" -> ntc id (dashboard deep-link)
+  searchIndex: [], // [{ kind, id, name, lcName, country }]
   satMeshes: [], // satellite meshes for cheap rescale on zoom
   leoTrajectoryMesh: null,
   leoTrail: null, // { mesh, attr, capacity }

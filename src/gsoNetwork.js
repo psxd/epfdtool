@@ -62,11 +62,13 @@ export async function loadData() {
     // Guarantee drawn beams == hover entries == real nodes: a connection row
     // whose endpoints don't resolve to an actual satellite / ground-station
     // node would draw a beam to a place with no dot and no hover entry (a
-    // "line to nowhere"). Drop such rows up-front. The current dataset drops
-    // 0 rows - this is the structural invariant for future datasets.
-    const satOk = new Set(store.rawData.satellites.map(s => s.name));
-    const gsOk = new Set(store.rawData.stations.map(s => s.name));
-    store.rawData.connections = store.rawData.connections.filter(c => satOk.has(c.sat_name) && gsOk.has(c.gs_name));
+    // "line to nowhere"). Resolved by NODE ID, not by name: a name can match a
+    // different physical station than the one the link was filed against. The
+    // current dataset drops 0 rows - this is the structural invariant for
+    // future datasets.
+    const satOk = new Set(store.rawData.satellites.map(s => s.id));
+    const gsOk = new Set(store.rawData.stations.map(s => s.id));
+    store.rawData.connections = store.rawData.connections.filter(c => satOk.has(c.sat_id) && gsOk.has(c.gs_id));
     updateDataSourceLabel();
     resetCountryNameCache();
     clearHoverCaches();
@@ -77,10 +79,9 @@ export async function loadData() {
     // carry `ntc_id` (string or array from the new pipeline) or nothing at
     // all (old files). First id wins; deterministic for a given triple.
     const ntcMap = new Map();
-    // The pair key is a JSON pair, NOT two names joined by a separator: names
-    // come from the ITU export and can contain any printable character, so
-    // any single separator (including a NUL escape) risks a collision
-    // ("A B" + "C" vs "A" + "B C").
+    // The pair key is a JSON pair, NOT two ids joined by a separator: ids embed
+    // ITU names, which can contain any printable character, so any single
+    // separator risks a collision.
     const pairKey = (gs, sat) => JSON.stringify([gs, sat]);
     const pickNtc = (c) => {
       const v = c.ntc_id;
@@ -92,11 +93,11 @@ export async function loadData() {
       return '';
     };
     for (const c of store.rawData.connections) {
-      if (!satConnectionMap.has(c.sat_name)) satConnectionMap.set(c.sat_name, []);
-      satConnectionMap.get(c.sat_name).push(c.gs_name);
-      if (!stnConnectionMap.has(c.gs_name)) stnConnectionMap.set(c.gs_name, []);
-      stnConnectionMap.get(c.gs_name).push(c.sat_name);
-      const k = pairKey(c.gs_name, c.sat_name);
+      if (!satConnectionMap.has(c.sat_id)) satConnectionMap.set(c.sat_id, []);
+      satConnectionMap.get(c.sat_id).push(c.gs_id);
+      if (!stnConnectionMap.has(c.gs_id)) stnConnectionMap.set(c.gs_id, []);
+      stnConnectionMap.get(c.gs_id).push(c.sat_id);
+      const k = pairKey(c.gs_id, c.sat_id);
       if (!ntcMap.has(k)) {
         const ntc = pickNtc(c);
         if (ntc) ntcMap.set(k, ntc);
@@ -104,48 +105,79 @@ export async function loadData() {
     }
     const ntcOf = (gs, sat) => ntcMap.get(pairKey(gs, sat)) || '';
     for (const s of store.rawData.satellites) {
-      s.ground_stations = [...new Set(satConnectionMap.get(s.name) || [])];
+      s.ground_stations = [...new Set(satConnectionMap.get(s.id) || [])];
       s.lat = 0;
       s.lon = s.long_nom !== undefined && s.long_nom !== null ? s.long_nom : (s.lon ?? 0);
     }
     for (const stn of store.rawData.stations) {
-      stn.satellites = [...new Set(stnConnectionMap.get(stn.name) || [])];
+      stn.satellites = [...new Set(stnConnectionMap.get(stn.id) || [])];
     }
 
-    // Build lookup indexes once. Each link row also carries the connection's
-    // ntc id list so hover rows can deep-link to the ITU dashboard for the
-    // exact ground-station + satellite + ntc triple (same URL from either
-    // side: GS hover row and SAT hover row use the same triple).
-    store.satByName.clear();
-    store.stationByName.clear();
-    store.satsByGsName.clear();
-    store.gsBySatName.clear();
-    store.satLonByName.clear();
+    // Build lookup indexes once, all keyed by node id. Each link row also
+    // carries the connection's ntc id list so hover rows can deep-link to the
+    // ITU dashboard for the exact ground-station + satellite + ntc triple (same
+    // URL from either side: GS hover row and SAT hover row use the same triple).
+    store.satById.clear();
+    store.stationById.clear();
+    store.satsByGsId.clear();
+    store.gsBySatId.clear();
+    store.satLonById.clear();
+    store.gsIdsByName.clear();
+    store.satIdsByName.clear();
     store.ntcByGsSat.clear();
     for (const s of store.rawData.satellites) {
-      store.satByName.set(s.name, s);
-      store.satLonByName.set(s.name, s.lon);
+      store.satById.set(s.id, s);
+      store.satLonById.set(s.id, s.lon);
+      if (!store.satIdsByName.has(s.name)) store.satIdsByName.set(s.name, []);
+      store.satIdsByName.get(s.name).push(s.id);
     }
     for (const stn of store.rawData.stations) {
-      store.stationByName.set(stn.name, stn);
+      store.stationById.set(stn.id, stn);
+      if (!store.gsIdsByName.has(stn.name)) store.gsIdsByName.set(stn.name, []);
+      store.gsIdsByName.get(stn.name).push(stn.id);
     }
-    for (const [gsName, satNames] of stnConnectionMap) {
-      store.satsByGsName.set(gsName, [...new Set(satNames)].map(nm => {
-        const s = store.satByName.get(nm);
-        return { name: nm, country: s ? (s.operator || s.satcountry || 'Unknown') : 'Unknown', ntcId: ntcOf(gsName, nm) };
+    // One entry per LINK, and every (gsId, satId) pair is unique in
+    // connections.json, so these lists are exactly the beams drawn from that
+    // node - the list length a user reads in the hover/card matches the beams
+    // they see. No name-based de-duplication happens here: two stations that
+    // share a name are different physical sites and each keeps its own list.
+    for (const [gsId, satIds] of stnConnectionMap) {
+      const gsName = (store.stationById.get(gsId) || {}).name || gsId;
+      store.satsByGsId.set(gsId, [...new Set(satIds)].map(id => {
+        const s = store.satById.get(id);
+        return {
+          id, name: s ? s.name : id, gsName,
+          country: s ? (s.operator || s.satcountry || 'Unknown') : 'Unknown',
+          ntcId: ntcOf(gsId, id),
+        };
       }));
     }
-    for (const [satName, gsNames] of satConnectionMap) {
-      store.gsBySatName.set(satName, [...new Set(gsNames)].map(nm => {
-        const g = store.stationByName.get(nm);
-        return { name: nm, country: g ? (g.country || g.gscountry || 'Unknown') : 'Unknown', ntcId: ntcOf(nm, satName) };
+    for (const [satId, gsIds] of satConnectionMap) {
+      const satName = (store.satById.get(satId) || {}).name || satId;
+      store.gsBySatId.set(satId, [...new Set(gsIds)].map(id => {
+        const g = store.stationById.get(id);
+        return {
+          id, name: g ? g.name : id, satName,
+          country: g ? (g.country || g.gscountry || 'Unknown') : 'Unknown',
+          ntcId: ntcOf(id, satId),
+        };
       }));
     }
-    store.ntcByGsSat.clear();
     for (const [k, v] of ntcMap) store.ntcByGsSat.set(k, v);
+    // One search entry per NODE (not per name), so the two SIDODADI sites and
+    // the two INTELSAT6 335.5E slots are each separately searchable and each
+    // selects its own node. `position` disambiguates the duplicate labels.
     store.searchIndex = [
-      ...store.rawData.satellites.map(s => ({ kind: 'sat', name: s.name, lcName: s.name.toLowerCase(), country: s.operator || s.satcountry || '' })),
-      ...store.rawData.stations.map(s => ({ kind: 'stn', name: s.name, lcName: s.name.toLowerCase(), country: s.country || s.gscountry || '' })),
+      ...store.rawData.satellites.map(s => ({
+        kind: 'sat', id: s.id, name: s.name, lcName: s.name.toLowerCase(),
+        country: s.operator || s.satcountry || '',
+        position: `lon ${s.lon}°`,
+      })),
+      ...store.rawData.stations.map(s => ({
+        kind: 'stn', id: s.id, name: s.name, lcName: s.name.toLowerCase(),
+        country: s.country || s.gscountry || '',
+        position: `${s.lat}, ${s.lon}`,
+      })),
     ];
 
     populateCountryFilters(store.rawData.satellites, store.rawData.stations);

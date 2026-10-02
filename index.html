@@ -30,11 +30,15 @@
 
       <div style="margin-top: 12px;">
         <label for="filterStatus">Satellite Filing</label>
-        <select id="filterStatus" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
+        <select id="filterStatus" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true" tabindex="-1">
           <option value="all">All Filings</option>
           <option value="planned">Planned Only</option>
           <option value="nonplanned">Non-Planned</option>
         </select>
+        <div id="filingBoxes" class="filingBoxes">
+          <button type="button" id="filingPlanned" class="filingBox" data-filing="planned" aria-pressed="true"><span class="filingBoxDot legendDot legendDotPlanned"></span>Planned</button>
+          <button type="button" id="filingNonPlanned" class="filingBox" data-filing="nonplanned" aria-pressed="true"><span class="filingBoxDot legendDot legendDotNonPlanned"></span>Non-Planned</button>
+        </div>
       </div>
 
       <div style="margin-top: 10px;">
@@ -57,13 +61,11 @@
       </div>
     </section>
 
-    <!-- Filtered View summary: what the globe is showing right now -->
-    <section class="panelSection" id="filterSummarySection" style="margin-top: 12px;">
-      <span class="subsectionLabel">Filtered View</span>
-      <div id="filterSummaryBox">
-        <p style="margin: 0; font-size: 13px; line-height: 1.45; color: #111111;">No filter applied</p>
-      </div>
-      <button id="clearSelectionBtn" type="button" style="display: none; margin-top: 8px; padding: 6px 10px; font-size: 12px; cursor: pointer; border-radius: 6px; border: 1px solid #cccccc; background: #ffffff; color: #333333;">Clear selection</button>
+    <!-- Filtered View summary: names the selected satellite / ground station.
+         Starts hidden and stays hidden until something is selected, so there is
+         no "No filter applied" placeholder (see filterSummary.js). -->
+    <section class="panelSection" id="filterSummarySection" style="margin-top: 12px; display: none;">
+      <div id="filterSummaryBox" class="filterSummaryBox"></div>
     </section>
 
     <!-- LEO Section (Hidden by default) -->
@@ -114,16 +116,17 @@
       <div class="statsGridWithIn">
         <div class="statBlock">
           <div id="satelliteStat" class="statNumber">0</div>
-          <div class="statLabel">Satellites</div>
+          <div id="satelliteStatLabel" class="statLabel">satellites</div>
         </div>
 
         <div class="statIn">and</div>
 
         <div class="statBlock">
           <div id="stationStat" class="statNumber">0</div>
-          <div class="statLabel">Ground Stations</div>
+          <div id="stationStatLabel" class="statLabel">ground stations</div>
         </div>
       </div>
+      <button id="clearSelectionBtn" type="button" class="clearSelectionBtn">Clear selection</button>
     </section>
 
     <hr>
@@ -172,8 +175,8 @@
     <button id="zoomOutBtn" class="cameraBtn" title="Zoom out">−</button>
     <button id="viewToggleBtn" class="cameraBtn" title="Toggle globe / horizon view">◠</button>
     <button id="resetViewBtn" class="cameraBtn" title="Reset to the initial boot view: no filters, default camera">↺</button>
-    <button id="addCommentBtn" class="cameraBtn commentBtn" title="Add a comment at this view">⍜</button>
-    <button id="myCommentsBtn" class="cameraBtn commentBtn" title="My comments" style="display:none;">💬</button>
+    <button id="addCommentBtn" class="cameraBtn commentBtn" title="Add a comment at this view">⊕</button>
+    <button id="myCommentsBtn" class="cameraBtn commentBtn" title="My comments" style="display:none;">☰</button>
   </div>
 
   <!-- 3D Globe Render Area -->

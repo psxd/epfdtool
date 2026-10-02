@@ -19,8 +19,8 @@
 import { store } from './state.js';
 import { normalizeCountryName } from './countryNorm.js';
 
-function gsCountryOfStation(gsName, fallbackCountry) {
-  const stn = store.stationByName ? store.stationByName.get(gsName) : undefined;
+function gsCountryOfStation(gsId, fallbackCountry) {
+  const stn = store.stationById ? store.stationById.get(gsId) : undefined;
   const raw = stn ? (stn.country || stn.gscountry || '') : (fallbackCountry || '');
   return normalizeCountryName(raw);
 }
@@ -46,10 +46,10 @@ export function linkedGsCountries(targetSat) {
   const sats = (store.rawData && store.rawData.satellites) || [];
   for (const sat of sats) {
     if (normalizeCountryName(sat.operator || sat.satcountry || '') !== targetSat) continue;
-    const links = store.gsBySatName ? store.gsBySatName.get(sat.name) : undefined;
+    const links = store.gsBySatId ? store.gsBySatId.get(sat.id) : undefined;
     if (!links) continue;
     for (const l of links) {
-      const c = gsCountryOfStation(l.name, l.country);
+      const c = gsCountryOfStation(l.id, l.country);
       if (c && hasPolygon(c)) out.add(c);
     }
   }
@@ -60,10 +60,10 @@ function gsSatLinkExists(targetGs, targetSat) {
   const sats = (store.rawData && store.rawData.satellites) || [];
   for (const sat of sats) {
     if (normalizeCountryName(sat.operator || sat.satcountry || '') !== targetSat) continue;
-    const links = store.gsBySatName ? store.gsBySatName.get(sat.name) : undefined;
+    const links = store.gsBySatId ? store.gsBySatId.get(sat.id) : undefined;
     if (!links) continue;
     for (const l of links) {
-      if (gsCountryOfStation(l.name, l.country) === targetGs) return true;
+      if (gsCountryOfStation(l.id, l.country) === targetGs) return true;
     }
   }
   return false;

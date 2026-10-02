@@ -229,15 +229,81 @@ hr {
   background: #E69F00;
 }
 
+/* Filtered View caption. Stylistically a caption to the stats block (same muted
+   grey as .statIntro) rather than a separate coloured panel: the per-country
+   detail now lives in the count labels underneath, so this only names the
+   selected entity. */
 #filterSummaryBox {
-  margin-top: 6px;
-  background: #eef4f9;
-  border: 1px solid #1977AD;
-  border-radius: 8px;
-  padding: 10px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+#filterSummaryBox p {
+  color: #666666;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.35;
+}
+
+#filterSummaryBox p.filterSummaryName {
   color: #111111;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Clear selection sits directly under the counts. Hidden unless something is
+   selected - updateFilterSummary toggles its display. */
+.clearSelectionBtn {
+  display: none;
+  width: 100%;
+  margin-top: 12px;
+  padding: 7px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  color: #333333;
+}
+
+.clearSelectionBtn:hover {
+  border-color: #eaaa00;
+}
+
+/* Satellite Filing: two clickable boxes standing in for the (now visually
+   hidden) #filterStatus select, which stays the source of truth. Selected =
+   yellow, matching the panel accent; unselected fades back. */
+.filingBoxes {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.filingBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111111;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0.45;
+  transition: opacity 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.filingBox[aria-pressed="true"] {
+  opacity: 1;
+  background: #f7dc93;
+  border-color: #eaaa00;
+}
+
+.filingBoxDot {
+  pointer-events: none;
 }
 
 .detailsBox {

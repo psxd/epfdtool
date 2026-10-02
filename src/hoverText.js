@@ -51,7 +51,7 @@ const CARD_STYLE = 'min-width: 240px; max-width: 340px; padding: 10px 14px; back
 
 export function stationHoverHtml(d) {
   if (!d) return '';
-  const key = `gs:${d.name}`;
+  const key = `gs:${d.id}`;
   const cached = gsHoverCache.get(key);
   if (cached) return cached;
   const html = stationCardHtml(d, false);
@@ -62,7 +62,7 @@ export function stationHoverHtml(d) {
 
 export function satelliteHoverHtml(d) {
   if (!d) return '';
-  const key = `sat:${d.name}`;
+  const key = `sat:${d.id}`;
   const cached = satHoverCache.get(key);
   if (cached) return cached;
   const html = satelliteCardHtml(d, false);
@@ -86,21 +86,25 @@ export function satelliteClickHtml(d) {
   return satelliteCardHtml(d, true);
 }
 
+// The listed rows ARE this node's drawn beams: the index is keyed by node id
+// and holds one entry per connection, so the count in the header equals the
+// number of lines leaving the dot. No name-based merging, which is what used
+// to make the list disagree with the picture.
 function stationCardHtml(d, clickable) {
-  const sats = store.satsByGsName.get(d.name) || [];
+  const sats = store.satsByGsId.get(d.id) || [];
   let satHtml = '<b>No connected satellites</b>';
   if (sats.length > 0) {
-    const rows = sats.map(s => ` - ${satRowText(d.name, s, clickable)}`);
+    const rows = sats.map(s => ` - ${satRowText(s, clickable)}`);
     satHtml = `<b>Satellites (${sats.length}):</b><br>` + rows.join('<br>');
   }
-  return `<div style="${CARD_STYLE}"><b>${escapeHtml(d.name)}</b> (${escapeHtml(d.operator || 'Unknown')})<br>Country: ${escapeHtml(d.country || 'Unknown')}<br><br>${satHtml}</div>`;
+  return `<div style="${CARD_STYLE}"><b>${escapeHtml(d.name)}</b> (${escapeHtml(d.operator || 'Unknown')})<br>Country: ${escapeHtml(d.country || 'Unknown')}<br>Lat/Lon: ${escapeHtml(d.lat)}, ${escapeHtml(d.lon)}<br><br>${satHtml}</div>`;
 }
 
 function satelliteCardHtml(d, clickable) {
-  const stations = store.gsBySatName.get(d.name) || [];
+  const stations = store.gsBySatId.get(d.id) || [];
   let gsHtml = 'No ground stations';
   if (stations.length > 0) {
-    const rows = stations.map(g => ` - ${gsRowText(g, d.name, clickable)}`);
+    const rows = stations.map(g => ` - ${gsRowText(g, clickable)}`);
     gsHtml = `<b>Ground Stations (${stations.length}):</b><br>` + rows.join('<br>');
   }
   const isPlanned = d.planned === true || d.planned === 1 || d.planned === '1' || d.planned === 'true';
@@ -108,14 +112,16 @@ function satelliteCardHtml(d, clickable) {
   return `<div style="${CARD_STYLE}"><b>${escapeHtml(d.name)} (${status})</b> (${escapeHtml(d.operator || 'Unknown')})<br>Longitude: ${escapeHtml(d.lon)}°<br><br>${gsHtml}</div>`;
 }
 
-function satRowText(gsName, s, clickable) {
+// The dashboard URL is built from the DISPLAY NAMES (that is what the ITU
+// dashboard path expects), while the connection is identified internally by id.
+function satRowText(s, clickable) {
   const text = `${escapeHtml(s.name)} (${escapeHtml(s.country || 'Unknown')})`;
   if (!clickable) return text;
-  return linkOrText(gsName, s.name, s.ntcId, text);
+  return linkOrText(s.gsName, s.name, s.ntcId, text);
 }
 
-function gsRowText(g, satName, clickable) {
+function gsRowText(g, clickable) {
   const text = `${escapeHtml(g.name)} (${escapeHtml(g.country || 'Unknown')})`;
   if (!clickable) return text;
-  return linkOrText(g.name, satName, g.ntcId, text);
+  return linkOrText(g.name, g.satName, g.ntcId, text);
 }

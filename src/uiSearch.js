@@ -4,6 +4,45 @@ import { requestApplyFilters, applyFilters } from './gsoFilters.js';
 import { focusCameraOn, zoomBy, selectEntity, clearSelection, DEFAULT_VIEW } from './globe.js';
 import { showDetailsPlaceholder } from './gsoNetwork.js';
 
+// Maps the two clickable filing-box states onto the hidden #filterStatus
+// select: both on or both off -> 'all'; only Planned on -> 'planned';
+// only Non-Planned on -> 'nonplanned'. The select stays the source of
+// truth so serializeFilters / normalizeFilter / comment URLs are unchanged.
+export function syncFilingBoxes() {
+  const plannedBtn = document.getElementById('filingPlanned');
+  const nonPlannedBtn = document.getElementById('filingNonPlanned');
+  const sel = document.getElementById('filterStatus');
+  const v = sel ? sel.value : 'all';
+  if (plannedBtn) plannedBtn.setAttribute('aria-pressed', v === 'planned' || v === 'all' ? 'true' : 'false');
+  if (nonPlannedBtn) nonPlannedBtn.setAttribute('aria-pressed', v === 'nonplanned' || v === 'all' ? 'true' : 'false');
+}
+
+function filingValueFromBoxes(plannedOn, nonPlannedOn) {
+  if (plannedOn && nonPlannedOn) return 'all';
+  if (plannedOn) return 'planned';
+  if (nonPlannedOn) return 'nonplanned';
+  return 'all';
+}
+
+function setupFilingBoxes() {
+  const plannedBtn = document.getElementById('filingPlanned');
+  const nonPlannedBtn = document.getElementById('filingNonPlanned');
+  const sel = document.getElementById('filterStatus');
+  if (!plannedBtn || !nonPlannedBtn || !sel) return;
+  syncFilingBoxes();
+  for (const btn of [plannedBtn, nonPlannedBtn]) {
+    btn.addEventListener('click', () => {
+      const next = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', next ? 'true' : 'false');
+      const plannedOn = plannedBtn.getAttribute('aria-pressed') === 'true';
+      const nonPlannedOn = nonPlannedBtn.getAttribute('aria-pressed') === 'true';
+      sel.value = filingValueFromBoxes(plannedOn, nonPlannedOn);
+      syncFilingBoxes();
+      requestApplyFilters(true);
+    });
+  }
+}
+
 export function setupUIEvents() {
   const searchInput = document.getElementById('searchInput');
   const filterStatus = document.getElementById('filterStatus');
@@ -13,6 +52,8 @@ export function setupUIEvents() {
   const viewToggleBtn = document.getElementById('viewToggleBtn');
   const zoomInBtn = document.getElementById('zoomInBtn');
   const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+  setupFilingBoxes();
 
   if (zoomInBtn) zoomInBtn.addEventListener('click', () => zoomBy(0.75));
   if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => zoomBy(1.33));
@@ -29,6 +70,7 @@ export function setupUIEvents() {
       if (filterStatus) filterStatus.value = 'all';
       if (filterSatCountry) filterSatCountry.value = 'all';
       if (filterGsCountry) filterGsCountry.value = 'all';
+      syncFilingBoxes();
       clearSelection();
       applyFilters(false);
       showDetailsPlaceholder();
@@ -107,6 +149,18 @@ export function setupUIEvents() {
   }
 }
 
+function escapeHtml(s) {
+  return String(s ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Node ids embed ITU names, so they must be attribute-escaped before being
+// written into a data- attribute.
+function escapeAttr(s) {
+  return escapeHtml(s).replace(/'/g, '&#39;');
+}
+
 function onGsoSearchInput(e, searchInput, suggestionBox) {
   const val = e.target.value.toLowerCase().trim();
   if (val.length === 0) {
@@ -122,8 +176,8 @@ function onGsoSearchInput(e, searchInput, suggestionBox) {
     if (sats.length >= 5 && stns.length >= 5) break;
   }
   let html = '';
-  for (const s of sats) html += `<div class="suggestion-item" data-type="sat" data-name="${s.name}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">🛰️ <b>${s.name}</b> (Satellite)</div>`;
-  for (const s of stns) html += `<div class="suggestion-item" data-type="stn" data-name="${s.name}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">📡 <b>${s.name}</b> (${s.country || 'Ground Station'})</div>`;
+  for (const s of sats) html += `<div class="suggestion-item" data-type="sat" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">🛰️ <b>${escapeHtml(s.name)}</b> (Satellite · ${escapeHtml(s.position)})</div>`;
+  for (const s of stns) html += `<div class="suggestion-item" data-type="stn" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">📡 <b>${escapeHtml(s.name)}</b> (${escapeHtml(s.country || 'Ground Station')} · ${escapeHtml(s.position)})</div>`;
   if (html && suggestionBox) {
     suggestionBox.innerHTML = html;
     suggestionBox.style.display = 'block';
@@ -140,11 +194,16 @@ function onGsoSearchInput(e, searchInput, suggestionBox) {
 // the blue box names it and the camera zooms to it (all inside selectEntity).
 // The country / filing filters are NOT changed, so this stays a look-up and
 // never rewrites the filtered node set.
+// Selected by NODE ID: a name can map to two real nodes (120 station names and
+// 2 satellite names are each filed twice), so the suggestion carries the exact
+// id and picks that specific site.
 function pickGsoSuggestion(item, searchInput, suggestionBox) {
   const type = item.getAttribute('data-type');
-  const name = item.getAttribute('data-name');
-  searchInput.value = name;
+  const id = item.getAttribute('data-id');
+  const row = type === 'sat' ? store.satById.get(id) : store.stationById.get(id);
+  if (!row) return;
+  searchInput.value = row.name;
   suggestionBox.style.display = 'none';
-  if (type === 'sat') selectEntity('sat', store.satByName.get(name));
-  else selectEntity('gs', store.stationByName.get(name));
+  if (type === 'sat') selectEntity('sat', row);
+  else selectEntity('gs', row);
 }
