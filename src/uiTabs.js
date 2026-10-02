@@ -60,19 +60,33 @@ export function setupLeoUIEvents() {
     });
   }
 
-  // Drag / wheel breaks follow so the camera never fights the user: the globe
-  // is grabbed, following switches itself off, and the checkbox reflects it.
+  // A real DRAG breaks follow so the camera never fights the user; a plain click
+  // or a text selection must NOT (following survives those). DRAG_PX below is a
+  // deliberately generous threshold so small pointer jitter and accidental
+  // nudges never drop follow - you have to really drag the globe to take over.
   // Bound on the canvas wrapper, NOT via globe.gl's controls(): this bundle
   // never links that method onto the Globe instance.
   const canvasWrap = document.getElementById('canvas-wrap');
   if (canvasWrap) {
+    const DRAG_PX = 100;
+    let dragFrom = null;
     const breakFollow = () => {
       if (!store.leoFollowSatellite) return;
       store.leoFollowSatellite = false;
       store.leoFollowBreakout = true;
       if (followBox) followBox.checked = false;
     };
-    canvasWrap.addEventListener('pointerdown', breakFollow, true);
+    canvasWrap.addEventListener('pointerdown', (e) => {
+      dragFrom = { x: e.clientX, y: e.clientY };
+    }, true);
+    canvasWrap.addEventListener('pointermove', (e) => {
+      if (!dragFrom || !store.leoFollowSatellite) return;
+      if (Math.hypot(e.clientX - dragFrom.x, e.clientY - dragFrom.y) > DRAG_PX) breakFollow();
+    }, true);
+    const endDrag = () => { dragFrom = null; };
+    canvasWrap.addEventListener('pointerup', endDrag, true);
+    canvasWrap.addEventListener('pointercancel', endDrag, true);
+    // A scroll is unambiguously a camera intent, so it still breaks immediately.
     canvasWrap.addEventListener('wheel', breakFollow, { capture: true, passive: true });
   }
   searchInput?.addEventListener('input', async (e) => {

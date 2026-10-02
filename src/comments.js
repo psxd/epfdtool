@@ -701,7 +701,13 @@ function wireControls() {
     });
   });
 
-  // Placement: a click (not a globe drag) on anything that isn't a UI surface.
+  // Placement: a click (not a globe drag) anywhere that isn't an interactive
+  // control or a reserved surface. The left panel (#ui) is deliberately NOT
+  // excluded any more - the summary box, stats, legend and panel background all
+  // place comments like any other area of the screen. Only genuine controls are
+  // skipped, so the filters, search boxes and buttons stay usable.
+  const NON_PLACEABLE = '#cameraControls, .commentModalBackdrop, .myCommentsPanel, .commentCard, .commentHint, #gtLogo';
+  const INTERACTIVE = 'input, select, textarea, button, a, label, [contenteditable="true"]';
   let pointerDownAt = null;
   document.addEventListener('pointerdown', (e) => {
     pointerDownAt = { x: e.clientX, y: e.clientY };
@@ -710,7 +716,10 @@ function wireControls() {
     if (!addMode || composerEl) return;
     const t = e.target;
     if (!t || typeof t.closest !== 'function') return;
-    if (t.closest('#ui, #cameraControls, .commentModalBackdrop, .myCommentsPanel, .commentCard, .commentHint, #gtLogo')) return;
+    if (t.closest(NON_PLACEABLE)) return;
+    // Skip anything the user is meant to operate (selects, inputs, buttons,
+    // links) so opening a comment never hijacks a control click.
+    if (t.closest(INTERACTIVE)) return;
     if (pointerDownAt && Math.hypot(e.clientX - pointerDownAt.x, e.clientY - pointerDownAt.y) > 6) return;
     const x = (e.clientX / Math.max(1, window.innerWidth)) * 100;
     const y = (e.clientY / Math.max(1, window.innerHeight)) * 100;
