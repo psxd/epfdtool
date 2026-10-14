@@ -41,7 +41,7 @@ export function filterSummaryText() {
     : null;
 
   if (selRow) {
-    const kindLabel = sel.kind === 'sat' ? 'satellite' : 'ground station';
+    const kindLabel = sel.kind === 'sat' ? 'space station' : 'earth station';
     // Two nodes can share a name, so the position is named too - otherwise the
     // caption is ambiguous about which of them is selected.
     const where = sel.kind === 'sat'
@@ -87,8 +87,17 @@ export function updateFilterSummary() {
       }
     }
   }
-  // The Clear button only exists while something is selected.
+  // The Clear button shows for EVERY kind of active selection: a clicked node,
+  // ANY dropdown/filing filter, or both - so there is always a way back to the
+  // unfiltered view. (It used to appear only for a clicked node, which is why
+  // it seemed to vanish when only a filter was applied.)
   const clearBtn = document.getElementById('clearSelectionBtn');
-  if (clearBtn) clearBtn.style.display = store.selection ? 'inline-block' : 'none';
+  if (clearBtn) {
+    const filtersActive = ['filterStatus', 'filterSatCountry', 'filterGsCountry'].some((id) => {
+      const el = document.getElementById(id);
+      return el && el.value && el.value !== 'all';
+    });
+    clearBtn.style.display = store.selection || filtersActive ? 'inline-block' : 'none';
+  }
   return text;
 }

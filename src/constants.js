@@ -1,10 +1,10 @@
 // Shared visual + orbital constants (1:1 with ver1/app.js).
 export const PALETTE = {
-  scene_bg: "#f1eee8",
-  gray_dark: "#8f8f8f",
-  gray_mid1: "#B0B0B0",
-  yellow_soft: "#f7dc93",
-  false_sat: "#E69F00",
+  scene_bg: "#ffffff",//"#f1eee8",
+  gray_dark: "#d8d8d8",//#8f8f8f",
+  gray_mid1: "#c1c1c1", //"#B0B0B0",
+  yellow_soft: "#f8dc93", //"#f7dc93",
+  false_sat: "#e9ab00", //"#E69F00",
   true_sat: "#1977AD"
 };
 

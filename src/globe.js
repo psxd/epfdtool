@@ -11,6 +11,7 @@ import { isCountryHighlighted, isCountryOutlined, isCountryFootprint, updateHigh
 import { buildGeoNameSet } from './countryNorm.js';
 import { stationHoverHtml, satelliteHoverHtml } from './hoverText.js';
 import { highlightBeams, clearBeamHighlight, setBeamSelection, clearBeamSelection } from './links.js';
+import { updateLeftCountsForSelection, updateLeftCountsFromDrawnBeams } from './leftCounts.js';
 import { updateFilterSummary } from './filterSummary.js';
 export const DEFAULT_VIEW = { lat: 20, lng: 0, altitude: 12 };
 
@@ -238,17 +239,21 @@ function satPickLocalScale(mesh, dotScale, camera, canvasHeight) {
   return ((SAT_PICK_PROXY_PX / 2) * worldPerPixel) / inherited;
 }
 
-// Satellite dot size at the current camera altitude. Dots are world-sized
-// spheres: zoom OUT and the globe shrinks away from them, zoom IN and they
-// shrink to nothing, so this counter-scales with altitude to keep their SCREEN
-// size roughly constant.
-// This returns a PURE MULTIPLIER for the 0.30-radius geometry, exactly like
-// ver1 (`Math.max(1.0, pov.altitude * 0.6)`). It must NOT bake the base radius
-// in as well: the scale is applied on top of a geometry that is already 0.30,
-// so folding 0.3 in here shrank every dot twice over (0.30 * 0.396 = 0.119,
-// i.e. 3.3x too small - the satellites were nearly invisible at every zoom).
-export function satScaleForAltitude(altitude) {
-  return Math.max(1.0, (Number(altitude) || DEFAULT_VIEW.altitude) * 0.6);
+// Dot scale multiplier - see satScaleForAltitude().
+const SAT_DOT_SCALE = 7.2;
+
+// CONSTANT space-station dot scale - the fix for "dots shrink after clearing
+// a filter". The old altitude law, max(1, altitude * 0.6), varied with the
+// camera, so any filter round-trip that ended at a different altitude than it
+// started left a stale scale behind and the dots came back up to ~14x smaller
+// (nearly invisible). The scale now ignores the camera entirely: boot, tween
+// steps, filter rebuilds, Clear selection and tab switches all converge on one
+// value, so the dots NEVER resize - same size at every zoom level, filter
+// state and selection, and clearly visible when zoomed in close.
+// 7.2 == 12 * 0.6, exactly the old size at the default view (altitude 12), so
+// the boot appearance is unchanged.
+export function satScaleForAltitude(_altitude) {
+  return SAT_DOT_SCALE;
 }
 
 // Re-apply the current-altitude scale to every satellite dot. Called from
@@ -323,6 +328,10 @@ export function selectEntity(kind, entity, { zoom = true } = {}) {
   setBeamSelection(kind, id);
   if (kind === 'sat' && detailRenderers.sat) detailRenderers.sat(entity);
   if (kind === 'gs' && detailRenderers.gs) detailRenderers.gs(entity);
+  // Left-panel counts mirror the pinned card: the selected side is 1, the
+  // other side is exactly the card rows (== highlighted beams, already
+  // filtered to the drawn link set inside leftCounts).
+  updateLeftCountsForSelection(kind, id);
   updateFilterSummary();
   if (zoom && store.world) {
     if (kind === 'sat') focusCameraOn(7, entity.lon || 0, SELECT_SAT_ALTITUDE);
@@ -333,11 +342,13 @@ export function selectEntity(kind, entity, { zoom = true } = {}) {
 
 // Drop the current selection: every beam is restored to the filtered set, the
 // yellow box goes back to its hint, and the blue box drops the entity name.
+// Counts revert to the drawn-beam totals (no re-filter needed).
 export function clearSelection() {
   if (!store.selection) return;
   store.selection = null;
   clearBeamSelection();
   if (detailRenderers.placeholder) detailRenderers.placeholder();
+  updateLeftCountsFromDrawnBeams();
   updateFilterSummary();
 }
 
@@ -400,8 +411,8 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
     .backgroundColor(PALETTE.scene_bg)
     .showGlobe(true)
     .showAtmosphere(false)
-    .globeMaterial(new THREE.MeshBasicMaterial({ color: 0x111111 }))
-    // Highlight colours. One blue (#1977AD) for every highlight, in two styles:
+    .globeMaterial(new THREE.MeshBasicMaterial({ color: 0xf7f7f7 }))
+    // 111111 Highlight colours. One blue (#1977AD) for every highlight, in two styles:
     //   GS country filtered   -> the country is FILLED solid blue.
     //   sat country filtered  -> the country is OUTLINED in that same blue and
     //                            NOT filled; its linked GS countries are also
@@ -419,9 +430,9 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
     // because globe.gl draws borders with LineBasicMaterial and WebGL ignores
     // linewidth everywhere - the caps stay flat (no altitude lift) so many
     // outlines can be lit at once without any of them fighting for depth.
-    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#cccccc')
+    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#111111')//'#c6c4bd')
     .polygonAltitude(POLYGON_ALTITUDE)
-    // Subdivide country edges so the cap and border follow the sphere. The
+    // Subdivide country edges so the cap and border follow the sphere. The #cccccc
     // library default (5 deg) leaves most edges as a single long chord, which
     // dips under the globe and both hollows out big-country fills and punches
     // gaps in their borders. 1 deg keeps the sag ~25x smaller.

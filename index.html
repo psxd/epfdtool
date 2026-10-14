@@ -24,12 +24,12 @@
     <section class="panelSection" id="gsoPanel" style="position: relative;">
       <label for="searchInput">Search Network Entities</label>
       <div style="position: relative; width: 100%;">
-        <input type="text" id="searchInput" placeholder="Search station, satellite..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
+        <input type="text" id="searchInput" placeholder="Search earth station, space station..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
         <div id="searchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
       </div>
 
       <div style="margin-top: 12px;">
-        <label for="filterStatus">Satellite Filing</label>
+        <label for="filterStatus">Space station filing</label>
         <select id="filterStatus" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true" tabindex="-1">
           <option value="all">All Filings</option>
           <option value="planned">Planned Only</option>
@@ -42,14 +42,14 @@
       </div>
 
       <div style="margin-top: 10px;">
-        <label for="filterSatCountry">Satellite Country</label>
+        <label for="filterSatCountry" class="ituLabel"><span class="ituTerm" tabindex="0">Space station<span class="ituTip" role="tooltip"><b>Space station:</b> A <span class="ituStation" tabindex="0">Station<span class="ituStationTip" role="tooltip"><b>Station:</b> One or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment, necessary at one location for carrying on a radiocommunication service, or the radio astronomy service.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> located on an object which is beyond, is intended to go beyond, or has been beyond, the major portion of the Earth's atmosphere.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> country</label>
         <select id="filterSatCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
           <option value="all">All Countries</option>
         </select>
       </div>
 
       <div style="margin-top: 10px;">
-        <label for="filterGsCountry">Ground Station Country</label>
+        <label for="filterGsCountry" class="ituLabel"><span class="ituTerm" tabindex="0">Earth station<span class="ituTip" role="tooltip"><b>Earth station:</b> A <span class="ituStation" tabindex="0">Station<span class="ituStationTip" role="tooltip"><b>Station:</b> One or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment, necessary at one location for carrying on a radiocommunication service, or the radio astronomy service.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> located either on the Earth's surface or within the major portion of the Earth's atmosphere and intended for communication:<ul class="ituBullets"><li>with one or more space stations; or</li><li>with one or more stations of the same kind by means of one or more reflecting satellites or other objects in space.</li></ul><span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> <span class="ituTerm" tabindex="0">administration<span class="ituTip" role="tooltip"><b>Administration:</b> Any governmental department or service responsible for discharging the obligations undertaken in the Constitution of the International Telecommunication Union, in the Convention of the International Telecommunication Union and in the Administrative Regulations (CS 1002).<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span></label>
         <select id="filterGsCountry" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; background: rgba(255, 255, 255, 0.9); font-size: 13px; color: #111; box-sizing: border-box;">
           <option value="all">All Countries</option>
         </select>
@@ -61,7 +61,7 @@
       </div>
     </section>
 
-    <!-- Filtered View summary: names the selected satellite / ground station.
+    <!-- Filtered View summary: names the selected space station / earth station.
          Starts hidden and stays hidden until something is selected, so there is
          no "No filter applied" placeholder (see filterSummary.js). -->
     <section class="panelSection" id="filterSummarySection" style="margin-top: 12px; display: none;">
@@ -70,7 +70,7 @@
 
     <!-- LEO Section (Hidden by default) -->
     <section class="panelSection" id="leoPanel" style="display: none; position: relative;">
-      <label for="leoSearchInput">Search Active LEO Satellite</label>
+      <label for="leoSearchInput">Search Active LEO Space Station</label>
       <div style="position: relative; width: 100%;">
         <input type="text" id="leoSearchInput" placeholder="e.g., ISS, STARLINK..." autocomplete="off" style="width: 100%; box-sizing: border-box;" />
         <div id="leoSearchSuggestions" style="position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ccc; max-height: 220px; overflow-y: auto; z-index: 1000; display: none; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);"></div>
@@ -85,10 +85,10 @@
         </select>
       </div>
 
-      <!-- Satellite-follow camera: rides along with the propagating satellite -->
+      <!-- Space station-follow camera: rides along with the propagating space station -->
       <div id="leoFollowRow" style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
         <input type="checkbox" id="leoFollowCheckbox" style="width: auto; margin: 0; padding: 0; cursor: pointer;" />
-        <label for="leoFollowCheckbox" style="margin: 0; cursor: pointer; user-select: none;">Follow satellite</label>
+        <label for="leoFollowCheckbox" style="margin: 0; cursor: pointer; user-select: none;">Follow space station</label>
       </div>
 
       <!-- Prominent Intersection Count Card -->
@@ -116,14 +116,14 @@
       <div class="statsGridWithIn">
         <div class="statBlock">
           <div id="satelliteStat" class="statNumber">0</div>
-          <div id="satelliteStatLabel" class="statLabel">satellites</div>
+          <div id="satelliteStatLabel" class="statLabel">space stations</div>
         </div>
 
         <div class="statIn">and</div>
 
         <div class="statBlock">
           <div id="stationStat" class="statNumber">0</div>
-          <div id="stationStatLabel" class="statLabel">ground stations</div>
+          <div id="stationStatLabel" class="statLabel">earth stations</div>
         </div>
       </div>
       <button id="clearSelectionBtn" type="button" class="clearSelectionBtn">Clear selection</button>
@@ -138,22 +138,23 @@
         <div class="legendList">
           <div class="legendRow">
             <span class="legendDot legendDotPlanned"></span>
-            <span>Planned Satellites (GSO Orbit)</span>
+            <span class="ituTerm ituFiling" tabindex="0">Planned<span class="ituTip" role="tooltip"><b>Planned:</b> A priori planning procedures guaranteeing equitable access to orbit/spectrum resources for future use, which include:<ul class="ituBullets"><li>the Allotment Plan for the Fixed-Satellite Service (FSS) using part of the 4/6 and 10&#8209;11/12&#8209;13 GHz frequency bands contained in Appendix 30B;</li><li>the Plan for the Broadcasting-Satellite Service (BSS) in the frequency band 11.7-12.7 GHz (Appendix 30) and the associated Plan for feeder links in the 14 GHz and 17 GHz frequency bands (Appendix 30A);</li><li>the Space Operations Functions in support of the operation of geostationary-satellite networks in the Broadcasting-Satellite Service (BSS) in accordance of Article 2A of Appendices 30 and 30A.</li></ul><span class="ituSource">Source: <a href="https://www.itu.int/en/ITU-R/space/elearning/Pages/elearningFAQ.aspx" target="_blank" rel="noopener">ITU</a></span></span></span> <span class="ituTerm" tabindex="0">Space Stations<span class="ituTip" role="tooltip"><b>Space station:</b> A <span class="ituStation" tabindex="0">Station<span class="ituStationTip" role="tooltip"><b>Station:</b> One or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment, necessary at one location for carrying on a radiocommunication service, or the radio astronomy service.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> located on an object which is beyond, is intended to go beyond, or has been beyond, the major portion of the Earth's atmosphere.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span> <button type="button" class="ituInfo" title="Show both definitions" aria-label="Show both definitions: planned and space station" aria-expanded="false">i</button></span>
           </div>
 
           <div class="legendRow">
             <span class="legendDot legendDotNonPlanned"></span>
-            <span>Non-Planned Satellites</span>
+            <span class="ituTerm ituFiling" tabindex="0">Non-Planned<span class="ituTip" role="tooltip"><b>Non-Planned:</b> Coordination procedures with the aim of efficiency of orbit/spectrum use and interference-free operation satisfying actual requirements.<span class="ituSource">Source: <a href="https://www.itu.int/en/ITU-R/space/elearning/Pages/elearningFAQ.aspx" target="_blank" rel="noopener">ITU</a></span></span></span> <span class="ituTerm" tabindex="0">Space Stations (GSO Orbit)<span class="ituTip" role="tooltip"><b>Space station:</b> A <span class="ituStation" tabindex="0">Station<span class="ituStationTip" role="tooltip"><b>Station:</b> One or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment, necessary at one location for carrying on a radiocommunication service, or the radio astronomy service.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> located on an object which is beyond, is intended to go beyond, or has been beyond, the major portion of the Earth's atmosphere.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span> <button type="button" class="ituInfo" title="Show both definitions" aria-label="Show both definitions: planned and space station" aria-expanded="false">i</button></span>
+
           </div>
 
           <div class="legendRow">
             <span class="legendDot legendDotStation"></span>
-            <span>Ground Stations</span>
+            <span class="ituTerm" tabindex="0">Earth Stations<span class="ituTip" role="tooltip"><b>Earth station:</b> A <span class="ituStation" tabindex="0">Station<span class="ituStationTip" role="tooltip"><b>Station:</b> One or more transmitters or receivers or a combination of transmitters and receivers, including the accessory equipment, necessary at one location for carrying on a radiocommunication service, or the radio astronomy service.<span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span></span> located either on the Earth's surface or within the major portion of the Earth's atmosphere and intended for communication:<ul class="ituBullets"><li>with one or more space stations; or</li><li>with one or more stations of the same kind by means of one or more reflecting satellites or other objects in space.</li></ul><span class="ituSource">Source: <a href="https://search.itu.int/history/HistoryDigitalCollectionDocLibrary/1.49.48.en.101.pdf" target="_blank" rel="noopener">ITU Radio Regulations, 2024</a></span></span> <button type="button" class="ituInfo" title="Show both definitions" aria-label="Show both definitions: earth station and station" aria-expanded="false">i</button></span>
           </div>
 
           <div class="legendRow">
             <span class="legendLine legendLineLink"></span>
-            <span>Active Link Paths</span>
+            <span>Active Links</span>
           </div>
 
           <div class="legendRow">

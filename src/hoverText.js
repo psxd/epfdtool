@@ -12,6 +12,7 @@
 // links for the same triples live in the left-panel click card (stationClickHtml
 // / satelliteClickHtml below, same dashboardUrl + same link styling).
 import { store } from './state.js';
+import { filteredSatsForGs, filteredStationsForSat } from './leftCounts.js';
 
 const ITU_DASHBOARD_BASE = 'https://www.itu.int/itu-r/space/apps/public/spaceexplorer/networks-explorer/earth-stations/dashboard';
 
@@ -86,26 +87,27 @@ export function satelliteClickHtml(d) {
   return satelliteCardHtml(d, true);
 }
 
-// The listed rows ARE this node's drawn beams: the index is keyed by node id
-// and holds one entry per connection, so the count in the header equals the
-// number of lines leaving the dot. No name-based merging, which is what used
-// to make the list disagree with the picture.
+// The listed rows ARE this node's highlighted beams: the per-node index entry
+// is filtered to the drawn (filtered) connection rows, so the count in the
+// header equals the number of highlighted lines leaving the dot. No
+// name-based merging, which is what used to make the list disagree with the
+// picture. Hover and click cards share the same lists, so both agree.
 function stationCardHtml(d, clickable) {
-  const sats = store.satsByGsId.get(d.id) || [];
-  let satHtml = '<b>No connected satellites</b>';
+  const sats = filteredSatsForGs(d.id);
+  let satHtml = '<b>No connected space stations</b>';
   if (sats.length > 0) {
     const rows = sats.map(s => ` - ${satRowText(s, clickable)}`);
-    satHtml = `<b>Satellites (${sats.length}):</b><br>` + rows.join('<br>');
+    satHtml = `<b>Space stations (${sats.length}):</b><br>` + rows.join('<br>');
   }
   return `<div style="${CARD_STYLE}"><b>${escapeHtml(d.name)}</b> (${escapeHtml(d.operator || 'Unknown')})<br>Country: ${escapeHtml(d.country || 'Unknown')}<br>Lat/Lon: ${escapeHtml(d.lat)}, ${escapeHtml(d.lon)}<br><br>${satHtml}</div>`;
 }
 
 function satelliteCardHtml(d, clickable) {
-  const stations = store.gsBySatId.get(d.id) || [];
-  let gsHtml = 'No ground stations';
+  const stations = filteredStationsForSat(d.id);
+  let gsHtml = 'No earth stations';
   if (stations.length > 0) {
     const rows = stations.map(g => ` - ${gsRowText(g, clickable)}`);
-    gsHtml = `<b>Ground Stations (${stations.length}):</b><br>` + rows.join('<br>');
+    gsHtml = `<b>Earth stations (${stations.length}):</b><br>` + rows.join('<br>');
   }
   const isPlanned = d.planned === true || d.planned === 1 || d.planned === '1' || d.planned === 'true';
   const status = isPlanned ? 'Planned' : 'Non-Planned';

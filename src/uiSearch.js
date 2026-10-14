@@ -78,15 +78,26 @@ export function setupUIEvents() {
     });
   }
 
-  // Clear button next to the "Filtered View" summary: drops only the entity
-  // selection (country / filing filters stay applied), and the search box is
-  // emptied to match so the two never disagree about what is selected.
+  // Clear button under the counts: clears EVERY kind of selection - the
+  // clicked node AND any active dropdown / filing filter (the button only
+  // shows when one of those is on, see updateFilterSummary). Camera is left
+  // alone, exactly like resetting the dropdowns by hand: filterView returns
+  // null when no filter is active, so applyFilters(true) makes no view change
+  // either. The search box is emptied so it never disagrees with the state.
   const clearSelectionBtn = document.getElementById('clearSelectionBtn');
   if (clearSelectionBtn) {
     clearSelectionBtn.addEventListener('click', () => {
+      const hadFilters = ['filterStatus', 'filterSatCountry', 'filterGsCountry'].some((id) => {
+        const el = document.getElementById(id);
+        return el && el.value && el.value !== 'all';
+      });
+      if (filterStatus) filterStatus.value = 'all';
+      if (filterSatCountry) filterSatCountry.value = 'all';
+      if (filterGsCountry) filterGsCountry.value = 'all';
+      syncFilingBoxes();
       clearSelection();
       if (searchInput) searchInput.value = '';
-      applyFilters(false);
+      applyFilters(hadFilters);
     });
   }
 
@@ -176,8 +187,8 @@ function onGsoSearchInput(e, searchInput, suggestionBox) {
     if (sats.length >= 5 && stns.length >= 5) break;
   }
   let html = '';
-  for (const s of sats) html += `<div class="suggestion-item" data-type="sat" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">🛰️ <b>${escapeHtml(s.name)}</b> (Satellite · ${escapeHtml(s.position)})</div>`;
-  for (const s of stns) html += `<div class="suggestion-item" data-type="stn" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">📡 <b>${escapeHtml(s.name)}</b> (${escapeHtml(s.country || 'Ground Station')} · ${escapeHtml(s.position)})</div>`;
+  for (const s of sats) html += `<div class="suggestion-item" data-type="sat" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">🛰️ <b>${escapeHtml(s.name)}</b> (Space station · ${escapeHtml(s.position)})</div>`;
+  for (const s of stns) html += `<div class="suggestion-item" data-type="stn" data-id="${escapeAttr(s.id)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 13px; color: #111;">📡 <b>${escapeHtml(s.name)}</b> (${escapeHtml(s.country || 'Earth station')} · ${escapeHtml(s.position)})</div>`;
   if (html && suggestionBox) {
     suggestionBox.innerHTML = html;
     suggestionBox.style.display = 'block';

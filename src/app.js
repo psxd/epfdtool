@@ -5,6 +5,7 @@ import { initGlobe } from './globe.js';
 import { loadData, showSatelliteDetails, showStationDetails, showDetailsPlaceholder } from './gsoNetwork.js';
 import { setupUIEvents } from './uiSearch.js';
 import { setupTabs, setupLeoUIEvents } from './uiTabs.js';
+import { setupItuDefinitions } from './ituDefinitions.js';
 import { initComments } from './comments.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,5 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupUIEvents();
   setupTabs();
   setupLeoUIEvents();
+  setupItuDefinitions();
   initComments();
 });

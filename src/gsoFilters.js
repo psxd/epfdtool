@@ -5,10 +5,12 @@
 // either dropdown always moves the view onto what got highlighted.
 import { store } from './state.js';
 import { normalizeCountryName } from './countryNorm.js';
+import { clearHoverCaches } from './hoverText.js';
 import { updateHighlightedCountriesCache } from './countryHi.js';
 import { filterView } from './countryView.js';
 import { focusCameraOn, setSatellites, selectEntity } from './globe.js';
 import { renderStraightLinkBeams, setFilterBeamHighlight } from './links.js';
+import { updateLeftCountsNoSelection, updateLeftCountsForSelection } from './leftCounts.js';
 import { updateFilterSummary } from './filterSummary.js';
 
 export function populateCountryFilters(satellites, stations) {
@@ -105,6 +107,9 @@ export function applyFilters(adjustView = true) {
   store.world.pointsData(visibleStations);
   setSatellites(visibleSatellites);
   renderStraightLinkBeams(filteredConnections, true);
+  // The drawn beam set changed, so any cached hover card built from the
+  // previous set is stale (card lists are filtered to the drawn beams).
+  clearHoverCaches();
 
   // Beam emphasis for the new state. renderStraightLinkBeams reset every flag
   // (the beam set was rebuilt), so the highlight has to be re-applied:
@@ -149,31 +154,16 @@ export function applyFilters(adjustView = true) {
   // consistent with each other: a country filter narrows the LINKS and both
   // sides follow from them (GS=France shows only satellites wired to French
   // stations).
-  const connectedSatIds = new Set(filteredConnections.map(c => c.sat_id));
-  const connectedGsIds = new Set(filteredConnections.map(c => c.gs_id));
-  const connectedSatNames = new Set();
-  for (const id of connectedSatIds) {
-    const s = store.satById.get(id);
-    if (s) connectedSatNames.add(s.name);
+  //
+  // With an entity selected the counts instead mirror its left-panel card:
+  // the selected side is 1 and the other side is exactly the card rows (==
+  // highlighted beams). selectEntity above already wrote those, so only the
+  // no-selection case is counted here.
+  if (!store.selection) {
+    updateLeftCountsNoSelection(filteredConnections);
+  } else {
+    updateLeftCountsForSelection(store.selection.kind, store.selection.id);
   }
-  const connectedGsNames = new Set();
-  for (const id of connectedGsIds) {
-    const stn = store.stationById.get(id);
-    if (stn) connectedGsNames.add(stn.name);
-  }
-  const satStat = document.getElementById('satelliteStat');
-  const stnStat = document.getElementById('stationStat');
-  const satLabel = document.getElementById('satelliteStatLabel');
-  const stnLabel = document.getElementById('stationStatLabel');
-  const satCount = connectedSatNames.size.toLocaleString();
-  const stnCount = connectedGsNames.size.toLocaleString();
-  if (satStat) satStat.textContent = satCount;
-  if (stnStat) stnStat.textContent = stnCount;
-  // The country is named ONLY when that dimension is actually filtered, so a bare
-  // total is never shown beside a filtered figure. The big .statNumber holds
-  // the figure, so the label below it is just the unit + optional country.
-  if (satLabel) satLabel.textContent = 'satellites' + (hasSat ? ' in ' + satCountry : '');
-  if (stnLabel) stnLabel.textContent = 'ground stations' + (hasGs ? ' in ' + gsCountry : '');
 
   updateFilterSummary();
 
