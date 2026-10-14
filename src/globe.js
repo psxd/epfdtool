@@ -430,7 +430,7 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
     // because globe.gl draws borders with LineBasicMaterial and WebGL ignores
     // linewidth everywhere - the caps stay flat (no altitude lift) so many
     // outlines can be lit at once without any of them fighting for depth.
-    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#111111')//'#c6c4bd')
+    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#c6c4bd')
     .polygonAltitude(POLYGON_ALTITUDE)
     // Subdivide country edges so the cap and border follow the sphere. The #cccccc
     // library default (5 deg) leaves most edges as a single long chord, which
