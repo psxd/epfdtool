@@ -64,6 +64,24 @@ export const POLYGON_CURVATURE_RESOLUTION = 1;
 export const MIN_CAMERA_ALTITUDE = 0.3;
 export const MAX_CAMERA_ALTITUDE = 12;
 
+// Gray limb ring around the Earth sphere so it reads against the white page
+// background. A plain BackSide shell, slightly larger than the globe, i.e. a
+// solid outline ring. (The built-in atmosphere is an additive glow shader and
+// washes to white-on-white, so it can't do this job.)
+const LIMB_COLOR = 0xcccccc;
+const LIMB_SCALE = 1.005;
+
+function addGlobeLimb() {
+  if (!store.world || store.world.__globeLimb) return;
+  const globeRadius = store.world.getGlobeRadius ? store.world.getGlobeRadius() : 100;
+  const geo = new THREE.SphereGeometry(globeRadius * LIMB_SCALE, 64, 64);
+  const mat = new THREE.MeshBasicMaterial({ color: LIMB_COLOR, side: THREE.BackSide });
+  const limb = new THREE.Mesh(geo, mat);
+  limb.name = '__globeLimb';
+  store.world.scene().add(limb);
+  store.world.__globeLimb = limb;
+}
+
 // ver1's transition duration, applied to every camera move.
 const CAMERA_TWEEN_MS = 800;
 
@@ -430,7 +448,7 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
     // because globe.gl draws borders with LineBasicMaterial and WebGL ignores
     // linewidth everywhere - the caps stay flat (no altitude lift) so many
     // outlines can be lit at once without any of them fighting for depth.
-    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#c6c4bd')
+    .polygonStrokeColor(d => (isCountryHighlighted(d.properties) || isCountryOutlined(d.properties)) ? '#1977AD' : '#cccccc')
     .polygonAltitude(POLYGON_ALTITUDE)
     // Subdivide country edges so the cap and border follow the sphere. The #cccccc
     // library default (5 deg) leaves most edges as a single long chord, which
@@ -498,6 +516,9 @@ export function initGlobe({ showSatelliteDetails, showStationDetails, showDetail
       // ones listed in its hover card) unmistakable.
       if (sat) highlightBeams('sat', sat.id); else clearBeamHighlight();
     });
+
+  // Gray limb shell around the Earth sphere (see LIMB_* above).
+  addGlobeLimb();
 
   fetch('./data/globe.json')
     .then(res => res.json())
